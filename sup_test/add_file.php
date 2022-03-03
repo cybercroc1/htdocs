@@ -1,6 +1,8 @@
 <?php
 include("sup/sup_conn_string");
 
+//blabla
+
 if(isset($_GET['id'])) {
 	$q=OCIParse($c,"select file_body, filename,filetype,tmp_name,fileerror,filesize,coment,load_date,base_id,hist_id from SUP_FILES where rowid='".$_GET['id']."'");
 	OCIExecute($q);	
