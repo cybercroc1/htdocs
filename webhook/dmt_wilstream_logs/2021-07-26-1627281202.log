@@ -1,0 +1,52 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30513
+                )
+
+        )
+
+    [ts] => 1627281202
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => NEW
+    [status_dop] => P
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Максим
+    [phone] => 89093549817
+    [phone_norm] => +79093549817
+    [comments] => <br>Комментарий: Дилер по двум брендам &quot;Русская Артель&quot; и &quot;Slitkoff&quot; - это тюнинг. Необходим поиск клиентов по Питеру и Ленинградской области. Мои клиенты это не розница, а ООО, ИП, магазины, сервисы, тюнинг-ателье - в общем все места, где и кто продают автозапчасти. Если сработаемся по Питеру и получим результат, готов отдать также Ростов, Краснодар, Крым и Пятигорск.<br>Услуга:  телефонные продажи<br>URL: http://wilstream.ru/outcalls/telemarketing/prodaji-po-telefonu/
+    [stats_id] => wcc1460731
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => 
+)

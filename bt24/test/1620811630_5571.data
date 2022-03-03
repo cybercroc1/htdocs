@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Абдулмаджтд
+            [phone] => 89030767585
+            [email] => abdulmadzidaheev@gmail.com
+            [url] => http://wilstream.ru/industrial-solutions/resheniya-dlya-it/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Абдулмаджтд
+            [phone] => 89030767585
+            [email] => abdulmadzidaheev@gmail.com
+            [url] => http://wilstream.ru/industrial-solutions/resheniya-dlya-it/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

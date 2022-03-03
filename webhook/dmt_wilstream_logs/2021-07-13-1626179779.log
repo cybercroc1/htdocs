@@ -1,0 +1,50 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30301
+                )
+
+        )
+
+    [ts] => 1626179770
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => CALL
+    [status_id] => NEW
+    [status_dop] => P
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => 
+    [phone] => 84951503411
+    [phone_norm] => +74951503411
+    [comments] => 
+    [status_name] => отклонено
+    [status_otkaza] => 
+)

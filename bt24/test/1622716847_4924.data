@@ -1,0 +1,31 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Клиент
+            [phone] => 79771257459
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Привлечение клиентов
+
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Клиент
+            [phone] => 79771257459
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Привлечение клиентов
+
+            [new] => 1
+        )
+
+)

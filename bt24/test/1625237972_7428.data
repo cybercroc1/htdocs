@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Светлана
+            [phone] => 1111111111
+            [email] => sytnik@wilstream.ru
+            [url] => http://wilstream.ru/about/kontakty/
+            [formname] => Задать вопрос
+            [question] => Вопрос: тест 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Светлана
+            [phone] => 1111111111
+            [email] => sytnik@wilstream.ru
+            [url] => http://wilstream.ru/about/kontakty/
+            [formname] => Задать вопрос
+            [question] => Вопрос: тест 
+            [new] => 1
+        )
+
+)

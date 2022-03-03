@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Александр
+            [phone] => +7 (499) 991-23-24
+            [email] => Metem2020@ya.ru
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Александр
+            [phone] => +7 (499) 991-23-24
+            [email] => Metem2020@ya.ru
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

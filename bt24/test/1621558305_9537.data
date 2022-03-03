@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Eventual
+            [phone] => 89032106161
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 03:40, 2021-05-21<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Eventual<br>номер_телефона: 89032106161<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Eventual
+            [phone] => 89032106161
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 03:40, 2021-05-21<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Eventual<br>номер_телефона: 89032106161<br>     
+            [new] => 1
+        )
+
+)

@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Вера
+            [phone] => 4996736443
+            [email] => Mersett@bk.ru
+            [url] => http://wilstream.ru/industrial-solutions/proizvoditeli-tovarov/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Вера
+            [phone] => 4996736443
+            [email] => Mersett@bk.ru
+            [url] => http://wilstream.ru/industrial-solutions/proizvoditeli-tovarov/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

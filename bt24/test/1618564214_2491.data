@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Мария
+            [phone] => 89526337443
+            [email] => Pr-747@bk.ru
+            [url] => http://wilstream.ru/industrial-solutions/predvybornaya-kampaniya/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Мария
+            [phone] => 89526337443
+            [email] => Pr-747@bk.ru
+            [url] => http://wilstream.ru/industrial-solutions/predvybornaya-kampaniya/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+)

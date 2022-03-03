@@ -1,0 +1,56 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30329
+                )
+
+        )
+
+    [ts] => 1626265589
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => CONVERTED
+    [status_dop] => S
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Станислав
+    [phone] => 79251743526
+    [phone_norm] => +79251743526
+    [comments] => <br>Комментарий: Обзвон целевой аудитории - медицинских организаций (клиники, медцентры), с предложением рекламных услуг.<br>URL: www.contact-center.ru/<br>Данные с формы: <br>
+    Имя: Станислав<br>
+    Email: ad.paroosh@yandex.ru<br>
+    Номер: +79251743526<br>
+    Название компании: <br>
+    Комментарии: <br>Комментарий: Добрый день, нашей компании требуются услуги контакт центра, а именно - исходящий обзвон целевой аудитории (клиники, медцентры) с предложением услуг по рекламе в интернет. 
+Можно сразу отправить КП на ad.paroosh@yandex.ru<br>URL: http://wilstream.ru/outcalls/telemarketing/holodnyy-zvonok/
+    [status_name] => подтверждено
+    [status_otkaza] => 
+)

@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Transport Lease JSC
+            [phone] => +789857731518
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 12:52, 2021-04-09<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: Transport Lease JSC<br>номер_телефона: +789857731518<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Transport Lease JSC
+            [phone] => +789857731518
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 12:52, 2021-04-09<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: Transport Lease JSC<br>номер_телефона: +789857731518<br>     
+            [new] => 1
+        )
+
+)

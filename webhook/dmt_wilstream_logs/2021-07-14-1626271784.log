@@ -1,0 +1,50 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30261
+                )
+
+        )
+
+    [ts] => 1626271784
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => 4
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => интересует строительство КЦ в Казахстане.
+    [record] => 
+    [name] => Алексей
+    [phone] => 89202503101
+    [phone_norm] => +79202503101
+    [comments] => <br>Комментарий: вопрос по аудиту коллцентра. что входит в эту процедуру и какова стоимость?<br>URL: http://wilstream.ru/stati/audit-koll-tsentra/
+    [status_name] => отклонено
+    [status_otkaza] => Иное
+)

@@ -1,0 +1,1245 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => @mediaonlyscreen{htm
+            [phone] => +79202710710
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" style="background:#f2f3f8!important">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=ca84226cf9128b6f" rel="stylesheet">
+    <title>Вы получили новый лид</title>
+    <style type="text/css">
+      @media only screen {
+        html {
+          min-height:100%;
+          background:#f2f3f8;
+        }
+      }
+      
+      .mcnPreviewText {
+        display:none !important;
+      }
+      
+      a.notpodcherk {
+        text-decoration:none;
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-float-center {
+          margin:0 auto !important;
+          float:none !important;
+          text-align:center !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-center {
+          text-align:center !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-left {
+          text-align:left !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-right {
+          text-align:right !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .hide-for-large {
+          display:block !important;
+          width:auto !important;
+          overflow:visible !important;
+          max-height:none !important;
+          font-size:inherit !important;
+          line-height:inherit !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .hide-for-large,table.body table.container .row.hide-for-large {
+          display:table !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .callout-inner.hide-for-large {
+          display:table-cell !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .show-for-large {
+          display:none !important;
+          width:0;
+          mso-hide:all;
+          overflow:hidden;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body img {
+          width:auto;
+          height:auto;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body center {
+          min-width:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .container {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .column,table.body .columns {
+          height:auto !important;
+          -moz-box-sizing:border-box;
+          -webkit-box-sizing:border-box;
+          box-sizing:border-box;
+          padding-left:20px !important;
+          padding-right:20px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .column .column,table.body .column .columns,table.body .columns .column,table.body .columns .columns {
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .collapse .column,table.body .collapse .columns {
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-1,th.small-1 {
+          display:inline-block !important;
+          width:8.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-2,th.small-2 {
+          display:inline-block !important;
+          width:16.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-3,th.small-3 {
+          display:inline-block !important;
+          width:25% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-4,th.small-4 {
+          display:inline-block !important;
+          width:33.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-5,th.small-5 {
+          display:inline-block !important;
+          width:41.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-6,th.small-6 {
+          display:inline-block !important;
+          width:50% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-7,th.small-7 {
+          display:inline-block !important;
+          width:58.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-8,th.small-8 {
+          display:inline-block !important;
+          width:66.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-9,th.small-9 {
+          display:inline-block !important;
+          width:75% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-10,th.small-10 {
+          display:inline-block !important;
+          width:83.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-11,th.small-11 {
+          display:inline-block !important;
+          width:91.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-12,th.small-12 {
+          display:inline-block !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .column td.small-12,.column th.small-12,.columns td.small-12,.columns th.small-12 {
+          display:block !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-1,table.body th.small-offset-1 {
+          margin-left:8.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-2,table.body th.small-offset-2 {
+          margin-left:16.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-3,table.body th.small-offset-3 {
+          margin-left:25% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-4,table.body th.small-offset-4 {
+          margin-left:33.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-5,table.body th.small-offset-5 {
+          margin-left:41.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-6,table.body th.small-offset-6 {
+          margin-left:50% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-7,table.body th.small-offset-7 {
+          margin-left:58.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-8,table.body th.small-offset-8 {
+          margin-left:66.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-9,table.body th.small-offset-9 {
+          margin-left:75% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-10,table.body th.small-offset-10 {
+          margin-left:83.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-11,table.body th.small-offset-11 {
+          margin-left:91.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.columns td.expander,table.body table.columns th.expander {
+          display:none !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .right-text-pad,table.body .text-pad-right {
+          padding-left:10px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .left-text-pad,table.body .text-pad-left {
+          padding-right:10px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu td,table.menu th {
+          width:auto !important;
+          display:inline-block !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu.small-vertical td,table.menu.small-vertical th,table.menu.vertical td,table.menu.vertical th {
+          display:block !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu[align=center] {
+          width:auto !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand,table.button.small-expanded {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand table,table.button.small-expanded table {
+          width:100%;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand table a,table.button.small-expanded table a {
+          text-align:center !important;
+          width:100% !important;
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand center,table.button.small-expanded center {
+          min-width:0;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        h1 {
+          font-size:32px !important;
+          line-height:42px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        h2 {
+          font-size:22px !important;
+          line-height:32px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.columns,table.body th.columns {
+          padding-left:15px !important;
+          padding-right:15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .pt-20-mobile {
+          padding-top:20px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .full {
+          display:block;
+          width:100%;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .header table.header__inner {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .header__wrapper .wrapper-inner {
+          padding:0 15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .socials__item {
+          padding-left:15px !important;
+          padding-right:15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .speaker__avatar {
+          margin-bottom:20px;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .event__content {
+          padding:0 20px !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background:#f2f3f8!important;box-sizing:border-box;color:#4e4e4e;font-family:Montserrat,Verdana,Arial,sans-serif;font-size:15px;font-weight:400;line-height:26px;margin:0;min-width:100%;padding:0;text-align:left;width:100%!important">
+  <span class="preheader" style="color:#f2f3f8;display:none!important;font-size:1px;line-height:1px;max-height:0;max-width:0;mso-hide:all!important;opacity:0;overflow:hidden;visibility:hidden">из кампании в Facebook Поиск клиентов, группа объявлений: Менеджер по продажам.
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+      
+    </span>
+  <table class="body" style="margin:0;background:#f2f3f8 !important;border-collapse:collapse;border-spacing:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;height:100%;line-height:26px;padding:0;text-align:left;vertical-align:top;width:100%;">
+    <tr style="padding:0;text-align:left;vertical-align:top;">
+      <td class="center" align="center" valign="top" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+        <center style="min-width:600px;width:100%;">
+          <table class="spacer float-center" style="margin:0 auto;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:100%;">
+            <tbody>
+              <tr style="padding:0;text-align:left;vertical-align:top;">
+                <td height="40" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:40px;font-weight:400;line-height:40px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+              </tr>
+            </tbody>
+          </table>
+          <table align="center" class="container header float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+            <tbody>
+              <tr style="padding:0;text-align:left;vertical-align:top;">
+                <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                  <table class="wrapper header__wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <td class="wrapper-inner" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                        <table width="500" style="border-bottom:1px solid #d9dde4;border-collapse:collapse;border-spacing:0;display:table;margin:0 auto;padding:0;position:relative;text-align:left;vertical-align:top;width:500px;" class="row header__inner collapse">
+                          <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top;">
+                              <th class=small-10 large-7 columns first" valign="middle" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:20px;padding-left:0;padding-right:0;padding-top:20px;text-align:left;width:360px;">
+                                <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                    <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                      <a target="_blank" style="margin:0;color:#039be6;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0;text-align:left;text-decoration:none;vertical-align:middle;width:30px;" href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=84800253"><img border="0" width="30" height="30" alt="eLama" src="https://elama.ru/info/uploads/elama_email/new_emails/logo-lama.png" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a><span style="font-size:12px;line-height:20px;margin-left:10px;vertical-align:middle" class="text-xs"><b style="font-weight:600;">еLama</b> | Уведомление</span>
+                                    </th>
+                                  </tr>
+                                </table>
+                              </th>
+                             
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                  <tbody>
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <td height="60" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:60px;font-weight:400;line-height:60px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table align="center" class="container float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+          <tbody>
+            <tr style="padding:0;text-align:left;vertical-align:top;">
+              <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                <table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                  <tbody>
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <th class="small-12 large-12 columns first last" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:0;padding-left:50px;padding-right:50px;text-align:left;width:580px;">
+                        <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                <h1 style="margin:0;margin-bottom:40px;color:#1d1d39;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:36px;font-weight:700;line-height:46px;padding:0;text-align:left;word-wrap:normal;">Вы получили новый лид</h1>
+                              <!-- Start КАРТИНКА -->
+                              <p style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">Здравствуйте! Вы получили новый лид из&nbsp;кампании в&nbsp;Facebook <b>Поиск клиентов</b><br><br>
+<b>Время и дата:</b> 15:29, 2021-03-19<br>
+<b>Группа объявлений:</b> Менеджер по продажам<br>
+<b>Объявление:</b> - Генерация лидов<br>
+<b>Форма:</b> Свяжитесь  с нами 2<br>
+<b>company_name</b>: -<br><b>номер_телефона</b>: +79202710710<br>
+                              </p>
+                                  </th>
+                                </tr>
+                              </table>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- End БЛОК 1 -->
+                      <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                        <tbody>
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table align="center" class="container float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+                        <tbody>
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                              <table class="row footer" style="background-color:#f2f3f8;border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                                <tbody>
+                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                    <th class="small-12 large-12 columns first last" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:0;padding-left:50px;padding-right:50px;text-align:left;width:580px;">
+                                      <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                        <tr style="padding:0;text-align:left;vertical-align:top;">
+                                          <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <table align="center" class="socials float-center" style="margin:0 auto;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:auto !important;">
+                                              <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                                                  <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                      <th class="socials__item socials__item--first float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:0 !important;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=4788864d28bde40f" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">ВКонтакте</a>
+                                                      </th>
+                                                      <th class="socials__item float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=cbec62d9" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Twitter</a>
+                                                      </th>
+                                                      <th class="socials__item float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=1902ef5d02a9c1e3" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Facebook</a>
+                                                      </th>
+                                                      <th class="socials__item socials__item--last float-center" style="margin:0 auto;border-right:0 !important;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:0 !important;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=ffa26001" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Youtube </a>
+                                                      </th>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="15" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:15px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <ul class="footer-contacts" style="list-style:none;margin:0;padding:0;text-align:center;">
+                                              <li class="footer-contacts__item" style="display:inline-block;">
+                                                <a class="footer-contacts__link" href="mailto:milo@elama.ru" style="margin:0;color:#4e4e4e !important;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0 10px;text-align:left;text-decoration:none;white-space:nowrap;">milo@elama.ru</a>
+                                              </li>
+                                              <li class="footer-contacts__item" style="display:inline-block;">
+                                                <a class="footer-contacts__link" href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=61165bd2" style="margin:0;color:#4e4e4e !important;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0 10px;text-align:left;text-decoration:none;white-space:nowrap;">8 800 500 31 90</a>
+                                              </li>
+                                            </ul>
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="10" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:400;line-height:10px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <p class="text-center footer__bottom-text" style="margin:0;margin-bottom:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:400;line-height:20px;padding:0;text-align:center;">
+                                             Вы получили это письмо, так&nbsp;как&nbsp;подписались на&nbsp;инструмент импорта лидов eLama.<br>Если больше не&nbsp;хотите получать такие уведомления, то&nbsp;вы можете <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=405ed6201c456c07" class="footer__bottom-name" target="_blank" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:inherit;padding:0;text-align:left;text-decoration:none;">отписаться</a> от&nbsp;них в&nbsp;личном кабинете.</p>
+                                              <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                <tbody>
+                                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                    <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </th>
+                                            <th class="expander" style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0 !important;text-align:left;visibility:hidden;width:0;"></th>
+                                          </tr>
+                                        </table>
+                                      </th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- prevent Gmail on iOS font size manipulation -->
+                <div style="display:none;white-space:nowrap;font:15px courier;line-height:0;">                                                           </div>
+              </center>
+            </td>
+          </tr>
+        </table>
+      <img src="https://admin.leadersend.com/track/open?u=4eee8c76&id=a6607e233caa5af00e55e09eaf12fae9" width="1" height="1" alt="" /></body>
+</html>
+
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => @mediaonlyscreen{htm
+            [phone] => +79202710710
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" style="background:#f2f3f8!important">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=ca84226cf9128b6f" rel="stylesheet">
+    <title>Вы получили новый лид</title>
+    <style type="text/css">
+      @media only screen {
+        html {
+          min-height:100%;
+          background:#f2f3f8;
+        }
+      }
+      
+      .mcnPreviewText {
+        display:none !important;
+      }
+      
+      a.notpodcherk {
+        text-decoration:none;
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-float-center {
+          margin:0 auto !important;
+          float:none !important;
+          text-align:center !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-center {
+          text-align:center !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-left {
+          text-align:left !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .small-text-right {
+          text-align:right !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .hide-for-large {
+          display:block !important;
+          width:auto !important;
+          overflow:visible !important;
+          max-height:none !important;
+          font-size:inherit !important;
+          line-height:inherit !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .hide-for-large,table.body table.container .row.hide-for-large {
+          display:table !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .callout-inner.hide-for-large {
+          display:table-cell !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.container .show-for-large {
+          display:none !important;
+          width:0;
+          mso-hide:all;
+          overflow:hidden;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body img {
+          width:auto;
+          height:auto;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body center {
+          min-width:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .container {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .column,table.body .columns {
+          height:auto !important;
+          -moz-box-sizing:border-box;
+          -webkit-box-sizing:border-box;
+          box-sizing:border-box;
+          padding-left:20px !important;
+          padding-right:20px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .column .column,table.body .column .columns,table.body .columns .column,table.body .columns .columns {
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .collapse .column,table.body .collapse .columns {
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-1,th.small-1 {
+          display:inline-block !important;
+          width:8.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-2,th.small-2 {
+          display:inline-block !important;
+          width:16.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-3,th.small-3 {
+          display:inline-block !important;
+          width:25% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-4,th.small-4 {
+          display:inline-block !important;
+          width:33.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-5,th.small-5 {
+          display:inline-block !important;
+          width:41.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-6,th.small-6 {
+          display:inline-block !important;
+          width:50% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-7,th.small-7 {
+          display:inline-block !important;
+          width:58.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-8,th.small-8 {
+          display:inline-block !important;
+          width:66.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-9,th.small-9 {
+          display:inline-block !important;
+          width:75% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-10,th.small-10 {
+          display:inline-block !important;
+          width:83.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-11,th.small-11 {
+          display:inline-block !important;
+          width:91.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        td.small-12,th.small-12 {
+          display:inline-block !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .column td.small-12,.column th.small-12,.columns td.small-12,.columns th.small-12 {
+          display:block !important;
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-1,table.body th.small-offset-1 {
+          margin-left:8.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-2,table.body th.small-offset-2 {
+          margin-left:16.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-3,table.body th.small-offset-3 {
+          margin-left:25% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-4,table.body th.small-offset-4 {
+          margin-left:33.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-5,table.body th.small-offset-5 {
+          margin-left:41.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-6,table.body th.small-offset-6 {
+          margin-left:50% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-7,table.body th.small-offset-7 {
+          margin-left:58.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-8,table.body th.small-offset-8 {
+          margin-left:66.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-9,table.body th.small-offset-9 {
+          margin-left:75% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-10,table.body th.small-offset-10 {
+          margin-left:83.33333% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.small-offset-11,table.body th.small-offset-11 {
+          margin-left:91.66667% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body table.columns td.expander,table.body table.columns th.expander {
+          display:none !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .right-text-pad,table.body .text-pad-right {
+          padding-left:10px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body .left-text-pad,table.body .text-pad-left {
+          padding-right:10px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu td,table.menu th {
+          width:auto !important;
+          display:inline-block !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu.small-vertical td,table.menu.small-vertical th,table.menu.vertical td,table.menu.vertical th {
+          display:block !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.menu[align=center] {
+          width:auto !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand,table.button.small-expanded {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand table,table.button.small-expanded table {
+          width:100%;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand table a,table.button.small-expanded table a {
+          text-align:center !important;
+          width:100% !important;
+          padding-left:0 !important;
+          padding-right:0 !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.button.small-expand center,table.button.small-expanded center {
+          min-width:0;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        h1 {
+          font-size:32px !important;
+          line-height:42px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        h2 {
+          font-size:22px !important;
+          line-height:32px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        table.body td.columns,table.body th.columns {
+          padding-left:15px !important;
+          padding-right:15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .pt-20-mobile {
+          padding-top:20px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .full {
+          display:block;
+          width:100%;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .header table.header__inner {
+          width:100% !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .header__wrapper .wrapper-inner {
+          padding:0 15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .socials__item {
+          padding-left:15px !important;
+          padding-right:15px !important;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .speaker__avatar {
+          margin-bottom:20px;
+        }
+      }
+      
+      @media only screen and (max-width:620px) {
+        .event__content {
+          padding:0 20px !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="-moz-box-sizing:border-box;-ms-text-size-adjust:100%;-webkit-box-sizing:border-box;-webkit-text-size-adjust:100%;Margin:0;background:#f2f3f8!important;box-sizing:border-box;color:#4e4e4e;font-family:Montserrat,Verdana,Arial,sans-serif;font-size:15px;font-weight:400;line-height:26px;margin:0;min-width:100%;padding:0;text-align:left;width:100%!important">
+  <span class="preheader" style="color:#f2f3f8;display:none!important;font-size:1px;line-height:1px;max-height:0;max-width:0;mso-hide:all!important;opacity:0;overflow:hidden;visibility:hidden">из кампании в Facebook Поиск клиентов, группа объявлений: Менеджер по продажам.
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+      
+    </span>
+  <table class="body" style="margin:0;background:#f2f3f8 !important;border-collapse:collapse;border-spacing:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;height:100%;line-height:26px;padding:0;text-align:left;vertical-align:top;width:100%;">
+    <tr style="padding:0;text-align:left;vertical-align:top;">
+      <td class="center" align="center" valign="top" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+        <center style="min-width:600px;width:100%;">
+          <table class="spacer float-center" style="margin:0 auto;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:100%;">
+            <tbody>
+              <tr style="padding:0;text-align:left;vertical-align:top;">
+                <td height="40" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:40px;font-weight:400;line-height:40px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+              </tr>
+            </tbody>
+          </table>
+          <table align="center" class="container header float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+            <tbody>
+              <tr style="padding:0;text-align:left;vertical-align:top;">
+                <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                  <table class="wrapper header__wrapper" align="center" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <td class="wrapper-inner" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                        <table width="500" style="border-bottom:1px solid #d9dde4;border-collapse:collapse;border-spacing:0;display:table;margin:0 auto;padding:0;position:relative;text-align:left;vertical-align:top;width:500px;" class="row header__inner collapse">
+                          <tbody>
+                            <tr style="padding:0;text-align:left;vertical-align:top;">
+                              <th class=small-10 large-7 columns first" valign="middle" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:20px;padding-left:0;padding-right:0;padding-top:20px;text-align:left;width:360px;">
+                                <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                    <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                      <a target="_blank" style="margin:0;color:#039be6;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0;text-align:left;text-decoration:none;vertical-align:middle;width:30px;" href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=84800253"><img border="0" width="30" height="30" alt="eLama" src="https://elama.ru/info/uploads/elama_email/new_emails/logo-lama.png" style="-ms-interpolation-mode:bicubic;border:none;clear:both;display:block;max-width:100%;outline:0;text-decoration:none;width:auto"></a><span style="font-size:12px;line-height:20px;margin-left:10px;vertical-align:middle" class="text-xs"><b style="font-weight:600;">еLama</b> | Уведомление</span>
+                                    </th>
+                                  </tr>
+                                </table>
+                              </th>
+                             
+                          </tr>
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                  <tbody>
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <td height="60" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:60px;font-weight:400;line-height:60px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table align="center" class="container float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+          <tbody>
+            <tr style="padding:0;text-align:left;vertical-align:top;">
+              <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                <table class="row" style="border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                  <tbody>
+                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                      <th class="small-12 large-12 columns first last" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:0;padding-left:50px;padding-right:50px;text-align:left;width:580px;">
+                        <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                <h1 style="margin:0;margin-bottom:40px;color:#1d1d39;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:36px;font-weight:700;line-height:46px;padding:0;text-align:left;word-wrap:normal;">Вы получили новый лид</h1>
+                              <!-- Start КАРТИНКА -->
+                              <p style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">Здравствуйте! Вы получили новый лид из&nbsp;кампании в&nbsp;Facebook <b>Поиск клиентов</b><br><br>
+<b>Время и дата:</b> 15:29, 2021-03-19<br>
+<b>Группа объявлений:</b> Менеджер по продажам<br>
+<b>Объявление:</b> - Генерация лидов<br>
+<b>Форма:</b> Свяжитесь  с нами 2<br>
+<b>company_name</b>: -<br><b>номер_телефона</b>: +79202710710<br>
+                              </p>
+                                  </th>
+                                </tr>
+                              </table>
+                            </th>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!-- End БЛОК 1 -->
+                      <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                        <tbody>
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table align="center" class="container float-center" style="margin:0 auto;background:#fff;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:600px;">
+                        <tbody>
+                          <tr style="padding:0;text-align:left;vertical-align:top;">
+                            <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                              <table class="row footer" style="background-color:#f2f3f8;border-collapse:collapse;border-spacing:0;display:table;padding:0;position:relative;text-align:left;vertical-align:top;width:100%;">
+                                <tbody>
+                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                    <th class="small-12 large-12 columns first last" style="margin:0 auto;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-bottom:0;padding-left:50px;padding-right:50px;text-align:left;width:580px;">
+                                      <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                        <tr style="padding:0;text-align:left;vertical-align:top;">
+                                          <th style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;">
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <table align="center" class="socials float-center" style="margin:0 auto;border-collapse:collapse;border-spacing:0;float:none;padding:0;text-align:center;vertical-align:top;width:auto !important;">
+                                              <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                <td style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;">
+                                                  <table style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                    <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                      <th class="socials__item socials__item--first float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:0 !important;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=4788864d28bde40f" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">ВКонтакте</a>
+                                                      </th>
+                                                      <th class="socials__item float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=cbec62d9" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Twitter</a>
+                                                      </th>
+                                                      <th class="socials__item float-center" style="margin:0 auto;border-right:1px solid #d9dde4;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:20px;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=1902ef5d02a9c1e3" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Facebook</a>
+                                                      </th>
+                                                      <th class="socials__item socials__item--last float-center" style="margin:0 auto;border-right:0 !important;color:#4e4e4e;float:none;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0;padding-left:20px;padding-right:0 !important;text-align:center;">
+                                                        <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=ffa26001" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:600;line-height:20px;padding:0;text-align:left;text-decoration:underline;">Youtube </a>
+                                                      </th>
+                                                    </tr>
+                                                  </table>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="15" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:15px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <ul class="footer-contacts" style="list-style:none;margin:0;padding:0;text-align:center;">
+                                              <li class="footer-contacts__item" style="display:inline-block;">
+                                                <a class="footer-contacts__link" href="mailto:milo@elama.ru" style="margin:0;color:#4e4e4e !important;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0 10px;text-align:left;text-decoration:none;white-space:nowrap;">milo@elama.ru</a>
+                                              </li>
+                                              <li class="footer-contacts__item" style="display:inline-block;">
+                                                <a class="footer-contacts__link" href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=61165bd2" style="margin:0;color:#4e4e4e !important;display:inline-block;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:26px;padding:0 10px;text-align:left;text-decoration:none;white-space:nowrap;">8 800 500 31 90</a>
+                                              </li>
+                                            </ul>
+                                            <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                              <tbody>
+                                                <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                  <td height="10" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:400;line-height:10px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                            <p class="text-center footer__bottom-text" style="margin:0;margin-bottom:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:10px;font-weight:400;line-height:20px;padding:0;text-align:center;">
+                                             Вы получили это письмо, так&nbsp;как&nbsp;подписались на&nbsp;инструмент импорта лидов eLama.<br>Если больше не&nbsp;хотите получать такие уведомления, то&nbsp;вы можете <a href="https://admin.leadersend.com/track/click?u=4eee8c76&eid=a6607e233caa5af00e55e09eaf12fae9&id=405ed6201c456c07" class="footer__bottom-name" target="_blank" style="margin:0;color:#4e4e4e !important;font-family:Montserrat, Verdana, Arial, sans-serif;font-weight:600;line-height:inherit;padding:0;text-align:left;text-decoration:none;">отписаться</a> от&nbsp;них в&nbsp;личном кабинете.</p>
+                                              <table class="spacer" style="border-collapse:collapse;border-spacing:0;padding:0;text-align:left;vertical-align:top;width:100%;">
+                                                <tbody>
+                                                  <tr style="padding:0;text-align:left;vertical-align:top;">
+                                                    <td height="30" style="-webkit-hyphens:auto;margin:0;border-collapse:collapse !important;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:30px;font-weight:400;line-height:30px;mso-line-height-rule:exactly;padding:0;text-align:left;vertical-align:top;word-wrap:break-word;"> </td>
+                                                  </tr>
+                                                </tbody>
+                                              </table>
+                                            </th>
+                                            <th class="expander" style="margin:0;color:#4e4e4e;font-family:Montserrat, Verdana, Arial, sans-serif;font-size:15px;font-weight:400;line-height:26px;padding:0 !important;text-align:left;visibility:hidden;width:0;"></th>
+                                          </tr>
+                                        </table>
+                                      </th>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- prevent Gmail on iOS font size manipulation -->
+                <div style="display:none;white-space:nowrap;font:15px courier;line-height:0;">                                                           </div>
+              </center>
+            </td>
+          </tr>
+        </table>
+      <img src="https://admin.leadersend.com/track/open?u=4eee8c76&id=a6607e233caa5af00e55e09eaf12fae9" width="1" height="1" alt="" /></body>
+</html>
+
+            [new] => 1
+        )
+
+)

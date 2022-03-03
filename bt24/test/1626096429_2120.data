@@ -1,0 +1,30 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Данила 
+            [phone] => 89151660791
+            [email] => portamper@gmail.com
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Какие условия вашего холодного обзвона, как закакзать услугу?
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Данила 
+            [phone] => 89151660791
+            [email] => portamper@gmail.com
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Какие условия вашего холодного обзвона, как закакзать услугу?
+            [new] => 1
+        )
+
+)

@@ -1,0 +1,147 @@
+<?php include("../../starcall_conf/session.cfg.php"); ?>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<link href="starcall.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<?php 
+extract($_REQUEST);
+
+if(!isset($_SESSION['project']['id']) or $_SESSION['project']['id']=='') exit();
+$project_id=$_SESSION['project']['id'];
+include("../../starcall_conf/conn_string.cfg.php");
+
+//*СОХРАНЕНИЕ
+if(isset($frm_submit) and $frm_submit=='save') {
+	if(isset($src_index_id)) {
+		$upd=OCIParse($c,"update STC_SRC_INDEXES set src_idx_quote=:quote where project_id=".$project_id." and id=:index_id");
+		foreach($src_index_id as $index_id => $quote) {
+			OCIBindByName($upd,":index_id",$index_id);
+			OCIBindByName($upd,":quote",$quote);
+			OCIExecute($upd,OCI_DEFAULT);
+		}
+	}
+	if(isset($qst_index_id)) {
+		$upd=OCIParse($c,"update STC_QST_INDEXES set qst_idx_quote=:quote where project_id=".$project_id." and id=:index_id");
+		foreach($qst_index_id as $index_id => $quote) {
+			OCIBindByName($upd,":index_id",$index_id);
+			OCIBindByName($upd,":quote",$quote);
+			OCIExecute($upd,OCI_DEFAULT);
+		}
+	}	
+	OCICommit($c);
+}
+//
+
+if(isset($src_quote_rebuild)) {
+	$q=OCIParse($c,"select t.src_quote_broken from STC_PROJECTS t
+	where id=".$_SESSION['project']['id']);
+	OCIExecute($q); OCIFetch($q);
+	if(OCIResult($q,"SRC_QUOTE_BROKEN")=='yes') {
+		if(OCIExecute(OCIParse($c,"begin stc_src_quote_rebuild(".$_SESSION['project']['id']."); end;"))) {
+		$_SESSION['project']['src_quote_broken']='';
+		echo "<script>parent.admMainTopFrame.location=parent.admMainTopFrame.location.href;</script>";
+		}
+	} 
+}
+
+if(isset($qst_quote_rebuild)) {
+	$q=OCIParse($c,"select t.qst_quote_broken from STC_PROJECTS t
+	where id=".$_SESSION['project']['id']);
+	OCIExecute($q); OCIFetch($q);
+	if(OCIResult($q,"QST_QUOTE_BROKEN")=='yes') {
+		if(OCIExecute(OCIParse($c,"begin stc_qst_quote_rebuild(".$_SESSION['project']['id']."); end;"))) {
+		$_SESSION['project']['qst_quote_broken']='';
+		echo "<script>parent.admMainTopFrame.location=parent.admMainTopFrame.location.href;</script>";
+		}
+	}
+}
+
+if($_SESSION['project']['src_quote_broken']<>'') {
+	echo "<font color=red><a href='?src_quote_rebuild'>Изменены квоты по исходным полям! Нажмите сюда, что бы перестроить квоты (может занять длительное время) </a></font> ";
+	exit();
+}
+else if($_SESSION['project']['qst_quote_broken']<>'') {
+	echo "<font color=red><a href='?qst_quote_rebuild'>Изменены квоты по вопросам! Нажмите сюда, что бы престроить квоты (может занять длительное время) </font> ";
+	exit();
+}
+if(!isset($type)) $type='src';
+
+echo " | ";
+echo "<a href='adm.quotes.qst.php'>Зависимые квоты</a> | ";
+echo "<a href='adm.quotes.sng.php'><font size=4>Независимые квоты</font></a> | ";
+echo "<a href='help.adm.quotes.html' target=_blank>Справка</a>";
+echo "<hr>";
+echo "<form name=frm_select method=get>";
+echo "<select name=type onchange=frm_select.submit()>";
+echo "<option value=src".($type=='src'?' selected':NULL).">Независимые квоты по исходным полям (индексам и квотам)</option>";
+echo "<option value=qst".($type=='qst'?' selected':NULL).">Независимые квоты по вопросам (квотируемым)</option>";
+echo "</select><a href=adm.quotes.xlsx_exp.php target=_blank>ffffff</a><hr>";
+echo "</form>";
+
+echo "<form name=frm method=post>";
+echo "<input type=hidden name=type value='".$type."'>";
+//независимые квоты по исходным индексам
+if($type=='src') {
+	$q=OCIParse($c,"select i.id idx_id,f.text_name,i.value, i.src_idx_quote
+	from STC_FIELDS f, STC_SRC_INDEXES i
+	where f.project_id=".$project_id." and f.deleted is null and f.src_type_id=1 and (f.quoted is not null or f.idx is not null)
+	and i.project_id=".$project_id." and i.field_id=f.id
+	order by f.text_name,i.value");
+	OCIExecute($q);
+	$i=0; while(OCIFetch($q)) {$i++;
+		if($i==1) {
+			echo "<table>";
+			echo "<tr>";
+			echo "<th>Название поля</th>";
+			echo "<th>Значение</th>";	
+			echo "<th>Квота</th>";
+			echo "</tr>";
+		}
+		echo "<tr>";
+		echo "<td><b>".OCIResult($q,"TEXT_NAME")."</b></td>";
+		echo "<td>".OCIResult($q,"VALUE")."</td>";
+		echo "<td><input type=text size=1 name=src_index_id[".OCIResult($q,"IDX_ID")."] value='".OCIResult($q,"SRC_IDX_QUOTE")."'></td>";
+		echo "</tr>";	
+	}
+	if ($i==0) {echo "<font size=3><b>Нет квотируемых или индексируемых исходных полей</b></font>"; exit();}
+	echo "</table>";
+}
+
+//независимые квоты по ключу квоты вопроса
+if($type=='qst') {
+	$q=OCIParse($c,"select qi.id idx_id,f.text_name,qi.value, qi.qst_idx_quote 
+from stc_objects o, stc_fields f, stc_qst_indexes qi 
+where o.project_id=".$project_id." and o.deleted is null
+and f.project_id=".$project_id." and f.id=o.field_id
+and qi.object_id=o.id
+order by f.text_name,qi.value");
+	OCIExecute($q);
+	$i=0; while(OCIFetch($q)) {$i++;
+		if($i==1) {
+			echo "<table>";
+			echo "<tr>";
+			echo "<th>Название поля</th>";
+			echo "<th>Значение</th>";	
+			echo "<th>Квота</th>";
+			echo "</tr>";
+		}
+		echo "<tr>";
+		echo "<td><b>".OCIResult($q,"TEXT_NAME")."</b></td>";
+		echo "<td>".OCIResult($q,"VALUE")."</td>";
+		echo "<td><input type=text size=1 name=qst_index_id[".OCIResult($q,"IDX_ID")."] value='".OCIResult($q,"QST_IDX_QUOTE")."'></td>";
+		echo "</tr>";	
+	}
+	
+	if ($i==0) {echo "<font size=3><b>Нет квотируемых вопросов или в вопросах не ответов</b></font>"; exit();}
+	echo "</table>";
+}
+echo "<hr>";
+echo "<input type=hidden name=frm_submit value=save>";
+echo "<input type=button name=save value=Сохранить onclick=this.disabled=true;frm.submit();> ";
+echo "</form>";
+?>
+</body>
+</html>
+

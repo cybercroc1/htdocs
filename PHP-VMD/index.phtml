@@ -1,0 +1,3936 @@
+<?
+
+include('../OCIWRAP/recordset.php');
+
+function strqs( $str )
+{
+	return StripSlashes(str_replace("'", "''", $str ));
+}
+//->>>> BEGIN SESSION INIT
+session_start();
+
+// установим переменные на эту сессию
+// нам нужен пользователь, кот. пользуется службой и коннекция к БД.
+// $ora_conn - сторока подключения к БД. Формат: login/password@service_name
+// $user_id - id пользователя, кот. пользуется службой
+$user_id = $_GET["uui"];
+if( !isset($HTTP_COOKIE_VARS["uui"]) )
+	setcookie( "uui", $user_id, 0 );
+else
+	$user_id = $HTTP_COOKIE_VARS["uui"];
+if( $user_id == 0 )
+{
+	print '<B ALIGN=CENTER><FONT COLOR=RED>ОШИБКА ИНИЦИАЛИЗАЦИИ! НЕ УКАЗАН ПОЛЬЗОВАТЕЛЬ!</FONT></B><BR>';
+	print 'Проверьте строку инициализации службы! Формат строки: uui=&lt;user_id&gt;&sid=&lt;ora_conn&gt;<BR>';
+	return 0;
+}
+
+$ora_conn_vmd = $_GET["sid"];
+if( !isset($HTTP_COOKIE_VARS["ora_conn_vmd"]) )
+	setcookie( "ora_conn_vmd", $ora_conn_vmd, 0 );
+else
+	$ora_conn_vmd = $HTTP_COOKIE_VARS["ora_conn_vmd"];
+
+// 2)	Create DB object
+$login = ""; $pwd = ""; $ser_name = "";
+$ar = explode("/", $ora_conn_vmd );
+$login = $ar[0];
+$ar = explode("@", $ar[1] );
+$pwd = $ar[0];
+$ser_name = $ar[1];
+if( strlen($login) == 0 || strlen($pwd) == 0 || strlen($ser_name) == 0 )
+{
+	print '<B ALIGN=CENTER><FONT COLOR=RED>ОШИБКА ИНИЦИАЛИЗАЦИИ! НЕ ВЕРНЫЙ ФОРМАТ СТРОКИ ПОДКЛЮЧЕНИЯ К БД!</FONT></B><BR>';
+	print 'ORA_CONNECTION_STRING: '.$ora_conn_vmd.'<BR>';
+	print 'Формат: login/password@service_name<BR>';
+	return 0;
+}
+
+
+$db = new Recordset($login, $pwd, $ser_name);
+//->>>>	END SESSION INIT
+
+
+$glogal_list_valign = "TOP";
+$global_dlg_valign = "MIDDLE";
+
+$result_code_for_charges = 9;
+$count_messages = 6;
+
+function check_date( $str_date )
+{
+	$arr = explode( ".", $str_date ); 	
+	if( sizeof($arr) != 3 )
+	{
+		return false;
+	}
+	if( strlen($arr[0]) != 2 || strlen($arr[1]) != 2 || strlen($arr[2]) != 2 )
+	{
+		return false;
+	}
+	if( !is_int(0+$arr[0]) || !is_int(0+$arr[1]) || !is_int(0+$arr[2]) )
+	{
+		return false;
+	}
+	if( (0+$arr[0]) <= 0 || (0+$arr[0]) > 31 ||
+		(0+$arr[1]) <= 0 || (0+$arr[1]) > 12 )
+	{
+		return false;
+	}
+	return true;
+};
+
+function check_date_time( $str_date )
+{
+	if( strlen($str_date) < 14 )
+	{
+		return false;
+	}
+	else if( !check_date( substr($str_date, 0, 8) ) )
+	{
+		return false;
+	}
+	$str_time = substr( $str_date, 9, 5 );
+
+	$arr = explode( ":", $str_time ); 	
+	if( sizeof($arr) != 2 )
+	{
+		return false;
+	}
+	if( strlen($arr[0]) != 2 || strlen($arr[1]) != 2 )
+	{
+		return false;
+	}
+	
+	if( !is_int(0+$arr[0]) || !is_int(0+$arr[1]) )
+	{
+		return false;
+	}
+	if( (0+$arr[0]) < 0 || (0+$arr[0]) > 23 ||
+		(0+$arr[1]) < 0 || (0+$arr[1]) > 59 )
+	{
+		return false;
+	}
+	return true;
+};
+
+function check_time( $str_time )
+{
+	if( strlen($str_time) < 5 )
+	{
+		return false;
+	}
+
+	$arr = explode( ":", $str_time ); 	
+	if( sizeof($arr) != 2 )
+	{
+		return false;
+	}
+	if( strlen($arr[0]) != 2 || strlen($arr[1]) != 2 )
+	{
+		return false;
+	}
+	
+	if( !is_int(0+$arr[0]) || !is_int(0+$arr[1]) )
+	{
+		return false;
+	}
+	if( (0+$arr[0]) < 0 || (0+$arr[0]) > 23 ||
+		(0+$arr[1]) < 0 || (0+$arr[1]) > 59 )
+	{
+		return false;
+	}
+	return true;
+};
+
+	$pid = $_GET["pid"];
+
+	if( $pid == 1 ) // запоминание даты в списке кампаний
+	{
+		$begin_date_cl = $_GET["begin_date_cl"];
+		if( !isset($_GET["begin_date_cl"]) || strlen( trim($_GET["begin_date_cl"]) ) == 0 )
+		{
+			if( isset($HTTP_COOKIE_VARS["begin_date_cl"]) )
+				$begin_date_cl = $HTTP_COOKIE_VARS["begin_date_cl"];
+			else
+				$begin_date_cl = date("d.m.y");
+		}
+		else
+		{
+			setcookie( "begin_date_cl", $begin_date_cl, 0 );
+		}
+
+		$end_date_cl = $_GET["end_date_cl"];
+		if( !isset($_GET["end_date_cl"]) || strlen( trim($_GET["end_date_cl"]) ) == 0 )
+		{
+			if( isset($HTTP_COOKIE_VARS["end_date_cl"]) )
+				$end_date_cl = $HTTP_COOKIE_VARS["end_date_cl"];
+			else
+				$end_date_cl = date("d.m.y");
+		}
+		else
+		{
+			setcookie( "end_date_cl", $end_date_cl, 0 );
+		}
+	}
+	
+?>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE>VMD</TITLE>
+<META NAME="Author" CONTENT="Vladimir">
+<META NAME="Keywords" CONTENT="VMD">
+<META NAME="Description" CONTENT="VMD">
+<meta http-equiv="content-type" content="text/html; charset=windows-1251">
+</HEAD>
+
+<STYLE>
+A:hover {COLOR:#ff0000}
+body {background-repeat: repeat-y; background-position: right;}
+.bodyText {font-family: Arial; font-size: 12px; color: #485b5f; text-align: justify;}
+td a {font-family: Arial; font-size: 12px; color: #485b5f;}
+.addClaim {font-family: Arial; font-size: 12px; color: #485b5f; text-align: justify;}
+
+.dataAreaTable {font-family: Arial; font-size: 12px; color: #485b5f; text-align: justify; border-style:solid; border-bottom-width:1px; border-left-width:0; border-top-width:0; border-right-width:1px;}
+.dataAreaTableData {font-family: Arial; font-size: 12px; color: #485b5f; text-align: justify; height:14; border-style:solid; border-bottom-width:0px; border-left-width:1px; border-top-width:1; border-right-width:0;}
+.dataAreaTableDataEmpty {font-family: Arial; font-size: 12px; color: #485b5f; text-align: justify; height:14; border-style:solid; border-bottom-width:0px; border-left-width:0px; border-top-width:0; border-right-width:0;}
+
+</STYLE>
+
+<?
+if ( (isset($_GET["pid"])) && ($_GET["pid"]==14) && (isset($_GET["action_name"])) && (($_GET["action_name"]=="delvar")||($_GET["action_name"]=="addvar")) )
+	print "<BODY BGCOLOR=\"#E5EBEB\" marginheight=\"0\" leftmargin=\"0\" topmargin=\"10\" LINK=\"#485b5f\" ALINK=\"#485b5f\" VLINK=\"#485b5f\" CLASS=bodyText onLoad='javascript:self.location=\"#VARIANTS\"'>\n";
+else
+	print "<BODY BGCOLOR=\"#E5EBEB\" marginheight=\"0\" leftmargin=\"0\" topmargin=\"10\" LINK=\"#485b5f\" ALINK=\"#485b5f\" VLINK=\"#485b5f\" CLASS=bodyText>\n";
+
+switch($pid)
+{
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+	case 0:// стартовый экран
+	{
+?>
+<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="0" WIDTH=100% HEIGHT=100% ALIGN=CENTER>
+<TR><TD VALIGN=<?print $global_dlg_valign;?>>
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=340 ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR>
+		<TD style="border:0;" ALIGN=CENTER>
+			<A HREF = "javascript:p=document.location.href.indexOf('?');document.location=document.location.href.substring(0,p)+'?pid=1';">Изменение списка кампаний</A>
+		</TD>
+	</TR>
+	<TR>
+		<TD style="border:0;" ALIGN=CENTER>
+			<A HREF = "javascript:p=document.location.href.indexOf('?');document.location=document.location.href.substring(0,p)+'?pid=2';">Изменение списка результатов обзвона</A>
+		</TD>
+	</TR>
+	<TR>
+		<TD style="border:0;" ALIGN=CENTER>
+			<A HREF = "javascript:p=document.location.href.indexOf('?');document.location=document.location.href.substring(0,p)+'?pid=5';">Изменение периодов, в которые обзвон запрещен</A>
+		</TD>
+	</TR>
+	<TR>
+		<TD style="border:0;" ALIGN=CENTER>
+			<A HREF = "javascript:p=document.location.href.indexOf('?');document.location=document.location.href.substring(0,p)+'?pid=3';">Наблюдение за системой</A>
+		</TD>
+	</TR>
+	<TR>
+		<TD style="border:0;" ALIGN=CENTER>
+			<A HREF = "javascript:p=document.location.href.indexOf('?');document.location=document.location.href.substring(0,p)+'?pid=4';">Изменение списка голосовых сообщений</A>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+</TABLE>
+
+<?
+	}
+	break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+	case 1: // СПИСОК КАМПАНИЙ
+	{		
+		if( isset($_GET["action_name"]) )
+		{
+			$action = $_GET["action_name"];
+			if( $action == "del" )
+			{// удалим выбранные строки
+				$row_count = $_GET["row_count"];
+//				$sql = "delete vmd_campaign where campaign_id = ";
+				//$sql = "select VMD_UTIL.F_CLOSE_CAMPAIGN( ";
+				$del_ids_arr = explode( ";", $_GET["del_ids"]); 	
+				for( $i = 0; $i < sizeof($del_ids_arr)-1; $i++ )
+				{
+					$ex_sql = "select VMD_UTIL.F_CLOSE_CAMPAIGN( ".$del_ids_arr[$i].", ".$user_id.") RES from dual";
+					$db->SelectRecords($ex_sql, &$rows);
+				}
+			}
+		}
+?>
+	<SCRIPT LANGUAGE="JavaScript">
+
+		function hasSelectedItem()
+		{
+			cid = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						cid = document.forms(0).elements(i).name.substring(4, document.forms(0).elements(i).name.length );
+						break;
+					}
+				}
+			}
+			if( cid == "" )
+				return false;
+			else
+				return cid;
+		}
+		
+		function onClickApply()
+		{
+			document.forms(0).elements("SEL_ALL").checked=false;
+			onClickSelAll();
+			document.forms(0).action=document.location.href;
+			document.forms(0).elements("pid").value = "1";
+			document.forms(0).submit();	
+		}
+
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( !document.forms(0).elements(event.srcElement.name).checked )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickCreate()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=11';
+		}
+		
+		function onClickDelete()
+		{
+			if( confirm("Вы действительно хотите закрыть выбранные кампании?") == false )
+				return;
+			document.forms(0).elements("pid").value = "1";
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).submit();
+		}
+		
+		function onClickExecHistory()
+		{
+			cid = hasSelectedItem();
+			if( cid == "" )
+			{
+				alert("Не выбрана кампания для просмотра истории!");
+				return;
+			}
+
+			count=0;
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						count++;
+					}
+				}
+			}
+			
+			if (count>1)
+			{
+				alert("Для просмотра истории выполнения должна быть выбрана только одна кампания!");
+				return;
+        		}
+
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=12&cid='+cid;
+		}
+
+		function onClickResults()
+		{
+			cid = hasSelectedItem();
+			if( cid == "" )
+			{
+				alert("Не выбрано кампаний для просмотра результатов!");
+				return;
+			}
+
+			count=0;
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						count++;
+					}
+				}
+			}
+			
+			if (count>1)
+			{
+				alert("Для просмотра результатов должна быть выбрана только одна кампания!");
+				return;
+        		}
+
+			document.forms(0).elements("pid").value = "1";
+			sel_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						sel_ids+=document.forms(0).elements(i).name.substring
+								(
+									4,
+									document.forms(0).elements(i).name.length
+								);
+
+						sel_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			p=document.location.href.indexOf('?');
+			// document.location=document.location.href.substring(0,p)+'?pid=13&sel_ids='+sel_ids;
+			document.location=document.location.href.substring(0,p)+'?pid=13&sel_ids='+sel_ids+'&att=-1';
+		}
+
+		function onClickRefresh()
+		{
+			document.location=document.location.href;
+		}
+
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+
+	</SCRIPT>
+
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<!-- ЗАГОЛОВОК С КНОПАКАМИ УПРАВЛЕНИЯ И ФИЛЬТРОМ -->
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Список кампаний</B></TD>
+	</TR>
+	<TR>
+		<TD>
+		<NOBR>Открытых с:<INPUT readonly TYPE=TEXT NAME="begin_date_cl" SIZE=9 VALUE="<?print $begin_date_cl;?>"><a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.forms(0).begin_date_cl);return false;" HIDEFOCUS><img class="PopcalTrigger" align="absmiddle" src="../clndrxp94/calbtn.gif" width="34" height="22" border="0" alt="Календарь"></A>&nbsp;
+				по:<INPUT readonly TYPE=TEXT NAME="end_date_cl" SIZE=9 VALUE="<?print $end_date_cl;?>"><a href="javascript:void(0)" onclick="if(self.gfPop)gfPop.fPopCalendar(document.forms(0).end_date_cl);return false;" HIDEFOCUS><img class="PopcalTrigger" align="absmiddle" src="../clndrxp94/calbtn.gif" width="34" height="22" border="0" alt="Календарь"></A>&nbsp;<INPUT TYPE=CHECKBOX NAME="hide_closed" <?if(isset($_GET["hide_closed"])) print 'CHECKED';?>>Не показывать закрытые компании&nbsp;&nbsp;<INPUT TYPE=BUTTON VALUE="Применить" onClick="onClickApply()"></NOBR>
+		</TD>
+	</TR>
+	<TR HEIGHT=100%>
+		<TD>
+		<DIV STYLE="height:100%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=dataAreaTable WIDTH=95% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR>
+				<TD WIDTH=3% class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+				<TD class=dataAreaTableData><B>Наименование</B></TD>
+				<TD class=dataAreaTableData><B>Сценарий</B></TD>
+				<TD class=dataAreaTableData><B>Открыта</B></TD>
+				<TD class=dataAreaTableData><B>Закрыта</B></TD>
+				<TD class=dataAreaTableData><B>Выполнено (%)</B></TD>
+			</TR>
+<?
+/*
+		$sql = "SELECT C.CAMPAIGN_ID CID, C.CAMPAIGN_NAME CN, NVL(VOICE_MESSAGE_NAME,'-') MN, 
+					to_char(C.CREATEDATE,'dd.mm.yy hh24:mi') CRD, to_char(C.CLOSEDATE,'dd.mm.yy hh24:mi') CLD 
+				FROM VMD_CAMPAIGN C, VMD_MESSAGES M 
+				WHERE VMREF = VOICE_MESSAGE_ID(+)
+				  AND C.CREATEDATE BETWEEN TO_DATE('".$begin_date_cl."', 'DD.MM.YY') AND TO_DATE('".$end_date_cl."','DD.MM.YY')+1 ";
+		if( isset($_GET["hide_closed"]) )
+			$sql = $sql." AND C.CLOSED = 0 ";
+*/
+		if( isset($_GET["hide_closed"]) )
+			$sql_closed = " AND C.CLOSED = 0 ";
+		else	
+			$sql_closed = "";
+
+		$sql = "SELECT C.CAMPAIGN_ID CID, C.CAMPAIGN_NAME CN, DECODE(SCRIPT_TYPE,'A','воспроизведение сообщения','B','информация о начислениях','V','автоматический опрос') MN, 
+					to_char(C.CREATEDATE,'dd.mm.yy hh24:mi') CRD, NVL(to_char(C.CLOSEDATE,'dd.mm.yy hh24:mi'),'&nbsp;') CLD, NVL(sel0.all_numbers,0) ALL_CAMP_NUMBERS, NVL(sel1.proc_numbers,0) PROC_CAMP_NUMBERS 
+				FROM VMD_CAMPAIGN C, VMD_MESSAGES M,
+				(select c.CAMPAIGN_ID ID, count(DISTINCT CAMPAIGN_PHONE_NO) all_numbers
+				 from VMD_CAMPAIGN c, VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn
+				 where cg.CAMPAIGN_REF = c.CAMPAIGN_ID and cn.CALL_GROUP_REF = cg.CAMPAIGN_GROUP_ID and cn.closed=0 
+					AND C.CREATEDATE BETWEEN TO_DATE('".$begin_date_cl."', 'DD.MM.YY') AND TO_DATE('".$end_date_cl."','DD.MM.YY')+1 
+					$sql_closed 
+				 group by c.CAMPAIGN_ID) sel0,
+				(select c.CAMPAIGN_ID ID, count(DISTINCT CAMPAIGN_PHONE_NO) proc_numbers
+				 from VMD_CAMPAIGN c, VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn
+				 where cg.CAMPAIGN_REF = c.CAMPAIGN_ID and cn.CALL_GROUP_REF = cg.CAMPAIGN_GROUP_ID and cn.closed=0 
+					AND C.CREATEDATE BETWEEN TO_DATE('".$begin_date_cl."', 'DD.MM.YY') AND TO_DATE('".$end_date_cl."','DD.MM.YY')+1 
+					$sql_closed 
+				 and (cn.STATEREF=4 or cn.STATEREF=5 or cn.STATEREF=6)
+				 group by c.CAMPAIGN_ID) sel1 
+				WHERE VMREF = VOICE_MESSAGE_ID(+)
+				  AND C.CREATEDATE BETWEEN TO_DATE('".$begin_date_cl."', 'DD.MM.YY') AND TO_DATE('".$end_date_cl."','DD.MM.YY')+1 
+					AND C.CAMPAIGN_ID=sel0.id(+) AND C.CAMPAIGN_ID=sel1.id(+) 		
+					$sql_closed 
+				ORDER BY C.CREATEDATE DESC, C.CAMPAIGN_ID DESC ";
+
+		$count = 0;
+		if( !check_date($begin_date_cl) || !check_date($end_date_cl) )
+			print '<TR><TD colspan=5>Не корректно заданы даты в фильтре!</TD></TR>';
+		else	
+			$count = $db->SelectRecords( $sql, &$rows );
+		for( $i=1; $i <= $count; $i++ )
+		{
+			print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["CID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;">';
+			print '<TD class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["CID"].'" onClick="onClickRow()"></TD>';
+			print '<TD class=dataAreaTableData><A HREF="javascript:p=document.location.href.indexOf(\'?\');document.location=document.location.href.substring(0,p)+\'?pid=11&cid='.$rows[$i]["CID"].'\'">'.$rows[$i]["CN"].'</A></TD>';
+			print '<TD class=dataAreaTableData>'.$rows[$i]["MN"].'</TD>';
+			print '<TD class=dataAreaTableData>'.$rows[$i]["CRD"].'</TD>';
+			print '<TD class=dataAreaTableData>'.$rows[$i]["CLD"].'</TD>';
+			$all_nums=$rows[$i]["ALL_CAMP_NUMBERS"];
+			$proc_nums=$rows[$i]["PROC_CAMP_NUMBERS"];
+			if ($all_nums==0)
+			{
+				$percents_out="-";
+				print '<TD class=dataAreaTableData>'.$percents_out.'</TD>';
+			}
+			else	
+			{
+				$percents=round( ($proc_nums*10000)/$all_nums );			
+				$percents_out=$percents/100;			
+				printf ('<TD class=dataAreaTableData>%.2f</TD>',$percents_out);
+			}
+			print '</TR>';
+		}
+		print '<INPUT TYPE=HIDDEN NAME=row_count value="'.$count.'">';
+?>
+		</TABLE>
+		</DIV>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD border=0>
+		<NOBR>
+		<INPUT TYPE=BUTTON value="Создать" onClick="onClickCreate()">&nbsp;
+		<INPUT TYPE=BUTTON value="Закрыть кампанию" onClick="onClickDelete()">&nbsp;
+		<INPUT TYPE=BUTTON value="История выполнения" onClick="onClickExecHistory()">&nbsp;
+		<INPUT TYPE=BUTTON value="Результаты" onClick="onClickResults()">&nbsp;
+		<INPUT TYPE=BUTTON value="Обновить" onClick="onClickRefresh()">&nbsp;
+		<INPUT TYPE=BUTTON value="Закрыть" onClick="onClickClose()">&nbsp;
+		</NOBR>
+		</TD>
+	</TR>
+	</TABLE>
+	<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="../clndrxp94/ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; top:-500px; left:-500px;">
+	</iframe>
+</TD></TR>
+</TABLE>
+
+	</FORM>
+
+
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 11: // ИЗМЕНЕНИЕ ПАРАМЕТРОВ КАМПАНИИ
+		{	
+			$action = $_GET["action_name"];
+			$cid = $_GET["cid"];
+			$cname = $_GET["CNAME"];
+			if( !isset($_GET["MID"]) )
+				$mid = -1;				
+			else
+				$mid = $_GET["MID"];
+			$interval = $_GET["INTERVAL"];
+			$try_count = $_GET["TRY_COUNT"];
+			$complete_time = $_GET["COMPLETE_TIME"];
+			$system_id = $_GET["SYSTEM_ID"];
+			$script_type = $_GET["SCRIPT_TYPE"];
+			$opened = date("d.m.y H:i");
+			$changed = date("d.m.y H:i");
+			$closed = "";
+			$err = Array("");
+			$index = 0;
+
+			switch($action) 
+			{
+				case "save":// сохранение или обновление информации о кампании
+				{
+					if( strlen($cname) == 0 )
+					{
+						$err[$index] = "Не введено наименование кампании!";
+						$index++;
+					}
+					if( strlen($mid) == 0 )
+					{
+						$err[$index] = "Не выбрано голосовое сообщение!";
+						$index++;
+					}
+					if( strlen($interval) == 0 || $interval < 0 )
+					{
+						$err[$index] = "Неверно задан интервал между обзвонами!";
+						$index++;
+					}
+					if( strlen($try_count) == 0 || $try_count < 0 )
+					{
+						$err[$index] = "Неверно задано количество попыток!";
+						$index++;
+					}
+					if( strlen($complete_time) == 0 || $complete_time < 0 )
+					{
+						$err[$index] = "Неверно задано время успешного соединения!";
+						$index++;
+					}
+					if( strlen($system_id) == 0 || $system_id < 0 )
+					{
+						$err[$index] = "Неверно задан идентификатор системы!";
+						$index++;
+					}
+					if( $script_type == "A" && $mid < 0 )
+					{
+						$err[$index] = "Для сценария 'восроизведение фиксированного сообщения' должно быть задано голосовое сообщение!";
+						$index++;
+					}
+
+					if( strlen($err[0]) == 0 )// ошибок нет. добавляем/обновляем
+					{
+						if ($mid<0)
+							$mid_str = "NULL";
+						else
+							$mid_str = $mid;
+
+						if( $cid > 0 )
+						{
+							/*$sql = "update vmd_campaign
+									set
+										CAMPAIGN_NAME = '".$cname."', 
+										vmref = ".$mid.", 
+										callinterval = ".$interval.", 
+										attempt_count = ".$try_count.", 
+										success_time = ".$complete_time."
+									where CAMPAIGN_ID = ".$cid;*/
+							$sql = "select VMD_UTIL.SP_ADD_CAMPAIGN(".$cid.", '".strqs($cname)."', ".strqs($interval).", ".strqs($try_count).", ".strqs($complete_time).", ".$user_id.", ".$mid_str.", ".$system_id.", '".strqs($script_type)."') CID from dual";
+							$db->SelectRecords( $sql, &$rows );
+							$cid = $rows[1]["CID"];
+						}
+						else
+						{
+							$sql = "select VMD_UTIL.SP_ADD_CAMPAIGN(0, '".strqs($cname)."', ".strqs($interval).", ".strqs($try_count).", ".strqs($complete_time).", ".$user_id.", ".$mid_str.", ".$system_id.", '".strqs($script_type)."') CID from dual";
+							$db->SelectRecords( $sql, &$rows );
+							$cid = $rows[1]["CID"];
+						}
+					}
+					else
+					{
+##						print sizeof($err);
+						print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER BORDERCOLOR=BLACK>';
+						print '<TR><TD style="color:red"><b>Ошибка добавления новой кампании!</b></TD></TR>';
+						for( $i = 0; $i < sizeof($err); $i++ )
+						{
+							if( strlen( $err[$i] ) > 0 )
+							{
+								print '<TR>';
+								print '<TD>'.$err[$i].'</TD>';
+								print '</TR>';
+							}
+						}
+						print '</TABLE>';
+					}
+				}
+				break;
+
+				case "copy_new": // копируем данные для создания новой кампании
+				{
+					$sql = "select VMD_UTIL.F_CP_CAMPAIGN(".$cid.", ".$user_id.") CID	 from dual";
+					$db->SelectRecords($sql, &$rows );
+					$cid = $rows[1]["CID"];
+				}
+				break;
+
+				case "close_campaign": // перешли из списка кампаний
+				{
+					$sql = "select VMD_UTIL.F_CLOSE_CAMPAIGN(".$cid.", ".$user_id.") res from dual";
+					$db->SelectRecords($sql, &$rows );
+				}
+			}
+
+			if( $cid > 0 )
+			{
+				$sql = "SELECT C.CAMPAIGN_ID CID, C.CAMPAIGN_NAME CN, NVL(VOICE_MESSAGE_ID,-1) MID, ATTEMPT_COUNT TC,
+						CALLINTERVAL INT, SYSTEM_ID SYSTEM_ID, SCRIPT_TYPE SCRIPT_TYPE, SUCCESS_TIME ST, to_char(C.ALTERDATE,'dd.mm.yy') ALD,
+					to_char(C.CREATEDATE,'dd.mm.yy') CRD, to_char(C.CLOSEDATE,'dd.mm.yy') CLD
+				FROM VMD_CAMPAIGN C, VMD_MESSAGES M
+				WHERE VMREF = VOICE_MESSAGE_ID(+)
+				  AND C.CAMPAIGN_ID  =  ".$cid;
+				$db->SelectRecords( $sql, &$rows );
+				$cid = $rows[1]["CID"];
+				$cname = $rows[1]["CN"];
+				$mid = $rows[1]["MID"];
+				$interval = $rows[1]["INT"];
+				$try_count = $rows[1]["TC"];
+				$system_id = $rows[1]["SYSTEM_ID"];
+				$script_type = $rows[1]["SCRIPT_TYPE"];
+				$complete_time = $rows[1]["ST"];
+				$opened = $rows[1]["CRD"];
+				$changed = $rows[1]["ALD"];
+				$closed = $rows[1]["CLD"];
+			}
+			else if ( ($action=="save")&&(strlen($cid)>0)&&($cid<0) )
+			{
+				print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER BORDERCOLOR=BLACK>';
+				print '<TR><TD style="color:red"><b>Ошибка сохранения информации о кампании!</b></TD></TR>';
+				print '</TABLE>';
+			}
+
+			$count_mess_js = 0;
+		
+			$sql = "SELECT COUNT(*) as COUNT_MESS FROM VMD_MESSAGES where closed <> 1";
+			$count = $db->SelectRecords($sql, &$rows);
+
+			if ($count>0)
+				$count_mess_js = $rows[1]["COUNT_MESS"];
+
+## Eugene ##
+if ( ( !IsSet($try_count) ) || ( strlen($try_count) == 0 ) )
+    $try_count_js = -1;
+else
+    $try_count_js = $try_count;
+##
+
+?>
+	<SCRIPT language="JavaScript">
+		
+		function onClickCallGroup()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=111&cid=<?print $cid;?>';
+		}
+
+		function onClickCalendar()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=112&cid=<?print $cid;?>';
+		}
+
+		function onCloseCampaign()
+		{
+			document.forms(0).elements("action_name").value = "close_campaign";
+			document.forms(0).elements("pid").value = "11";
+			document.forms(0).submit();
+		}
+
+		function onClickStopList()
+		{
+			document.forms(0).elements("action_name").value = "close_campaign";
+			document.forms(0).elements("pid").value = "113";
+			document.forms(0).submit();
+		}
+
+		function onCopyNew()
+		{
+			document.forms(0).elements("action_name").value = "copy_new";
+			document.forms(0).elements("pid").value = "11";
+			document.forms(0).submit();
+		}
+
+		function onSave()
+		{
+			if( ( document.forms(0).elements("mid").value == -1 ) && ( document.forms(0).elements("script_type").value == "A" ) )
+			{
+				alert("Для сценария 'восроизведение фиксированного сообщения' должно быть задано голосовое сообщение!");
+				return;
+			}
+
+			if( document.forms(0).elements("interval").value < 5 )
+			{
+				alert("Значение интервала между обзвонами должно быть не менее 5.");
+				return;
+			}
+
+			// Eugene
+                        var try_count_js_code = <?print $try_count_js;?>;
+			if (try_count_js_code>=0)			 
+			{		
+				if( document.forms(0).elements("try_count").value > <?print $try_count_js;?> )
+				{
+					if( !confirm("Изменить состояние для номеров с исчерпанным количеством прозвонок?") )
+						return;
+				}
+				else if ( document.forms(0).elements("try_count").value < <?print $try_count_js;?> )
+				{
+					if( !confirm("Новое число попыток меньше старого. Продолжить?") )
+						return;
+				}
+			}		
+
+			document.forms(0).elements("action_name").value = "save";
+			document.forms(0).elements("pid").value = "11";
+			document.forms(0).submit();
+		}
+
+		function onCancel()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=1';
+		}
+
+		function onChoose()
+		{
+			if ( document.forms(0).elements("script_type").value != "A" )
+			{
+				document.forms(0).elements("mid").value = -1;
+				document.forms(0).elements("mid").disabled=true;
+			}
+			else
+			{
+				document.forms(0).elements("mid").disabled=false;
+			}
+		}
+
+		function onClickScenario()
+		{
+			count_mess = <?print $count_mess_js;?>;
+
+			if (count_mess==0)
+			{
+				alert("Нет ни одного голосового сообщения!\nСначала необходимо определить голосовые сообщения.");
+				return;
+			}
+
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=14&cid=<?print $cid;?>';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="0" CLASS=bodyText WIDTH=100% HEIGHT=100% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR><TD VALIGN=<?print $global_dlg_valign;?>>
+
+		<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=650 ALIGN=CENTER BORDERCOLOR=BLACK>
+		<TR>
+			<TD align=center> <B>Изменение параметров кампании</B> </TD>
+		</TR>
+
+		<TR>
+			<TD>
+
+				<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=100% HEIGHT=100% ALIGN=CENTER BORDERCOLOR=BLACK>
+				<TR>
+					<TD>Наименование кампании:</TD>
+					<TD COLSPAN=2><INPUT TYPE=TEXT NAME="CNAME" SIZE=53 maxlength=50 VALUE="<?print $cname;?>"></TD>
+				</TR>
+
+				<TR>
+					<TD>Сценарий обработки вызова:</TD>
+					<TD colspan=2><SELECT NAME="SCRIPT_TYPE" style="width:340" <?if (strlen($cid)>0) print " disabled"; else print " onChange='onChoose()'";?>><OPTION VALUE="A"<?if ($script_type=="A") print " SELECTED"?>>воспроизведение фиксированного сообщения<OPTION VALUE="B"<?if ($script_type=="B") print " SELECTED"?>>информация о балансе и начислениях<OPTION VALUE="V"<?if ($script_type=="V") print " SELECTED"?>>автоматический опрос</SELECT></TD>
+				</TR>
+
+				<TR>
+					<TD>Интервал между обзвонами:</TD>
+					<TD><INPUT TYPE=TEXT NAME="INTERVAL" LENGTH=15 VALUE="<?print $interval;?>"></TD>
+					<TD>Открыта: <?print $opened;?></TD>
+				</TR>
+
+				<TR>
+					<TD>Количество попыток:</TD>
+					<TD><INPUT TYPE=TEXT NAME="TRY_COUNT" LENGTH=15 VALUE="<?print $try_count;?>"></TD>
+					<TD>Изменена: <?print $changed;?></TD>
+				</TR>
+
+				<TR>
+					<TD>Время успешного соединения:</TD>
+					<TD><INPUT TYPE=TEXT NAME="COMPLETE_TIME" LENGTH=15 VALUE="<?print $complete_time;?>"></TD>
+					<TD>Закрыта: <?print $closed;?></TD>
+				</TR>
+<?
+/*
+				<TR>
+					<TD>Идентификатор системы:</TD>
+					<TD><INPUT TYPE=TEXT NAME="SYSTEM_ID" LENGTH=15 VALUE="print $system_id;" maxlength=10></TD>
+					<TD>&nbsp;</TD>
+				</TR>
+*/
+				print "<INPUT TYPE=HIDDEN NAME=\"SYSTEM_ID\" VALUE=1>\n";
+?>
+
+				<TR>
+					<TD>Голосовое сообщение:</TD>
+					<TD COLSPAN=2 align=left>
+						<SELECT NAME="MID" style="width:340"<?if (($script_type!="A")&&(strlen($cid)>0)) {print " DISABLED"; $mid=-1;}?>><OPTION VALUE="-1">-</OPTION>
+<?
+					$sql = "SELECT VOICE_MESSAGE_ID, VOICE_MESSAGE_NAME FROM VMD_MESSAGES where closed <> 1 ORDER BY VOICE_MESSAGE_NAME";
+					$count = $db->SelectRecords($sql, &$rows);
+					for( $i=1; $i <= $count; $i++ )
+					{
+						if( $rows[$i]["VOICE_MESSAGE_ID"] == $mid )
+							print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						else
+							print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+					}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+
+				<TR>
+					<TD colspan=3>
+						<?if( strlen($cid) > 0 ) print '<INPUT TYPE=BUTTON VALUE="Абоненты" onClick="onClickCallGroup()">&nbsp;';?>
+						<?if( strlen($cid) > 0 ) print '<INPUT TYPE=BUTTON VALUE="Стоплист" onClick="onClickStopList()">&nbsp;';?>
+						<?if( (strlen($cid)>0)&&($script_type=="V") ) print '<INPUT TYPE=BUTTON VALUE="Сценарий опроса" onClick="onClickScenario()">&nbsp;';?>
+						<?if( strlen($cid) > 0 ) print '<INPUT TYPE=BUTTON VALUE="Календарь" onClick="onClickCalendar()">&nbsp;';?>
+						&nbsp;
+					</TD>
+				</TR>
+				</TABLE>
+
+			</TD>
+		</TR>
+
+		<TR>
+			<TD>
+				<?
+				if( strlen($cid) > 0 ) 
+				{
+					if( strlen($closed) == 0 )
+						print '<INPUT TYPE=BUTTON VALUE="Закрыть кампанию" onClick="onCloseCampaign()">&nbsp;';
+					print '<INPUT TYPE=BUTTON VALUE="Копировать в новую" onClick="onCopyNew()">&nbsp;';
+				}
+				?>
+				<?if(strlen($closed) == 0 ){?>
+				<INPUT TYPE=BUTTON VALUE="Сохранить" onClick="onSave()">&nbsp;
+				<?}?>
+				<?if( $cid > 0 ){ ?>
+					<INPUT TYPE=BUTTON VALUE="Закрыть" onClick="onCancel()">&nbsp;
+				<?}else{?>
+					<INPUT TYPE=BUTTON VALUE="Отмена" onClick="onCancel()">&nbsp;
+				<?}?>
+
+			</TD>
+		</TR>
+
+	</TD></TR>
+	</TABLE>
+	</FORM>
+
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 111: // ИЗМЕНЕНИЕ ГРУППЫ ОБЗВОНА (ГРУППЫ АБОНЕНТОВ)
+		{
+			$action_name = $_GET["action_name"];
+			$cid = $_GET["cid"];
+			$gid = $_GET["gid"];
+			$gname = $_GET["gname"];
+			$phones = Array("");	
+			$cname = "";
+			$phone = $_GET["phone"];
+			$PhoneType = $_GET["PhoneType"];
+			if( !isset($PhoneType) )
+			{
+				$PhoneType = 1;
+			}
+
+			$err = Array("");
+			$index = 0;
+			
+			if( $cid != "" )
+			{
+				if( strlen($action_name) > 0 )
+				{
+					$sql = "select VMD_UTIL.SP_ADD_GRP(";
+					if( strlen($gid) == 0 )
+						$sql = $sql."0,";
+					else
+						$sql = $sql.$gid.",";
+					$sql = $sql.$cid.",";
+					$sql = $sql."'".strqs($gname)."',";
+					$sql = $sql.$user_id.") GID from dual";
+					$db->SelectRecords($sql, &$rows);
+					if( $rows[1]["GID"] > 0 )
+						$gid = $rows[1]["GID"];
+					else
+					{
+						$err[$index] = "Не удалось обновить группу!";
+						$index++;
+					}
+				}
+
+				switch( $action_name )
+				{
+					case "upload_file":
+					{
+						$fp = fopen($HTTP_POST_FILES["phones_file"]["tmp_name"], "r");
+						$file_as_str = fread( $fp, filesize( $HTTP_POST_FILES["phones_file"]["tmp_name"] ) );
+						fclose( $fp );		
+						$arr = explode( sprintf("%c%c", 13,10), $file_as_str );
+						$res = true;
+						for( $i = 0; $i < sizeof($arr); $i++ )
+						{
+							$arr_type[$i]=1;
+							if( strlen($arr[$i]) > 0 )
+							{
+								for( $j = 0; $j < strlen($arr[$i]); $j++ )
+								{
+									if( ord($arr[$i][$j]) > 57 || ord($arr[$i][$j]) < 48 )
+									{
+										if ( (ord($arr[$i][$j])==32) && ($j>0) )
+										{
+											$temptype = substr($arr[$i],$j);
+											$arr[$i] = substr($arr[$i],0,$j);
+											$type = trim($temptype);
+                                                                                        if (strlen($type)==0)
+											{
+												continue(2);
+											}
+##											for( $k = 0; $k < strlen($type); $k++ )
+##											{
+##												if( ord($type[$k]) > 57 || ord($type[$k]) < 48 )
+##												{
+##													$res = false;
+##													break(3);
+##												}
+##											}
+											if (strlen($type)>1)
+											{
+												$res = false;
+												break(2);
+											}	
+											if ( ($type!="1") && ($type!="3") && ($type!="4") )
+											{
+												$res = false;
+												break(2);
+											}	
+											$arr_type[$i] = $type;
+											continue(2);
+										}
+										$res = false;
+										break(2);
+									}
+								}
+							}
+						}
+						
+						if( $res )
+						{
+							$r = false;
+							for( $i = 0; $i < sizeof($arr); $i++ )
+							{
+								if( strlen($arr[$i]) > 0 )
+								{
+									$sql = "select VMD_UTIL.FG_ADD_PHONE(0, ".$gid.", '".strqs($arr[$i])."', $arr_type[$i], ".$user_id.") RES from dual";
+									$db->SelectRecords($sql, &$rows);
+									if( $rows[1]["RES"] <= 0 && $r == false )
+									{
+										$err[$index] = "Не удалось добавить номера обзвона!";
+										$index++;
+										$r = true;
+									}
+								}
+							}
+						}
+						else
+						{
+							$err[$index] = "Файл содержит некорректные данные!";
+							$index++;
+						}
+					}
+					break;
+
+					case "del":
+					{
+						$del_ids = explode(";", $_GET["del_ids"]);
+						$r = false;
+						for( $i = 0; $i < sizeof($del_ids); $i++ )
+						{
+							$sql = "select vmd_util.FG_CLOSE_PHONE(".$del_ids[$i].", ".$user_id.") RES from dual";
+							$db->SelectRecords($sql, &$rows);
+							if( $rows[1]["RES"] <= 0 && $r == false )
+							{
+								$err[$index] = "Не удалось удалить номера обзвона!";
+								$index++;
+								$r = true;
+							}
+						}
+					}
+					break;
+
+					case "del_all":
+					{
+						$sql = "select vmd_util.FG_CLOSE_ALLPHONES(".$gid.", ".$user_id.") RES from dual";
+						$db->SelectRecords($sql, &$rows);
+						if( $rows[1]["RES"] <= 0 && $r == false )
+						{
+							$err[$index] = "Не удалось удалить номера обзвона!";
+							$index++;
+						}
+					}
+					break;
+
+					case "add":
+					{
+						$res = true;
+						if( strlen($phone) > 0 )
+						{
+							for( $j = 0; $j < strlen($phone); $j++ )
+							{
+								if( ord($phone[$j]) > 57 || ord($phone[$j]) < 48 )
+								{
+									$res = false;
+									break;
+								}
+							}
+						}
+
+						if( $res )
+						{
+							$sql = "select VMD_UTIL.FG_ADD_PHONE(0, ".$gid.", '".strqs($phone)."', $PhoneType, ".$user_id.") RES from dual";
+							$db->SelectRecords($sql, &$rows);
+							if( $rows[1]["RES"] <= 0 )
+							{
+								$err[$index] = "Не удалось добавить номер обзвона!";
+								$index++;
+							}
+						}
+						else
+						{
+							$err[$index] = "Добавляемый телефон содержит недопустимые символы!";
+							$index++;
+						}
+					}
+
+					break;
+				}
+			
+				///  SELECT DATA
+				$sql = "select campaign_name from vmd_campaign where campaign_id = ".$cid;
+				$count = $db->SelectRecords($sql, &$rows);
+				if( $count == 0 )
+				{
+					$cid = "";
+				}
+				else
+				{
+					$cname = $rows[1]["CAMPAIGN_NAME"];
+					$sql = "select campaign_group_id, campaign_group_name 
+						from vmd_campaign_groups
+						where campaign_ref = ".$cid;
+					$count = $db->SelectRecords($sql, &$rows);
+					if( $count > 0 )
+					{
+						$gname = $rows[1]["CAMPAIGN_GROUP_NAME"];
+						$gid = $rows[1]["CAMPAIGN_GROUP_ID"];
+						$sql = "select campaign_phone_id, campaign_phone_no||' ('||DECODE(phoneno_type_ref,1,'местный',3,'национальный',4,'международный')||')' as campaign_phone_no 
+								from vmd_campaign_numbers 
+								where call_group_ref = ".$gid." and closed <> 1 ORDER BY campaign_phone_no";
+						$count = $db->SelectRecords($sql, &$rows);
+						for( $i = 1; $i <= $count; $i++ )
+						{
+							$phones[$i-1][0] = $rows[$i]["CAMPAIGN_PHONE_ID"];
+							$phones[$i-1][1] = $rows[$i]["CAMPAIGN_PHONE_NO"];
+						}
+					}
+				}
+			}
+			
+			print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER>';
+			for( $i = 0; $i < sizeof($err); $i++ )
+			{
+				if( strlen($err[$i]) > 0 )
+				{
+					if( $i == 0 )
+						print '<TR><TD style="color:red">Ошибка добавления/изменения данных!</TD></TR>';
+					print '<TR><TD>'.$err[$i].'</TD></TR>';
+				}
+			}
+			print '</TABLE>';
+?>
+	<SCRIPT LANGUAGE="JavaScript">
+		cid = "<?print $cid;?>";
+		if( cid == "" )
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+
+		function onClickSearch()
+		{
+			if( document.forms(0).elements("phone").value.length == 0 )
+			{
+				alert("Введите телефон для поиска!");
+				return;
+			}
+
+			for( i = 0; i < document.forms(0).elements("phones").options.length; i++ )
+			{
+				document.forms(0).elements("phones").options(i).selected = false;
+
+				p = document.forms(0).elements("phones").options(i).text.indexOf(' (');
+				phone = document.forms(0).elements("phones").options(i).text.substring(0,p);
+
+				if( phone ==  document.forms(0).elements("phone").value )
+				{
+					document.forms(0).elements("phones").options(i).selected = true;
+				}
+			}
+		}
+
+		function onClickAdd()
+		{
+			if( document.forms(0).elements("gname").value == "" )
+			{
+				alert("Введите название группы!");
+				return;
+			}
+
+			if( document.forms(0).elements("phone").value == "" )
+			{
+				alert("Введите номер!");
+				return;
+			}
+
+			document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "111";
+			document.forms(0).method = "GET";
+			document.forms(0).submit();
+		}
+
+		function onClickDel()
+		{
+			if( confirm("Вы уверены, что хотите удалить выбранные телефоны?") == false )
+				return;
+			del_ids = "";
+			for( i = 0; i < document.forms(0).elements("phones").options.length; i++ )
+			{
+				if( document.forms(0).elements("phones").options(i).selected == true )
+				{
+					del_ids+=document.forms(0).elements("phones").options(i).value+";";
+					document.forms(0).elements("phones").options(i).selected = false;
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring( 0, del_ids.length-1 );
+			else
+			{
+				alert("Выберите удаляемые телефоны!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("pid").value = "111";
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).method = "GET";
+			document.forms(0).submit();
+		}
+
+		function onClickDelAll()
+		{
+			if( confirm("Вы уверены, что хотите удалить все телефоны?") == false )
+				return;
+			document.forms(0).elements("pid").value = "111";
+			document.forms(0).elements("action_name").value = "del_all";
+			document.forms(0).method = "GET";
+			document.forms(0).submit();
+		}
+		
+		kindOfBold = 0;
+		intervalID = 0;
+		function onIntervalLoad( abort )
+		{
+			if( kindOfBold == 0 )
+				document.all["status"].innerHTML = "Статус: <B>Загрузка данных...</B>";
+			else
+				document.all["status"].innerHTML = "Статус: Загрузка данных...";
+			kindOfBold = !kindOfBold;
+
+			if( abort == true )
+			{
+				window.clearInterval(intervalID);
+				document.all["status"].innerHTML = "Статус: Задание отменено";
+			}
+
+		}
+
+		function onClickApply()	
+		{
+			if( document.forms(0).elements("gname").value == "" )
+			{
+				alert("Введите название группы!");
+				return;
+			}
+
+			p=document.location.href.indexOf('?');
+			document.forms(0).action = document.location.href.substring(0,p);
+			document.forms(0).action +=	'?pid=111&cid=<?print $cid;?>&gid=<?print $gid;?>';
+			document.forms(0).action += '&gname='+document.forms(0).elements("gname").value;
+			if( document.forms(0).elements("phones_file").value == "" )
+				document.forms(0).action += '&action_name=simp';
+			else
+				document.forms(0).action += '&action_name=upload_file';
+			document.forms(0).method = "POST";
+			document.forms(0).submit();
+			
+			document.all["status"].innerHTML = "Статус: Загрузка данных...";
+
+			intervalID = window.setInterval("onIntervalLoad(false)", 1000);
+		}
+
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location = document.location.href.substring(0,p)+'?pid=11&cid=<?print $cid;?>';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="POST" NAME="MAIN" ENCTYPE="multipart/form-data" onKeyDown="onIntervalLoad(true);">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+	<INPUT TYPE=HIDDEN NAME="gid" VALUE="<?print $gid;?>">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="0" CLASS=bodyText WIDTH=100% HEIGHT=100% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR><TD VALIGN=<?print $global_dlg_vlign?>>
+
+		<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=360 ALIGN=CENTER BORDERCOLOR=BLACK>
+		<TR>
+			<TD align=center> <B>Изменение группы абонентов</B><BR>в рамках кампании "<?print $cname;?>" </TD>
+		</TR>
+		<TR>
+			<TD>
+				<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=100% HEIGHT=100% ALIGN=CENTER BORDERCOLOR=BLACK>
+				<TR>
+					<TD colspan=2>Наименование группы:</TD>
+				</TR>
+				<TR>
+					<TD COLSPAN=2><INPUT TYPE=TEXT NAME="gname" SIZE=50 VALUE="<?print $gname;?>"></TD>
+				</TR>
+				<TR><TD colspan=2>&nbsp;</TD></TR>
+				<TR>
+					<TD>Номера телефонов:</TD>
+					<TD>Тип номера:</TD>
+				</TR>
+				<TR>
+					<TD><INPUT TYPE=TEXT NAME="phone" SIZE=30 VALUE=""></TD>
+					<TD>
+						<SELECT NAME="PhoneType">
+							<OPTION VALUE=1>местный
+							<OPTION VALUE=3>национальный
+							<OPTION VALUE=4>международный
+						</SELECT> 
+					</TD>
+				</TR>
+				<TR>
+					<TD>
+						<SELECT NAME="phones" SIZE=10 style="width:205" MULTIPLE>
+<?
+			for( $i = 0; $i < sizeof($phones); $i++ )
+			{
+				if( strlen($phones[$i][1]) > 0	)
+					print "<OPTION VALUE=\"".$phones[$i][0]."\">".$phones[$i][1];		
+			}
+?>
+						</SELECT>
+					</TD>
+					<TD valign=top><BR>
+						<INPUT TYPE=BUTTON VALUE="Найти номер" onClick="onClickSearch()" style="width:120"><BR><BR>
+						<INPUT TYPE=BUTTON VALUE="Добавить" onClick="onClickAdd()" style="width:120"><BR><BR>
+						<INPUT TYPE=BUTTON VALUE="Удалить" onClick="onClickDel()" style="width:120"><BR><BR>
+						<INPUT TYPE=BUTTON VALUE="Удалить все" onClick="onClickDelAll()" style="width:120"><BR><BR>
+					</TD>
+				</TR>
+				<TR>
+					<TD>
+						<INPUT TYPE=FILE NAME="phones_file" style="width:205">
+					</TD>
+					<TD>
+						<INPUT TYPE=BUTTON VALUE="Применить" onClick="onClickApply()" style="width:120">
+					</TD>
+				</TR>
+				<TR>
+					<TD ID=status><NOBR>Статус: Ожидание</NOBR></TD>
+					<TD><BR>
+					<?if( strlen($gid) == 0 ){?>
+						<INPUT TYPE=BUTTON VALUE="Отменить" style="width:120" onClick="onClickClose()">
+					<?}else{?>
+						<INPUT TYPE=BUTTON VALUE="Закрыть" style="width:120" onClick="onClickClose()">
+					<?}?>
+					</TD>
+				</TR>
+				</TABLE>
+			</TD>
+		</TR>
+		</TABLE>
+	</TD></TR>
+	</TABLE>
+	</FORM>
+
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 112: // ИЗМЕНЕНИЕ КАЛЕНДАРЯ КАМПАНИИ
+		{
+			$cid = $_GET["cid"];
+			$begin_date = date("d.m.y H:i");
+			if( isset($_GET["begin_date"]) && strlen( trim($_GET["begin_date"]) ) > 0 )
+				$begin_date = $_GET["begin_date"];
+			$end_date = date("d.m.y H:i");
+			if( isset($_GET["end_date"]) && strlen(trim($_GET["end_date"])) > 0 )
+				$end_date = $_GET["end_date"];
+			
+			$cname = "";
+			if( strlen($cid) > 0 )
+			{
+				$sql = "select campaign_name from vmd_campaign where campaign_id = ".$cid;
+				$count = $db->SelectRecords($sql, &$rows);
+				if( $count == 0 )
+				{
+					$cid = "";
+				}
+				else
+				{
+					$cname = $rows[1]["CAMPAIGN_NAME"];
+				}
+			}
+
+			$action_name = $_GET["action_name"];
+
+			$err = Array("");
+			$index = 0;
+			switch($action_name)
+			{
+				case "add":
+				{
+					if( !check_date_time($begin_date) || !check_date_time($end_date) )
+					{
+						$err[$index] = "Неправильный формат даты!";
+						$index++;
+					}
+					else
+					{
+						$sql = "select VMD_UTIL.SP_ADD_CAL(0,".$cid.", to_date('".$begin_date."', 'dd.mm.yy hh24:mi'), to_date('".$end_date.":59','dd.mm.yy hh24:mi:ss'), ".$user_id.") RES from dual";
+
+						$db->SelectRecords($sql, &$rows);
+
+						if( $rows[1]["RES"] == -20005 )
+						{
+							$err[$index] = "Дата начала обзвона не должна быть больше даты окончания обзвона!";
+							$index++;
+						}
+						else if( $rows[1]["RES"] == -20006 )
+						{
+							$err[$index] = "Введенный диапазон обзвона пересекается с периодами, в которые обзвон запрещен!";
+							$index++;
+						}
+						else if( $rows[1]["RES"] <= 0 )
+						{
+							$err[$index] = "Не удалось добавить новый период!";
+							$index++;
+						}
+					}
+				}
+				break;
+
+				case "del":
+				{
+					$del_ids = explode(";", $_GET["del_ids"]);
+					$err_ex = false;
+					$err_cl = false;
+					for($i=0; $i < sizeof($del_ids); $i++ )
+					{
+						$sql = "select VMD_UTIL.F_DEL_CALENDAR(".$del_ids[$i].", ".$user_id.") RES from dual";
+						$db->SelectRecords($sql, &$res);
+						if( $res[1]["RES"] < 0 )
+						{
+							if( $res[1]["RES"] == -1 )
+							{
+								if( $err_ex == false )
+								{
+									$err[$index] = "Не все календари были удалены, т.к. они имеют результаты обзвона!";
+									$index++;
+									$err_ex = true;
+								}
+							}
+							else if( $res[1]["RES"] == -2 )
+							{
+								if( $err_cl == false )
+								{
+									$err[$index] = "Календари не были удалены, т.к. кампания закрыта!";
+									$index++;
+									$err_cl = true;
+								}
+							}
+						}
+					}
+				}
+				break;
+
+				case "close_per":
+				{
+					$del_ids = explode(";", $_GET["del_ids"]);
+					$r = false;
+					for($i=0; $i < sizeof($del_ids); $i++ )
+					{
+						$sql = "select vmd_util.f_close_cal(".$del_ids[$i].", ".$user_id.") res from dual";
+						$db->SelectRecords($sql, &$rows);
+						if( $rows[1]["RES"] <= 0 && $r == false )
+						{
+							$err[$index] = "Не удалось закрыть период!";
+							$index++;
+							$r = true;
+						}
+					}
+				}
+				break;
+			}
+
+if( sizeof($err) > 0 && strlen($err[0]) > 0 )
+{
+?>
+<TABLE BORDER=0 ALIGN=CENTER height=0% class=bodyText>
+<TR><TD style="color:red"><B>Ошибка!</B></TD></TR>
+<?
+	for( $i = 0; $i < sizeof($err); $i++ )
+	{
+		if( strlen($err[$i]) > 0 )
+		{
+			print '<TR><TD><B>'.$err[$i].'</B></TD></TR>';
+		}
+	}
+?>
+</TABLE>
+<?
+}
+?>
+
+	<SCRIPT LANGUAGE="JavaScript">
+		cid = "<?print $cid;?>";
+		if( cid == "" )
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( document.forms(0).elements(event.srcElement.name).checked == false )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickAdd()
+		{
+			document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "112";
+			document.forms(0).submit();
+		}
+		
+		function onClickDel()
+		{
+			if( confirm("Вы действительно хотите удалить выбранные периоды?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите элементы, которые хотите удалить!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).elements("pid").value = "112";
+			document.forms(0).submit();
+		}
+		
+		function onClickClosePer()
+		{
+			if( confirm("Вы действительно хотите закрыть выбранные периоды?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите периоды, которые хотите закрыть!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "close_per";
+			document.forms(0).elements("pid").value = "112";
+			document.forms(0).submit();
+		}
+
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=11&cid=<?print $cid;?>';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Изменение календаря в рамках кампании "<?print $cname;?>"</B></TD>
+	</TR>
+	<TR>
+		<TD>
+		<NOBR>
+		Начало обзвона:<INPUT TYPE=TEXT NAME="begin_date" SIZE=15 VALUE="<?print $begin_date;?>">&nbsp;
+		Окончание обзвона:<INPUT TYPE=TEXT NAME="end_date" SIZE=15 VALUE="<?print $end_date;?>">&nbsp;
+		<INPUT TYPE=BUTTON value="Добавить" onClick="onClickAdd()">
+		</NOBR>
+		<DIV STYLE="height:100%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR>
+				<TD WIDTH=3% class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+				<TD class=dataAreaTableData><B>Начало обзвона</B></TD>
+				<TD class=dataAreaTableData><B>Окончание обзвона</B></TD>
+				<TD class=dataAreaTableData><B>Период закрыт</B></TD>
+			</TR>
+
+<?
+			$sql = "select campaign_date_id CDID, to_char(campaign_start_date, 'dd.mm.yy hh24:mi') STD, to_char(campaign_stop_date, 'dd.mm.yy hh24:mi') SPD, closed CL from vmd_campaign_calendar where campaign_ref=".$cid." ORDER BY campaign_start_date";
+			$count = $db->SelectRecords($sql, &$rows);
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["CDID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;" >';
+				print '<TD WIDTH=3% class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["CDID"].'" onClick="onClickRow()"></TD>';
+				print '<TD class=dataAreaTableData>'.$rows[$i]["STD"].'</TD>';
+				print '<TD class=dataAreaTableData>'.$rows[$i]["SPD"].'</TD>';
+				if( $rows[$i]["CL"] == 0 )
+					print '<TD class=dataAreaTableData>Нет</TD>';
+				else
+					print '<TD class=dataAreaTableData>Да</TD>';
+				print '</TR>';
+			}
+?>
+		</TABLE>
+		</DIV>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD>
+			<INPUT TYPE=BUTTON value="Закрыть период" onClick="onClickClosePer()">&nbsp;
+			<INPUT TYPE=BUTTON value="Удалить" onClick="onClickDel()">&nbsp;
+			<INPUT TYPE=BUTTON value="Закрыть" onClick="onClickClose()">&nbsp;
+		</TD>
+	</TR>
+	</TABLE>
+	</FORM>
+<?
+		}
+		break;
+
+		case 113: // ИЗМЕНЕНИЕ СПИСКА РЕЗУЛЬТАТОВ, ПОСЛЕ КОТОРЫХ ОБЗВОН СЛЕДУЕТ ПРЕКРАТИТЬ
+		{
+			$res_id = $_GET["res_id"];
+			$action = $_GET["action_name"];
+			$cid = $_GET["cid"];
+			$err = Array("");
+			$index = 0;
+			switch( $action )
+			{
+				case "add":
+					if( strlen($res_id) > 0 )
+					{
+						$sql = "select VMD_UTIL.F_ADD_STOPLIST(0, ".$cid.", ".$user_id.", ".strqs($res_id).") RES from dual";
+						$db->SelectRecords($sql, &$row);
+						if( $row[1]["RES"] <= 0 )
+						{
+							$err[$index] = $cid . " " . $user_id . " " . $res_id . " " . $row[1]["RES"] . " Не удалось добавить результат!";
+							$index++;
+						}
+					}
+					break;
+				case "del":
+					{
+						$row_count = $_GET["row_count"];
+						$del_ids_arr = explode( ";", $_GET["del_ids"]); 	
+						$r = false;
+						for( $i = 0; $i < sizeof($del_ids_arr)-1; $i++ )
+						{
+							$ex_sql = $sql = "select VMD_UTIL.F_DEL_STOPLIST(".$del_ids_arr[$i].") RES from dual";
+							$db->SelectRecords($sql, &$row);
+							if( $row[1]["RES"] < 0 && $r == false)
+							{
+								$err[$index] = "Не все результаты были удалены!";
+								$index++;
+								$r = true;
+							}
+						}
+					}
+					break;
+			}
+
+if( sizeof($err) > 0 && strlen($err[0]) > 0 )
+{
+?>
+<TABLE BORDER=0 ALIGN=CENTER height=0% class=bodyText>
+<TR><TD style="color:red"><B>Ошибка!</B></TD></TR>
+<?
+	for( $i = 0; $i < sizeof($err); $i++ )
+	{
+		if( strlen($err[$i]) > 0 )
+		{
+			print '<TR><TD><B>'.$err[$i].'</B></TD></TR>';
+		}
+	}
+?>
+</TABLE>
+<?
+}
+?>
+
+		<SCRIPT LANGUAGE="JavaScript">
+
+		function onClickDel()
+		{
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).elements("pid").value = 113;
+			document.forms(0).submit();
+		}
+
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( !document.forms(0).elements(event.srcElement.name).checked )
+				document.forms(0).elements("SEL_ALL").checked = false;
+		}
+
+		function onClickAdd()
+		{
+			document.forms(0).elements('pid').value=113;
+			document.forms(0).elements('action_name').value="add";
+			document.forms(0).submit();
+		}
+
+		function onClickClose()
+		{
+			document.forms(0).elements('pid').value=11;
+			document.forms(0).submit();
+		}
+
+	</SCRIPT>
+<?
+	$cname = "";
+	$ctype = "";
+	if( strlen($cid) > 0 )
+	{
+		$sql = "select campaign_name as campaign_name, SCRIPT_TYPE as SCRIPT_TYPE, DECODE(SCRIPT_TYPE,'A','воспроизведение сообщения','B','информация о начислениях','V','автоматический опрос') as script_type_name from vmd_campaign where campaign_id = ".$cid;
+		$count = $db->SelectRecords($sql, &$rows);
+		if( $count > 0 )
+		{
+			$cname = $rows[1]["CAMPAIGN_NAME"];
+			$ctype = $rows[1]["SCRIPT_TYPE"];
+			$ctype_name = $rows[1]["SCRIPT_TYPE_NAME"];
+		}
+	}
+?>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Изменение стоплиста кампании "<?print $cname?>"<BR>(сценарий <?print $ctype_name?>)</B></TD>
+	</TR>
+	<!-- ЗАГОЛОВОК С КНОПАКАМИ УПРАВЛЕНИЯ И ФИЛЬТРОМ -->
+	<TR vAlign=TOP>
+		<TD>
+			<NOBR>
+			Результат: 
+			<SELECT NAME="res_id" style="width:250">
+<?
+			if ($ctype=="A")
+				$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<$result_code_for_charges ORDER BY reasoncode";
+			else if ($ctype=="B")
+				$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<=$result_code_for_charges ORDER BY reasoncode";
+			else
+				$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<>$result_code_for_charges ORDER BY reasoncode";
+
+			$count = $db->SelectRecords($sql, &$rows );
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<OPTION VALUE="'.$rows[$i]["CCID"].'">'.$rows[$i]["NAME"];
+			}
+?>
+			</SELECT>&nbsp;<INPUT TYPE=BUTTON VALUE="Добавить" onClick="onClickAdd()">
+			</NOBR>
+		</TD>
+	</TR>
+	<TR height=100%>
+		<TD>
+			<DIV STYLE="height:100%; overflow:scroll;">
+			<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=dataAreaTable WIDTH=95% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR>
+			<TD class=dataAreaTableData WIDTH=3%><INPUT TYPE=CHECKBOX NAME="SEL_ALL" onClick="onClickSelAll()"></TD>
+			<TD class=dataAreaTableData WIDTH=55%><B>Результат</B></TD>
+			<TD class=dataAreaTableData WIDTH=20%><B>Создан</B></TD>
+			</TR>
+
+<?
+		$sql = "select CAMPAIGN_STOPLIST_ID CSID, CAMPAIGN_CODE_NAME CN, TO_CHAR(OPENDATE, 'dd.mm.yyyy') O
+				from VMD_CAMPAIGN_STOPLIST ST, VMD_CAMPAIGN_RESULTCODES R
+				where ST.CLOSED = 0 and R.CLOSED = 0 and ST.CAMPAIGN_CODE_REF = R.CAMPAIGN_CODE_ID and CAMPAIGN_REF = ".$cid;
+		$count=$db->SelectRecords($sql, &$rows);
+		for( $i = 1; $i <= $count; $i++ ) 
+		{
+			print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["CSID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;">';
+			print '<TD class=dataAreaTableData WIDTH=3%><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["CSID"].'" onClick="onClickRow()"></TD>';
+			print '<TD class=dataAreaTableData>&nbsp;'.$rows[$i]["CN"].'</TD>';
+			print '<TD class=dataAreaTableData>&nbsp;'.$rows[$i]["O"].'</TD>';
+			print '</TR>';
+		}
+		print '<INPUT TYPE=HIDDEN NAME=row_count value="'.$count.'">';
+?>
+		</TABLE>
+		</DIV>
+			</TD>
+		</TR>
+		<TR>
+			<TD align=right>
+			<INPUT TYPE=BUTTON VALUE="Удалить" onClick="onClickDel()">&nbsp;<INPUT TYPE=BUTTON VALUE="Закрыть" onClick="onClickClose()">
+			</TD>
+		</TR>
+		</TABLE>
+		</TD>
+		</TR>
+	</TABLE>
+	</FORM>
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 12: // ПРОСМОТР РЕЗУЛЬТАТОВ ОБЗВОНА
+		{
+			$cname = "";
+			$ctype = "";
+
+			$cid = explode( ";", $_GET["cid"]);
+			$camp_id = $cid[0];
+			$sql = "select CAMPAIGN_NAME, SCRIPT_TYPE from VMD_CAMPAIGN where campaign_id = ".$camp_id;
+			$rcount = $db->SelectRecords($sql, &$gr);
+			if ($rcount>0)
+			{
+				$cname = $gr[1]["CAMPAIGN_NAME"];
+				$ctype = $gr[1]["SCRIPT_TYPE"];
+			}	
+
+			if ($ctype!="V")
+{
+
+?>
+	<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% ALIGN=CENTER >
+	<TR><TD VALIGN=<?print $global_list_valign?>>
+
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+<?
+			for( $k = 1; $k <= $rcount; $k++ ){
+			$sql = "select num.CAMPAIGN_PHONE_NO phone, to_char(res.CALL_DATETIME, 'dd.mm.yy hh24:mi:ss') std, 
+									cod.CAMPAIGN_CODE_NAME res_name 
+							from vmd_campaign_calendar cal, vmd_campaign_numbers num, 
+								 vmd_campaign_results res, vmd_campaign_resultcodes cod
+							where cal.campaign_ref = ".$camp_id." 
+								  and cal.CAMPAIGN_DATE_ID = res.CAMPAIGN_CAL_REF
+								  and num.CAMPAIGN_PHONE_ID = res.CAMPAIGN_PHONE_REF
+								  and res.RESULT_REF = cod.CAMPAIGN_CODE_ID
+							order by num.CAMPAIGN_PHONE_NO, cal.CAMPAIGN_START_DATE, std ";
+			$count = $db->SelectRecords($sql, &$rows);
+			if( $count == 0 )
+				continue;
+?>
+		<TR height=17>
+			<TD ALIGN=CENTER><B>История выполнения кампании "<?print $cname;?>"</B></TD>
+		</TR>
+		<TR>
+			<TD>
+				<DIV style="overflow:scroll;">
+				<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+
+				<TR>
+					<TD CLASS=dataAreaTableData width=20%>
+						<B>Номер телефона</B>
+					</TD>
+					<TD CLASS=dataAreaTableData width=80%>
+						<B>Результат</B>
+					</TD>
+				</TR>
+<?
+					$lphone = "";
+					for( $i = 1; $i <= $count; $i++ )
+					{
+						print '<TR>';
+						if( $lphone != $rows[$i]["PHONE"] ) // новый телефон. выведем
+						{
+							print '<TD CLASS=dataAreaTableData style="border-bottom-width:0;"> ';
+							print $rows[$i]["PHONE"];
+							$lphone = $rows[$i]["PHONE"]; // запомним
+							print '</TD><TD  CLASS=dataAreaTableData style="border-bottom-width:0;">';
+						}
+						else
+						{
+							print '<TD  CLASS=dataAreaTableData style="border-top-width:0; border-bottom-width:0;">&nbsp;';
+							//print $rows[$i]["PHONE"]."l:".$lphone;
+							print '</TD><TD  CLASS=dataAreaTableData style="border-bottom-width:0;">';
+						}
+						print $rows[$i]["STD"];
+						print ": ".$rows[$i]["RES_NAME"];
+						print "</TD></TR>";
+					}
+?>
+				</TABLE>
+				</DIV>
+			</TD>
+		</TR>
+		<?}?>
+		<TR height=17><TD ALIGN=RIGHT><INPUT TYPE=BUTTON value="Закрыть" onClick="p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=1';">
+		</TABLE>
+	</TD></TR>
+	</TABLE>
+<?
+}
+else
+{
+?>
+	<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% ALIGN=CENTER >
+	<TR><TD VALIGN=<?print $global_list_valign?>>
+
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+<?
+			for( $k = 1; $k <= $rcount; $k++ ){
+			$sql = "select num.CAMPAIGN_PHONE_NO phone, to_char(res.CALL_DATETIME, 'dd.mm.yy hh24:mi:ss') std, 
+									cod.CAMPAIGN_CODE_NAME res_name, NVL(vv.variant_name,'&nbsp;') ANSWER 
+							from vmd_campaign_calendar cal, vmd_campaign_numbers num, 
+								 vmd_campaign_results res, vmd_campaign_resultcodes cod, 
+								 VMD_VOTE_VARIANTS VV 
+							where cal.campaign_ref = ".$camp_id." 
+								  AND VV.CAMPAIGN_ID(+) = ".$camp_id." 	
+								  AND VV.VARIANT_DIGITS(+) = res.USER_CODE  	
+								  and cal.CAMPAIGN_DATE_ID = res.CAMPAIGN_CAL_REF
+								  and num.CAMPAIGN_PHONE_ID = res.CAMPAIGN_PHONE_REF
+								  and res.RESULT_REF = cod.CAMPAIGN_CODE_ID
+							order by num.CAMPAIGN_PHONE_NO, cal.CAMPAIGN_START_DATE, std ";
+			$count = $db->SelectRecords($sql, &$rows);
+			if( $count == 0 )
+				continue;
+?>
+		<TR height=17>
+			<TD ALIGN=CENTER><B>История выполнения кампании "<?print $cname;?>"</B></TD>
+		</TR>
+		<TR>
+			<TD>
+				<DIV style="overflow:scroll;">
+				<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+
+				<TR>
+					<TD CLASS=dataAreaTableData width=20%>
+						<B>Номер телефона</B>
+					</TD>
+					<TD CLASS=dataAreaTableData width=60%>
+						<B>Результат</B>
+					</TD>
+					<TD CLASS=dataAreaTableData width=20%>
+						<B>Результат</B>
+					</TD>
+				</TR>
+<?
+					$lphone = "";
+					for( $i = 1; $i <= $count; $i++ )
+					{
+						print '<TR>';
+						if( $lphone != $rows[$i]["PHONE"] ) // новый телефон. выведем
+						{
+							print '<TD CLASS=dataAreaTableData style="border-bottom-width:0;"> ';
+							print $rows[$i]["PHONE"];
+							$lphone = $rows[$i]["PHONE"]; // запомним
+							print '</TD><TD  CLASS=dataAreaTableData style="border-bottom-width:0;">';
+						}
+						else
+						{
+							print '<TD  CLASS=dataAreaTableData style="border-top-width:0; border-bottom-width:0;">&nbsp;';
+							//print $rows[$i]["PHONE"]."l:".$lphone;
+							print '</TD><TD  CLASS=dataAreaTableData style="border-bottom-width:0;">';
+						}
+						print $rows[$i]["STD"];
+						print ": ".$rows[$i]["RES_NAME"];
+						print "</TD>";
+						print '<TD CLASS=dataAreaTableData style="border-bottom-width:0;">';
+						print $rows[$i]["ANSWER"];
+						print "</TD></TR>";
+					}
+?>
+				</TABLE>
+				</DIV>
+			</TD>
+		</TR>
+		<?}?>
+		<TR height=17><TD ALIGN=RIGHT><INPUT TYPE=BUTTON value="Закрыть" onClick="p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=1';">
+		</TABLE>
+	</TD></TR>
+	</TABLE>
+<?
+}
+		}
+
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 13: // результаты
+		{
+			$sel_ids_arr = explode( ";", $_GET["sel_ids"]);
+
+			$att = $_GET["att"];
+			if ( !isset($att) )
+				$att = -1;
+
+			$reasonFail = $_GET["reasonFail"];
+			if ( !isset($reasonFail) )
+				$reasonFail = -1;
+
+			$stoplist = $_GET["stoplist"];
+			if ( !isset($stoplist) )
+				$stoplist = -1;
+
+/*
+			$in = "(".$sel_ids_arr[0];
+			for( $i = 1; $i < sizeof($sel_ids_arr)-1; $i++ )
+			{
+				$in .= ",";
+				$in .= $sel_ids_arr[$i];
+			}
+			$in .= ")";
+*/
+			$in = $sel_ids_arr[0];
+
+/* Eugene
+			$count_not_complete = 0;
+			// необходимо для того, что бы правильно оперелить постановку (+)
+			$sql = "select c.CAMPAIGN_NAME, count(DISTINCT CAMPAIGN_PHONE_NO) C 
+							from VMD_CAMPAIGN c, VMD_CAMPAIGN_CALENDAR cc, 
+								 VMD_CAMPAIGN_RESULTS cr,
+								 VMD_CAMPAIGN_NUMBERS cn
+							where c.CAMPAIGN_ID = cc.CAMPAIGN_REF and cc.CAMPAIGN_DATE_ID = cr.CAMPAIGN_CAL_REF
+								  and cn.STATEREF=4 and cn.CAMPAIGN_PHONE_ID = cr.CAMPAIGN_PHONE_REF
+							group by c.CAMPAIGN_NAME";
+			$count_complete = $db->SelectRecords($sql, &$ar);
+			$sql = "select c.CAMPAIGN_NAME, count(DISTINCT CAMPAIGN_PHONE_NO) C 
+							from VMD_CAMPAIGN c, VMD_CAMPAIGN_CALENDAR cc, 
+								 VMD_CAMPAIGN_RESULTS cr,
+								 VMD_CAMPAIGN_NUMBERS cn
+							where c.CAMPAIGN_ID = cc.CAMPAIGN_REF and cc.CAMPAIGN_DATE_ID = cr.CAMPAIGN_CAL_REF
+								  and cn.STATEREF=5 and cn.CAMPAIGN_PHONE_ID = cr.CAMPAIGN_PHONE_REF
+							group by c.CAMPAIGN_NAME";
+			$count_not_complete = $db->SelectRecords($sql, &$ar);
+			$sql = "select CC.CAMPAIGN_NAME CN, NVL(CC.C,0) CCC, NVL(CNC.C,0) CCNC
+					from (
+							select c.CAMPAIGN_NAME, count(DISTINCT CAMPAIGN_PHONE_NO) C 
+							from VMD_CAMPAIGN c, VMD_CAMPAIGN_CALENDAR cc, 
+								 VMD_CAMPAIGN_RESULTS cr,
+								 VMD_CAMPAIGN_NUMBERS cn
+							where c.CAMPAIGN_ID = cc.CAMPAIGN_REF and cc.CAMPAIGN_DATE_ID = cr.CAMPAIGN_CAL_REF
+								  and cn.STATEREF=4 and cn.CAMPAIGN_PHONE_ID = cr.CAMPAIGN_PHONE_REF
+								  and c.CAMPAIGN_ID in ".$in." 
+							group by c.CAMPAIGN_NAME
+						 ) CC,
+						 (
+						   select c.CAMPAIGN_NAME, count(DISTINCT CAMPAIGN_PHONE_NO) C
+							from VMD_CAMPAIGN c, VMD_CAMPAIGN_CALENDAR cc, 
+								 VMD_CAMPAIGN_RESULTS cr,
+								 VMD_CAMPAIGN_NUMBERS cn
+							where c.CAMPAIGN_ID = cc.CAMPAIGN_REF and cc.CAMPAIGN_DATE_ID = cr.CAMPAIGN_CAL_REF
+								  and cn.STATEREF=5 and cn.CAMPAIGN_PHONE_ID = cr.CAMPAIGN_PHONE_REF
+								  and c.CAMPAIGN_ID in ".$in." 
+							group by c.CAMPAIGN_NAME
+						) CNC ";
+			//print $sql;
+			if( $count_not_complete < $count_complete )
+				$sql .= " where CC.CAMPAIGN_NAME = CNC.CAMPAIGN_NAME(+)";
+			else
+				$sql .= " where CC.CAMPAIGN_NAME (+)= CNC.CAMPAIGN_NAME";
+*/
+// Eugene
+
+?>
+			<SCRIPT language="JavaScript">
+				function onClose()
+				{
+					p=document.location.href.indexOf('?');
+					document.location = document.location.href.substring(0,p)+'?pid=1';
+				}
+
+				function onShowNumInNewWindow()
+				{
+					numKind = document.forms(0).elements("numKind").value;
+					reasonFail = document.forms(0).elements("reasonFail").value;
+					stoplist = document.forms(0).elements("stoplist").value;
+        				window.open( "numbers.phtml?att="+numKind+"&reasonFail="+reasonFail+"&stoplist="+stoplist+"&ids=<?print $_GET['sel_ids']?>"+"&sid=<?print $ora_conn_vmd;?>&uui=<?print $user_id;?>", "VMD" );
+				}
+
+				function onShowNumInThisWindow()
+				{
+					numKind = document.forms(0).elements("numKind").value;
+					reasonFail = document.forms(0).elements("reasonFail").value;
+					stoplist = document.forms(0).elements("stoplist").value;
+					p=document.location.href.indexOf('&att');
+                                        document.location=document.location.href.substring(0,p)+'&att='+numKind+'&reasonFail='+reasonFail+'&stoplist='+stoplist;
+				}
+
+				function onChangeState()
+				{
+					if ( document.forms(0).elements("numKind").value == 1 )
+					{
+						document.forms(0).elements("reasonFail").value = -1;
+						document.forms(0).elements("reasonFail").disabled=true;
+						document.forms(0).elements("stoplist").value = -1;
+						document.forms(0).elements("stoplist").disabled=true;
+					}
+					else
+					{
+						document.forms(0).elements("reasonFail").disabled=false;
+					}
+				}
+
+				function onChangeReason()
+				{
+					if ( document.forms(0).elements("reasonFail").value != 6 )
+					{
+						document.forms(0).elements("stoplist").value = -1;
+						document.forms(0).elements("stoplist").disabled=true;
+					}
+					else
+					{
+						document.forms(0).elements("stoplist").disabled=false;
+					}
+				}
+
+			</SCRIPT>
+			<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% ALIGN=CENTER >
+			<TR><TD VALIGN=<?print $global_list_valign?>>
+
+			<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR height=17>
+			<TD ALIGN=CENTER><B>Результаты</B></TD>
+			</TR>
+			<TR>
+				<TD>
+					<FORM><br>Состояние:
+					<SELECT NAME="numKind" onChange='onChangeState()'>
+						<OPTION VALUE=0<?if ($att==0) print " selected";?>>неуспешное
+						<OPTION VALUE=1<?if ($att==1) print " selected";?>>успешное
+					</SELECT> 
+					Причина:
+					<SELECT NAME="reasonFail" onChange='onChangeReason()'<?if ($att==1) print " disabled";?>>
+						<OPTION VALUE=-1>- 
+						<OPTION VALUE=5<?if ($reasonFail==5) print " selected";?>>попытки исчерпаны 
+						<OPTION VALUE=6<?if ($reasonFail==6) print " selected";?>>условное завершение 
+					</SELECT> 
+
+					Результат:
+					<SELECT NAME="stoplist"<?if ($reasonFail!=6) print " disabled";?>>
+					<OPTION VALUE=-1>- 
+<?
+					$ctype = "";
+					$sql = "select SCRIPT_TYPE as SCRIPT_TYPE from vmd_campaign where campaign_id = ".$in;
+					$count = $db->SelectRecords($sql, &$rows);
+					if( $count > 0 )
+						$ctype = $rows[1]["SCRIPT_TYPE"];
+
+					if ($ctype=="A")
+						$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<$result_code_for_charges ORDER BY reasoncode";
+					else if ($ctype=="B")
+						$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<=$result_code_for_charges ORDER BY reasoncode";
+					else
+						$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 and reasoncode<>$result_code_for_charges ORDER BY reasoncode";
+
+					$count = $db->SelectRecords($sql, &$rows );
+					for( $i = 1; $i <= $count; $i++ )
+					{
+						print '<OPTION VALUE="'.$rows[$i]["C"].'"';
+                				if ($stoplist==$rows[$i]["C"]) 
+							print " selected";
+						print '>'.$rows[$i]["NAME"];
+					}
+?>
+					</SELECT> 
+
+					<br><br><INPUT TYPE=BUTTON VALUE="Показать" onClick="onShowNumInThisWindow()">
+					<INPUT TYPE=BUTTON VALUE="Выгрузить" onClick="onShowNumInNewWindow()">
+					</FORM>
+				</TD>
+			</TR>
+			<TR>
+				<TD>
+					<BR>
+					<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+
+					<TR>
+						<TD CLASS=dataAreaTableData width=55%>
+							<B>Наименование кампании</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=15% align=left>
+							<B>Общее число номеров</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=15% align=left>
+							<B>Число успешно прозвоненных номеров</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=15% align=left>
+							<B>Число неуспешно прозвоненных номеров</B>
+						</TD>
+					</TR>
+<?
+			$calls_success=0;
+
+			$sql = "SELECT cmp.CAMPAIGN_NAME CN, NVL(sel0.c,0) C_ALL, NVL(sel1.c,0) CCC, NVL(sel2.c,0) CCNC
+				FROM
+				VMD_CAMPAIGN cmp, 
+				(select cg.CAMPAIGN_REF ID, count(DISTINCT cn.CAMPAIGN_PHONE_NO) C 
+					from VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn
+					where cn.CALL_GROUP_REF = cg.CAMPAIGN_GROUP_ID
+						and cg.CAMPAIGN_REF = ".$in." and cn.closed=0 
+					group by cg.CAMPAIGN_REF) sel0,
+				(select cg.CAMPAIGN_REF ID, count(DISTINCT cn.CAMPAIGN_PHONE_NO) C 
+					from VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn
+					where cn.CALL_GROUP_REF = cg.CAMPAIGN_GROUP_ID
+						and cn.STATEREF=4 and cn.closed=0 
+						and cg.CAMPAIGN_REF = ".$in."  
+					GROUP BY cg.CAMPAIGN_REF) sel1,  
+				(select cg.CAMPAIGN_REF ID, count(DISTINCT cn.CAMPAIGN_PHONE_NO) C 
+					from VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn
+					where cn.CALL_GROUP_REF = cg.CAMPAIGN_GROUP_ID
+						and (cn.STATEREF=5 or cn.STATEREF=6) and cn.closed=0 
+						and cg.CAMPAIGN_REF = ".$in."  
+					GROUP BY cg.CAMPAIGN_REF) sel2 
+				WHERE cmp.CAMPAIGN_ID=sel0.id(+) AND cmp.CAMPAIGN_ID=sel1.id(+) AND cmp.CAMPAIGN_ID=sel2.id(+) AND cmp.CAMPAIGN_ID = ".$in."  
+				ORDER BY CMP.CREATEDATE DESC, CMP.CAMPAIGN_ID DESC";
+
+			$count = $db->SelectRecords($sql, &$rows );
+
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print "<TR>";
+				print "<TD CLASS=dataAreaTableData width=55%>";
+				print $rows[$i]["CN"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=15%>";
+				print $rows[$i]["C_ALL"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=15%>";
+				print $rows[$i]["CCC"];
+				$calls_success=$rows[$i]["CCC"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=15%>";
+				print $rows[$i]["CCNC"];
+				print "</TD>";
+				print "</TR>";
+			}
+
+?>
+				</TABLE><br>
+			</TD>
+		</TR>
+<?
+		$ctype = "A";
+		$sql = "select SCRIPT_TYPE as SCRIPT_TYPE from vmd_campaign where campaign_id = ".$in;
+		$count = $db->SelectRecords($sql, &$rows);
+		if( $count > 0 )
+			$ctype = $rows[1]["SCRIPT_TYPE"];
+
+		if ($ctype=="V")
+		{
+			print "<TR><TD ALIGN=CENTER><BR>
+				<TABLE CELLSPACING=0 CELLPADDING=5 BORDER=\"1\" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+				<TR>
+						<TD CLASS=dataAreaTableData width=40% align=left>
+							<B>Вариант ответа</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=30% align=left>
+							<B>Количество голосов</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=30% align=left>
+							<B>% от успешно прозвоненных номеров</B>
+						</TD>
+					</TR>\n";
+
+/*
+			$sql = "SELECT vv.variant_name as variant, COUNT(num.campaign_phone_no) as count_calls FROM VMD_CAMPAIGN_NUMBERS num, VMD_CAMPAIGN_GROUPS gr, VMD_CAMPAIGN_RESULTS res, VMD_VOTE_VARIANTS vv 
+				WHERE num.call_group_ref=gr.campaign_group_id AND gr.campaign_ref=$in AND num.stateref=4 
+				AND res.campaign_phone_ref=num.campaign_phone_id AND res.result_ref=1 AND num.closed<>1 
+				AND vv.campaign_id=$in AND res.user_code=vv.variant_digits
+				GROUP BY vv.variant_digits, vv.variant_name
+				ORDER BY vv.variant_digits, vv.variant_name";
+*/
+
+			$sql = "SELECT var.variant_name as variant, NVL(sel.count_calls_,0) as count_calls FROM 
+				(SELECT vv.variant_digits as variant_digits, COUNT(num.campaign_phone_no) as count_calls_ FROM VMD_CAMPAIGN_NUMBERS num, VMD_CAMPAIGN_GROUPS gr, VMD_CAMPAIGN_RESULTS res, VMD_VOTE_VARIANTS vv 
+				WHERE num.call_group_ref=gr.campaign_group_id AND gr.campaign_ref=$in AND num.stateref=4 
+				AND res.campaign_phone_ref=num.campaign_phone_id AND res.result_ref=1 AND num.closed<>1 
+				AND vv.campaign_id=$in AND res.user_code=vv.variant_digits
+				GROUP BY vv.variant_digits
+				ORDER BY vv.variant_digits) sel, VMD_VOTE_VARIANTS var 
+				WHERE var.variant_digits=sel.variant_digits(+) AND var.campaign_id=$in ORDER BY var.variant_digits";
+
+			$count = $db->SelectRecords($sql, &$rows );
+
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print "<TR>";
+				print "<TD CLASS=dataAreaTableData width=40%>";
+				print $rows[$i]["VARIANT"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=30%>";
+				print $rows[$i]["COUNT_CALLS"];
+				$count_calls=$rows[$i]["COUNT_CALLS"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=30%>";
+				if ($calls_success==0)
+				{
+					$percents_out="-";
+					print $percents_out;
+				}
+				else	
+				{
+					$percents=round( ($count_calls*10000)/$calls_success );			
+					$percents_out=$percents/100;			
+					printf ('%.2f',$percents_out);
+				}
+				print "</TD>";
+				print "</TR>";
+			}
+
+			print "</TABLE><br>";
+
+			$calls_ignored = 0;
+			$calls_unsuccess = 0;
+			$calls_total = 0;
+
+			$sql = "SELECT COUNT(res.campaign_res_id) as COUNT_CALLS_IGNORED FROM VMD_CAMPAIGN_NUMBERS num, VMD_CAMPAIGN_GROUPS gr, VMD_CAMPAIGN_RESULTS res 
+				WHERE num.call_group_ref=gr.campaign_group_id AND gr.campaign_ref=$in 
+				AND res.campaign_phone_ref=num.campaign_phone_id AND res.result_ref=2 AND num.closed<>1";
+			$count = $db->SelectRecords($sql, &$rows);
+			if( $count > 0 )
+				$calls_ignored = $rows[1]["COUNT_CALLS_IGNORED"];
+
+			$sql = "SELECT COUNT(res.campaign_res_id) as COUNT_CALLS_UNSUCCESS FROM VMD_CAMPAIGN_NUMBERS num, VMD_CAMPAIGN_GROUPS gr, VMD_CAMPAIGN_RESULTS res 
+				WHERE num.call_group_ref=gr.campaign_group_id AND gr.campaign_ref=$in 
+				AND res.campaign_phone_ref=num.campaign_phone_id AND res.result_ref IN (3,4,5,6,7,8) AND num.closed<>1";
+			$count = $db->SelectRecords($sql, &$rows);
+			if( $count > 0 )
+				$calls_unsuccess = $rows[1]["COUNT_CALLS_UNSUCCESS"];
+
+			$sql = "SELECT COUNT(res.campaign_res_id) as COUNT_CALLS_TOTAL FROM VMD_CAMPAIGN_NUMBERS num, VMD_CAMPAIGN_GROUPS gr, VMD_CAMPAIGN_RESULTS res 
+				WHERE num.call_group_ref=gr.campaign_group_id AND gr.campaign_ref=$in 
+				AND res.campaign_phone_ref=num.campaign_phone_id AND num.closed<>1";
+			$count = $db->SelectRecords($sql, &$rows);
+			if( $count > 0 )
+				$calls_total = $rows[1]["COUNT_CALLS_TOTAL"];
+
+			print "<TABLE CELLSPACING=0 CELLPADDING=0 BORDER=\"0\" WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+				<TR>
+						<TD CLASS=dataAreaTableDataEmpty width=40% align=left>
+							Итого игнорировано звонков:
+						</TD>
+						<TD CLASS=dataAreaTableDataEmpty width=60% align=left>
+							$calls_ignored
+						</TD>
+				</TR>
+				<TR>
+						<TD CLASS=dataAreaTableDataEmpty width=40% align=left>
+							Итого неуспешных попыток дозвона:
+						</TD>
+						<TD CLASS=dataAreaTableDataEmpty width=60% align=left>
+							$calls_unsuccess
+						</TD>
+				</TR>
+				<TR>
+						<TD CLASS=dataAreaTableDataEmpty width=40% align=left>
+							Итого попыток дозвона:
+						</TD>
+						<TD CLASS=dataAreaTableDataEmpty width=60% align=left>
+							$calls_total
+						</TD>
+				</TR></TABLE>";
+			print "<br></TD></TR>";
+		}
+
+		if ( ($att==0)||($att==1) )
+		{
+			print "<TR><TD ALIGN=CENTER><BR>
+				<TABLE CELLSPACING=0 CELLPADDING=5 BORDER=\"1\" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK HEIGHT=100%>
+				<TR>
+						<TD CLASS=dataAreaTableData width=33% align=left>
+							<B>Номер</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=33% align=left>
+							<B>Состояние номера</B>
+						</TD>
+						<TD CLASS=dataAreaTableData width=34% align=left>
+							<B>Результат последней попытки</B>
+						</TD>
+					</TR>\n";
+
+			$str_stoplist="";
+
+			if ($att==0)
+			{
+				if ($reasonFail>0)
+				{	
+					$state_str="$reasonFail";
+					if ( ($reasonFail==6)&&($stoplist>=0) )
+					{
+						$str_stoplist=" and rc.REASONCODE=$stoplist ";
+					}
+				}
+				else
+					$state_str="5,6";
+			}
+			else
+				$state_str="4";
+
+			$sql = "select cn.CAMPAIGN_PHONE_NO as CAMP_NUMBER, ps.STATE_NAME as NUMBER_STATE, rc.CAMPAIGN_CODE_NAME as NUMBER_RESULT 
+				from VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn, VMD_PHONE_STATES ps, VMD_CAMPAIGN_RESULTCODES rc 
+				where cn.CALL_GROUP_REF=cg.CAMPAIGN_GROUP_ID and cg.CAMPAIGN_REF=$in and 
+					cn.STATEREF=ps.STATE_ID and cn.resultref=rc.CAMPAIGN_CODE_ID 
+					and cn.closed<>1 and ps.STATE_ID IN ($state_str) $str_stoplist 
+					ORDER BY cn.CAMPAIGN_PHONE_NO";
+
+			$count = $db->SelectRecords($sql, &$rows );
+
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print "<TR>";
+				print "<TD CLASS=dataAreaTableData width=33%>";
+				print $rows[$i]["CAMP_NUMBER"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=33%>";
+				print $rows[$i]["NUMBER_STATE"];
+				print "</TD>";
+				print "<TD CLASS=dataAreaTableData width=34%>";
+				print $rows[$i]["NUMBER_RESULT"];
+				print "</TD>";
+				print "</TR>";
+			}
+
+			print "</TABLE><br></TD></TR>";
+		}
+?>
+		<TR>
+			<TD ALIGN=RIGHT><INPUT TYPE=BUTTON onClick="onClose()" VALUE="Закрыть"></TD>
+		</TR>
+		</TABLE>
+		</TD>
+		</TR>
+		</TABLE>
+<?
+		}
+		break;
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 14: // СЦЕНАРИЙ ОПРОСА
+		{
+			$res_code = 0;
+			$res_code_var_add = 0;
+			$res_code_var_del = 0;
+
+			$cid = $_GET["cid"];
+
+			$action = "";
+
+			if( isset($_GET["action_name"]) )
+				$action = $_GET["action_name"];
+
+			switch($action) 
+			{
+				case "save":// сохранение или обновление информации
+				{
+					$vote_initial = $_GET["sel_vote_initial"];
+					if ($vote_initial<0)
+						$vote_initial_str = "NULL";
+					else
+						$vote_initial_str = $vote_initial;
+
+					$vote_variants = $_GET["sel_vote_variants"];
+
+					$vote_error_input = $_GET["sel_vote_error_input"];
+					if ($vote_error_input<0)
+						$vote_error_input_str = "NULL";
+					else
+						$vote_error_input_str = $vote_error_input;
+
+					$vote_correct_input = $_GET["sel_vote_correct_input"];
+					if ($vote_correct_input<0)
+						$vote_correct_input_str = "NULL";
+					else
+						$vote_correct_input_str = $vote_correct_input;
+
+					$vote_error_bye = $_GET["sel_vote_error_bye"];
+					if ($vote_error_bye<0)
+						$vote_error_bye_str = "NULL";
+					else
+						$vote_error_bye_str = $vote_error_bye;
+
+					$vote_bye = $_GET["sel_vote_bye"];
+					if ($vote_bye<0)
+						$vote_bye_str = "NULL";
+					else
+						$vote_bye_str = $vote_bye;
+
+					$term_char_int = $_GET["sel_term_char_int"];
+					$retry_num = $_GET["edit_retry_num"];
+
+					$sql = "select VMD_UTIL.F_UPDATE_SCENARIO( $cid, $vote_initial_str, $vote_variants, $vote_error_input_str, $vote_correct_input_str, $vote_error_bye_str, $vote_bye_str, $term_char_int, $retry_num ) RES_CODE from dual";
+
+					$db->SelectRecords( $sql, &$rows );
+					$res_code = $rows[1]["RES_CODE"];
+				}
+				break;
+
+				case "delvar":
+				{
+					$del_ids_arr = explode( ";", $_GET["del_ids"]); 
+					for( $i = 0; $i < sizeof($del_ids_arr); $i++ )
+					{
+						$ex_sql = "select VMD_UTIL.F_DEL_VARIANT( ".$cid.", '".$del_ids_arr[$i]."' ) RES_CODE from dual";
+						$db->SelectRecords($ex_sql, &$rows);
+						$res_code_cur = $rows[1]["RES_CODE"];
+						if ($res_code_cur!=0)
+							$res_code_var_del=-1;
+					}
+				}
+				break;
+
+				case "addvar":
+				{
+					$variant_name = $_GET["edit_variant_name"];
+					$variant_digits = $_GET["edit_variant_digits"];
+
+					$sql = "select VMD_UTIL.F_ADD_VARIANT( $cid, '".$variant_name."', '".$variant_digits."' ) RES_CODE from dual";
+
+					$db->SelectRecords( $sql, &$rows );
+					$res_code_var_add = $rows[1]["RES_CODE"];
+				}
+				break;
+			}
+
+			if( $res_code!=0 )
+			{
+				print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER BORDERCOLOR=BLACK>';
+				print '<TR><TD style="color:red"><b>Ошибка сохранения информации!</b></TD></TR>';
+				print '</TABLE>';
+			}
+
+			$cname = "";
+
+			$sql = "select CAMPAIGN_NAME as CAMP_NAME, TERM_CHAR as TERM_CHAR, USER_INPUT_RETRY_NUM as USER_INPUT_RETRY_NUM from VMD_CAMPAIGN where campaign_id = $cid";
+			$rcount = $db->SelectRecords($sql, &$gr);
+			if ($rcount>0)
+			{
+				$cname = $gr[1]["CAMP_NAME"];
+				if ($res_code==0)
+				{
+					$term_char = "#";
+					$retry_num = 0;
+					$term_char = $gr[1]["TERM_CHAR"];
+					$retry_num = $gr[1]["USER_INPUT_RETRY_NUM"];
+				}
+			}
+
+			if ($res_code==0)
+			{
+				$vote_initial = -1;
+				$vote_variants = -1;
+				$vote_error_input = -1;
+				$vote_correct_input = -1;
+				$vote_error_bye = -1;
+				$vote_bye = -1;
+
+				$sql = "SELECT VOICE_MESSAGE_ID as VOICE_MESSAGE_ID FROM VMD_VOTE_MESSAGES WHERE CAMPAIGN_ID=$cid ORDER BY VOTE_MESSAGE_TYPE_ID";
+				$count = $db->SelectRecords($sql, &$rows);
+				if ($count==$count_messages)
+				{
+					$vote_initial = $rows[1]["VOICE_MESSAGE_ID"];
+					$vote_variants = $rows[2]["VOICE_MESSAGE_ID"];
+					$vote_error_input = $rows[3]["VOICE_MESSAGE_ID"];
+					$vote_correct_input = $rows[4]["VOICE_MESSAGE_ID"];
+					$vote_error_bye = $rows[5]["VOICE_MESSAGE_ID"];
+					$vote_bye = $rows[6]["VOICE_MESSAGE_ID"];
+				}
+			}
+
+			$sql = "SELECT VOICE_MESSAGE_ID as VOICE_MESSAGE_ID, VOICE_MESSAGE_NAME as VOICE_MESSAGE_NAME FROM VMD_MESSAGES where closed <> 1 ORDER BY VOICE_MESSAGE_NAME";
+			$count = $db->SelectRecords($sql, &$rows);
+?>
+
+	<SCRIPT LANGUAGE="JavaScript">
+
+		function onClickSave()
+		{
+			var thisChar='';
+			var numStr='0123456789';
+			var count=0;
+			var i=0;
+			err1='Ошибка при вводе максимального числа попыток ввода!';
+			data=document.forms(0).elements("edit_retry_num").value;
+			len=data.length;
+			if (len==0)
+			{
+				alert (err1);
+				return;
+			}
+			for (i=0; i<len; i++)
+			{
+				thisChar=data.substring(i,i+1);
+				if (numStr.indexOf(thisChar)!=(-1))
+					count++;
+			}
+			if (count!=len)
+			{
+				alert (err1);
+				return (false);
+			}
+			idata=parseInt(data);
+			if (idata==0)
+			{
+				alert (err1);
+				return (false);
+			}
+
+			document.forms(0).elements("action_name").value = "save";
+			document.forms(0).elements("pid").value = "14";
+			document.forms(0).submit();
+		}
+		
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( document.forms(0).elements(event.srcElement.name).checked == false )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickAddVariant()
+		{
+			var thisChar='';
+			var numStr='0123456789';
+			var count=0;
+			var i=0;
+			err2='Ошибка при вводе наименования пункта меню!';
+			data=document.forms(0).elements("edit_variant_name").value;
+			len=data.length;
+			if (len==0)
+			{
+				alert (err2);
+				return;
+			}
+			count=0;
+			i=0;
+			err1='Ошибка при вводе варианта ответа!';
+			data=document.forms(0).elements("edit_variant_digits").value;
+			len=data.length;
+			if (len==0)
+			{
+				alert (err1);
+				return;
+			}
+			for (i=0; i<len; i++)
+			{
+				thisChar=data.substring(i,i+1);
+				if (numStr.indexOf(thisChar)!=(-1))
+					count++;
+			}
+			if (count!=len)
+			{
+				alert (err1);
+				return (false);
+			}
+			document.forms(0).elements("action_name").value = "addvar";
+			document.forms(0).elements("pid").value = "14";
+			document.forms(0).submit();
+		}
+		
+		function onClickDelVariant()
+		{
+			if( confirm("Вы действительно хотите удалить выбранные варианты ответов?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите элементы, которые хотите удалить!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "delvar";
+			document.forms(0).elements("pid").value = "14";
+			document.forms(0).submit();
+		}
+		
+	</SCRIPT>
+
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+
+	<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% ALIGN=CENTER >
+	<TR><TD VALIGN=<?print $global_list_valign?>>
+
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+		<TR height=17>
+			<TD ALIGN=CENTER><B>Сценарий опроса</B></TD>
+		</TR>
+		<TR>
+			<TD>
+				<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=80% ALIGN=CENTER HEIGHT=100% BORDERCOLOR=BLACK>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Наименование:</TD>
+					<TD width=60% align=left>
+						<INPUT TYPE=TEXT NAME="CAMP_NAME" SIZE=50 maxlength=50 VALUE="<?print $cname;?>" disabled>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				</TABLE>
+			</TD>
+		</TR>	
+		<TR height=17>
+			<TD ALIGN=CENTER><B>Основные параметры</B></TD>
+		</TR>
+		<TR>
+			<TD>
+				<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=80% ALIGN=CENTER HEIGHT=100% BORDERCOLOR=BLACK>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Приветствие:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_initial" style="width:326">
+						<OPTION VALUE="-1"> </OPTION>
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_initial )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Меню опроса:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_variants" style="width:326">
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_variants )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Подтверждение получения ответа:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_correct_input" style="width:326">
+						<OPTION VALUE="-1"> </OPTION>
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_correct_input )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Ошибка ввода ответа:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_error_input" style="width:326">
+						<OPTION VALUE="-1"> </OPTION>
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_error_input )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Окончание опроса:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_bye" style="width:326">
+						<OPTION VALUE="-1"> </OPTION>
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_bye )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Число попыток исчерпано:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_vote_error_bye" style="width:326">
+						<OPTION VALUE="-1"> </OPTION>
+<?
+						for( $i=1; $i <= $count; $i++ )
+						{
+							if( $rows[$i]["VOICE_MESSAGE_ID"] == $vote_error_bye )
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'" SELECTED>'.$rows[$i]["VOICE_MESSAGE_NAME"];
+							else
+								print '<OPTION VALUE="'.$rows[$i]["VOICE_MESSAGE_ID"].'">'.$rows[$i]["VOICE_MESSAGE_NAME"];
+						}
+?>
+						</SELECT>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Символ конца ввода:</TD>
+					<TD width=60% align=left>
+						<SELECT NAME="sel_term_char_int" style="width:35"><OPTION VALUE=0<?if ($term_char=="#") print " SELECTED"?>>#<OPTION VALUE=1<?if ($term_char=="*") print " SELECTED"?>>*<OPTION VALUE=2<?if ($term_char==" ") print " SELECTED"?>>-</SELECT></TD>
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left>Максимальное число попыток ввода:</TD>
+					<TD width=60% align=left>
+						<INPUT TYPE=TEXT NAME="edit_retry_num" SIZE=2 maxlength=4 VALUE="<?print $retry_num;?>">
+					</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40% align=left><INPUT TYPE=BUTTON VALUE="Применить" onClick="onClickSave()"></TD>
+					<TD width=60% align=left>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD width=40%>&nbsp;</TD>
+					<TD width=60%>&nbsp;</TD>
+				</TR>
+				</TABLE>
+			</TD>
+		</TR>	
+		<TR height=17>
+			<TD ALIGN=CENTER><B><A NAME="VARIANTS">Варианты ответов</A></B></TD>
+		</TR>
+		<TR>
+			<TD>
+
+			<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+
+<?
+			if ( $res_code_var_add!=0 )
+			{
+				print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER BORDERCOLOR=BLACK>';
+				print '<TR><TD style="color:red"><b>Ошибка добавления варианта! Возможно, такой вариант уже существует.</b></TD></TR>';
+				print '</TABLE>';
+			}
+			else if ( $res_code_var_del!=0 )
+			{
+				print '<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText ALIGN=CENTER BORDERCOLOR=BLACK>';
+				print '<TR><TD style="color:red"><b>Ошибка удаления варианта! Не все варианты были удалены.</b></TD></TR>';
+				print '</TABLE>';
+			}
+?>
+
+			<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=80% ALIGN=CENTER HEIGHT=100% BORDERCOLOR=BLACK>
+			<TR>
+				<TD width=40%>&nbsp;</TD>
+				<TD width=60%>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD colspan=2>
+					Наименование пункта меню: <INPUT TYPE=TEXT NAME="edit_variant_name" SIZE=30 maxlength=50 VALUE="<?print $variant_name;?>">&nbsp;
+					Вариант ответа: <INPUT TYPE=TEXT NAME="edit_variant_digits" SIZE=5 maxlength=10 VALUE="<?print $variant_digits;?>">&nbsp;
+					<INPUT TYPE=BUTTON value="Добавить" onClick="onClickAddVariant()">
+				</TD>
+			</TR>
+			<TR>
+				<TD width=40%>&nbsp;</TD>
+				<TD width=60%>&nbsp;</TD>
+			</TR>
+			</TABLE>
+
+			<TABLE CELLSPACING=0 CELLPADDING=1 WIDTH=80% ALIGN=CENTER BORDERCOLOR=BLACK class="dataAreaTable">
+			<TR style="border:0">
+				<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+				<TD class="dataAreaTableData"><B>Наименование пункта меню</B></TD>
+				<TD class="dataAreaTableData"><B>Вариант ответа</B></TD>
+			</TR>
+<?
+			$sql = "select VARIANT_NAME as VARIANT_NAME, VARIANT_DIGITS as VARIANT_DIGITS from VMD_VOTE_VARIANTS where CAMPAIGN_ID=$cid ORDER BY VARIANT_DIGITS";
+			$count = $db->SelectRecords($sql, &$rows);
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["VARIANT_DIGITS"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;" >';
+				print '<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["VARIANT_DIGITS"].'" onClick="onClickRow()"></TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["VARIANT_NAME"].'</TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["VARIANT_DIGITS"].'</TD>';
+				print '</TR>';
+			}
+?>
+			</TABLE>
+			<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=80% ALIGN=CENTER HEIGHT=100% BORDERCOLOR=BLACK>
+			<TR>
+				<TD width=40%>&nbsp;</TD>
+				<TD width=60%>&nbsp;</TD>
+			</TR>
+			<TR>
+				<TD colspan=2>
+				<INPUT TYPE=BUTTON VALUE="Удалить" onClick="onClickDelVariant()">
+				</TD>
+			</TR>
+			<TR>
+				<TD width=40%>&nbsp;</TD>
+				<TD width=60%>&nbsp;</TD>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>	
+		<TR height=17><TD ALIGN=RIGHT><INPUT TYPE=BUTTON value="Закрыть" onClick="p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=11&cid=<?print $cid;?>';">
+		</TABLE>
+	</TD></TR>
+	</TABLE>
+	</FORM>
+
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 2: // ИЗМЕНЕНИЕ СПИСКА РЕЗУЛЬТАТОВ ОБЗВОНА
+		{
+			$code = $_GET["code"];
+			$encoding = $_GET["encoding"];
+
+			$action_name = $_GET["action_name"];
+
+			$err = Array("");
+			$index = 0;
+			switch($action_name)
+			{
+				case "add":
+				{
+					if( strlen($code) == 0 || strlen($encoding) == 0 )
+					{
+						$err[$index] = "Не заполенны обязательные поля!";
+						$index++;
+					}
+					else
+					{
+						$sql = "select vmd_util.F_ADD_RESULTCODE(0, '".strqs($code)."', '".strqs($encoding)."', ".$user_id.") RES from dual";
+						$db->SelectRecords($sql, &$rows);
+						if( $rows[1]["RES"] <= 0 )
+						{
+							$err[$index] = "Не удалось добавить результат!";
+							$index++;
+						}
+					}
+				}
+				break;
+
+				case "not_use":
+				{
+					$del_ids = explode(";", $_GET["del_ids"]);
+					$r = false;
+					for($i=0; $i < sizeof($del_ids); $i++ )
+					{
+						$sql = "select vmd_util.F_CLOSE_RESULTCODE(".$del_ids[$i].", ".$user_id.") res from dual";
+						$db->SelectRecords($sql, &$rows);
+						if( $rows[1]["RES"] <= 0 && $r == false )
+						{
+							$err[$index] = "Не удалось удалить результаты!";
+							$index++;
+							$r = true;
+						}
+					}
+				}
+				break;
+			}
+//			F_ADD_RESULTCODE
+?>
+<TABLE BORDER=0 ALIGN=CENTER height=0%>
+<?
+	for( $i = 0; $i < sizeof($err); $i++ )
+	{
+		if( strlen($err[$i]) > 0 )
+		{
+			print '<TR><TD>'.$err[$i].'</TD></TR>';
+		}
+	}
+?>
+</TABLE>
+
+	<SCRIPT LANGUAGE="JavaScript">
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( document.forms(0).elements(event.srcElement.name).checked == false )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickAdd()
+		{
+			if( document.forms(0).elements("code").value.length == 0 )
+			{
+				alert("Введите код!");
+				return;
+			}
+			if( document.forms(0).elements("encoding").value.length == 0 )
+			{
+				alert("Введите расшифровку!");
+				return;
+			}
+			document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "2";
+			document.forms(0).submit();
+		}
+
+		function onClickNotUse()
+		{
+			if( confirm("Вы действительно хотите прекратить использование выбранных результатов обзвона?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите результаты обзвона, использование которых необходимо прекратить!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "not_use";
+			document.forms(0).elements("pid").value = "2";
+			document.forms(0).submit();
+		}
+
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Изменение списка результатов обзвона</B></TD>
+	</TR>
+	<TR>
+		<TD ALIGN=CENTER>
+		<NOBR>
+		Код:<INPUT TYPE=TEXT NAME="code" SIZE=5 VALUE="<?print $code;?>">&nbsp;
+		Расшифровка:<INPUT TYPE=TEXT NAME="encoding" SIZE=40 VALUE="<?print $encoding;?>">&nbsp;
+		<INPUT TYPE=BUTTON value="Добавить" onClick="onClickAdd()">
+		</NOBR>
+		<DIV STYLE="height:98.5%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=1 WIDTH=95% ALIGN=CENTER BORDERCOLOR=BLACK class="dataAreaTable">
+			<TR style="border:0">
+				<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+				<TD WIDTH=3% class="dataAreaTableData"><B>Код</B></TD>
+				<TD class="dataAreaTableData"><B>Расшифровка</B></TD>
+			</TR>
+<?
+			$sql = "select CAMPAIGN_CODE_ID CCID, REASONCODE C, CAMPAIGN_CODE_NAME NAME from VMD_CAMPAIGN_RESULTCODES where closed <> 1 and reasoncode<>1 ORDER BY reasoncode";
+			$count = $db->SelectRecords($sql, &$rows);
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["CCID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;" >';
+				print '<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["CCID"].'" onClick="onClickRow()"></TD>';
+				print '<TD WIDTH=3% class="dataAreaTableData">'.$rows[$i]["C"].'</TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["NAME"].'</TD>';
+				print '</TR>';
+			}
+?>
+		</TABLE>
+		</DIV>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD>
+			<TABLE BORDER=0 WIDTH=100%>
+			<TR>
+			<TD><INPUT TYPE=BUTTON value="Прекратить использование" onClick="onClickNotUse()">&nbsp;</TD>
+			<TD align=right><INPUT TYPE=BUTTON value="Закрыть" onClick="onClickClose()">&nbsp;</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+	</FORM>
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 3: // НАБЛЮДЕНИЕ ЗА СИСТЕМОЙ
+		{
+			$interval = $_GET["interval"];
+?>
+	<SCRIPT LANGUAGE="JavaScript">
+
+		function onClickRefresh()
+		{
+			//document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "3";
+			document.forms(0).submit();
+		}
+
+	</SCRIPT>
+		<FORM ACTION="" METHOD="GET" NAME="MAIN">
+		<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=450 HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Текущие соединения</B></TD>
+	</TR>
+	<TR>
+		<TD>
+		<NOBR>
+		Период обновления (сек):<INPUT TYPE=TEXT NAME="interval" SIZE=9 VALUE="<?print $interval;?>">&nbsp;
+		</NOBR>
+		</TD>
+	</TR>
+	<TR HEIGHT=100%>
+		<TD>
+		<DIV style="height:98.5%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=dataAreaTable WIDTH=95% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR>
+				<TD CLASS=dataAreaTableData><B>Номер телефона</B></TD>
+				<TD CLASS=dataAreaTableData><B>Статус</B></TD>
+			</TR>
+
+<?
+			/*$sql = "select campaign_phone_no N, state_name S from vmd_campaign_numbers, vmd_phone_states where state_id = stateref and state_id = 2";
+			$count = $db->SelectRecords($sql, &$rows);*/
+			$rep_path =  getenv("VMD_REP_PATH");
+			$lcat_path = getenv("VMD_LCAT_PATH");
+			$sched_path = getenv("VMD_SCHED_PATH");
+			$sysstr = $lcat_path."/lcat -p ".$sched_path." ".$rep_path;
+##			print $sysstr;
+			unset($ar);
+			exec(EscapeShellCmd($sysstr), $ar );
+			for($i=0; $i < sizeof($ar); $i++ )
+			{
+				$str = explode( "\t", $ar[$i] );
+				print '<TR>';
+				print '<TD CLASS=dataAreaTableData>&nbsp;'.$str[0].'</TD>';
+				print '<TD CLASS=dataAreaTableData>&nbsp;'.$str[2].'</TD>';
+				print '</TR>';
+			}
+?>
+		</TABLE>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD>
+			<TABLE CELLSPACING=0 CELLPADDING=0 BORDER="0" CLASS=bodyText WIDTH=100% ALIGN=LEFT>
+			<TR>
+				<TD><INPUT TYPE=BUTTON VALUE="Обновить" onClick="onClickRefresh()"></TD>
+				<TD align=right>
+				<INPUT TYPE=BUTTON VALUE="Закрыть" onClick="p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';">
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+	</FORM>
+
+	<SCRIPT LANGUAGE="JavaScript">
+		
+		interval = "<?print $interval;?>";
+		if( interval != "" )
+			window.setTimeout("onClickRefresh()", interval*1000 );
+
+	</SCRIPT>
+
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 4: // ИЗМЕНЕНИЕ СПИСКА ГОЛОСОВЫХ СООБЩЕНИЙ
+		{
+			$mess_path = $_GET["mess_path"];
+			$mess_name = $_GET["mess_name"];
+			$mess_server = $_GET["mess_server"];
+
+			$action_name = $_GET["action_name"];
+
+			$err = Array("");
+			$index = 0;
+			switch($action_name)
+			{
+				case "add":
+				{
+					if( strlen($mess_path) == 0 || strlen($mess_name) == 0 )
+					{
+						$err[$index] = "Не заполенны обязательные поля!";
+						$index++;
+					}
+					else
+					{
+						if (strlen($mess_server)==0)
+							$mess_server_str = "NULL";
+						else
+							$mess_server_str = $mess_server;
+						$sql = "select vmd_util.F_ADD_MESSAGE('".strqs($mess_name)."', '".strqs($mess_path)."', ".$mess_server_str.", ".$user_id.") from dual";
+						$db->SelectRecords($sql, &$rows);
+					}
+				}
+				break;
+
+				case "del":
+				{
+					$del_ids = explode(";", $_GET["del_ids"]);
+					for($i=0; $i < sizeof($del_ids); $i++ )
+					{
+						$sql = "select vmd_util.F_CLOSE_MESSAGE(".$del_ids[$i].", ".$user_id.") res from dual";
+						$db->SelectRecords($sql, &$rows);
+					}
+				}
+				break;
+
+				case "del_all":
+				{
+					$sql = "select vmd_util.F_CLOSE_ALL_MESSAGES(".$user_id.") res from dual";
+					$db->SelectRecords($sql, &$rows);
+				}
+				break;
+			}
+	if( strlen($err[0]) > 0 )
+	{
+		print '<TABLE ALIGN=CENTER BORDER=0>';
+		print '<TR><TD style="color:red">Ошибка!</TD></TR>';
+		for( $i = 0; $i < sizeof( $err ); $i++ )
+		{
+			if( strlen($err[$i]) > 0 )
+				print '<TR><TD>'.$err[$i].'</TD></TR>';
+		}
+		print '</TABLE>';
+	}
+?>
+
+<SCRIPT LANGUAGE="JavaScript">
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( document.forms(0).elements(event.srcElement.name).checked == false )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickAdd()
+		{
+			if( document.forms(0).elements("mess_name").value.length == 0 )
+			{
+				alert("Введите наименование сообщения!");
+				return;
+			}
+
+			if( document.forms(0).elements("mess_name").value.length > 50 )
+			{
+				alert("Наименование сообщения должно быть длиной не более 50 символов!");
+				return;
+			}
+
+			if( document.forms(0).elements("mess_path").value.length == 0 )
+			{
+				alert("Введите путь к файлу (ID сообщения)!");
+				return;
+			}
+
+			if( document.forms(0).elements("mess_path").value.length > 100 )
+			{
+				alert("Путь к файлу должен быть длиной не более 100 символов!");
+				return;
+			}
+
+			var thisChar='';
+			var numStr='0123456789';
+			var count=0;
+			var i=0;
+			var idata;
+			err='Ошибка при вводе идентификатора сервера (значение должно быть 0..65535)';
+			data=document.forms(0).elements("mess_server").value;
+			len=data.length;
+			if (len>0)
+			{
+				for (i=0; i<len; i++)
+				{
+					thisChar=data.substring(i,i+1);
+					if (numStr.indexOf(thisChar)!=(-1))
+					count++;
+				}
+				if (count!=len)
+				{
+					alert (err);
+					return;
+				}
+				idata=parseInt(data);
+				if (idata>65535)
+				{
+					alert (err);
+					return;
+				}
+			}
+
+			document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "4";
+			document.forms(0).submit();
+		}
+
+		function onClickDel()
+		{
+			if( confirm("Вы действительно хотите удалить выбранные сообщения?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите сообщения, которые хотите удалить!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).elements("pid").value = "4";
+			document.forms(0).submit();
+		}
+
+		function onClickDelAll()
+		{
+			if( confirm("Вы действительно хотите удалить все сообщения?") == false )
+				return;
+			document.forms(0).elements("action_name").value = "del_all";
+			document.forms(0).elements("pid").value = "4";
+			document.forms(0).submit();
+		}
+
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Изменение списка голосовых сообщений</B></TD>
+	</TR>
+	<TR>
+		<TD align=center>
+		<NOBR>
+		Наименование сообщения:<INPUT TYPE=TEXT NAME="mess_name" SIZE=17 VALUE="<?print $mess_name;?>">&nbsp;
+		Путь к файлу (ID сообщения):<INPUT TYPE=TEXT NAME="mess_path" SIZE=17 VALUE="<?print $mess_path;?>">&nbsp;
+		Идентификатор сервера:<INPUT TYPE=TEXT NAME="mess_server" SIZE=4 VALUE="<?print $mess_server;?>" maxlength=5>&nbsp;
+		<INPUT TYPE=BUTTON value="Добавить" onClick="onClickAdd()">
+		</NOBR>
+		<DIV STYLE="height:98.5%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=1 WIDTH=95% ALIGN=CENTER BORDERCOLOR=BLACK class="dataAreaTable">
+			<TR style="border:0">
+				<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+				<TD class="dataAreaTableData"><B>Наименование сообщения</B></TD>
+				<TD class="dataAreaTableData"><B>Путь к файлу (ID сообщения)</B></TD>
+				<TD class="dataAreaTableData"><B>Идентификатор сервера</B></TD>
+				<TD class="dataAreaTableData"><B>Дата создания</B></TD>
+			</TR>
+<?
+			$sql = "select voice_message_id VMID, voice_message_name VMN, voice_message_path VMP, NVL(voice_server_id,'-1') VMS, to_char(CREATEDATE, 'dd.mm.yy') CRD from VMD_MESSAGES where closed <> 1 ORDER BY voice_message_name";
+			$count = $db->SelectRecords($sql, &$rows);
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["VMID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;" >';
+				print '<TD WIDTH=3% class="dataAreaTableData"><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["VMID"].'" onClick="onClickRow()"></TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["VMN"].'</TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["VMP"].'</TD>';
+				if ($rows[$i]["VMS"]<0)
+					print '<TD class="dataAreaTableData">&nbsp;</TD>';
+				else
+					print '<TD class="dataAreaTableData">'.$rows[$i]["VMS"].'</TD>';
+				print '<TD class="dataAreaTableData">'.$rows[$i]["CRD"].'</TD>';
+				print '</TR>';
+			}
+?>
+		</TABLE>
+		</DIV>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD>
+			<TABLE BORDER=0 WIDTH=100%>
+			<TR>
+			<TD><INPUT TYPE=BUTTON value="Удалить" onClick="onClickDel()">&nbsp;</TD>
+			<TD align=center><INPUT TYPE=BUTTON value="Удалить все" onClick="onClickDelAll()">&nbsp;</TD>
+			<TD align=right><INPUT TYPE=BUTTON value="Закрыть" onClick="onClickClose()">&nbsp;</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+	</FORM>
+<?
+		}
+		break;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+		case 5: // ИЗМЕНЕНИЕ ПЕРИОДОВ, В КОТОРЫЕ ОБЗВОН ЗАПРЕЩЕН
+		{
+			$begin_date = date("H:i");
+			if( isset($_GET["begin_date"]) && strlen( trim($_GET["begin_date"]) ) > 0 )
+				$begin_date = $_GET["begin_date"];
+			$end_date = date("H:i");
+			if( isset($_GET["end_date"]) && strlen(trim($_GET["end_date"])) > 0 )
+				$end_date = $_GET["end_date"];
+			
+			$action_name = $_GET["action_name"];
+
+			$system_id = $_GET["system_id"];
+
+			$err = Array("");
+			$index = 0;
+			switch($action_name)
+			{
+				case "add":
+				{
+					if( !check_time($begin_date) || !check_time($end_date) )
+					{
+						$err[$index] = "Неправильный формат времени!";
+						$index++;
+					}
+					else if ($begin_date>$end_date)
+					{
+						$err[$index] = "Время начала периода не должно быть больше времени окончания периода!";
+						$index++;
+					}
+					else
+					{
+						$sql = "select VMD_UTIL.ADD_SILENT_PERIOD(".$system_id.", '".$begin_date."', '".$end_date."', ".$user_id.") RES from dual";
+						$db->SelectRecords($sql, &$rows);
+						if ($rows[1]["RES"] == -20004)
+						{
+							$err[$index] = "Указанный период пересекается с уже существующими!";
+							$index++;
+						}
+						else if( $rows[1]["RES"] != 0 )
+						{
+							$err[$index] = "Не удалось добавить новый период!";
+							$index++;
+						}
+					}
+				}
+				break;
+
+				case "del":
+				{
+					$del_ids = explode(";", $_GET["del_ids"]);
+					$err_ex = false;
+					$err_cl = false;
+					for($i=0; $i < sizeof($del_ids); $i++ )
+					{
+						$sql = "select VMD_UTIL.DEL_SILENT_PERIOD(".$del_ids[$i].", ".$user_id.") RES from dual";
+						$db->SelectRecords($sql, &$res);
+						if( $res[1]["RES"] < 0 )
+						{
+							if( $res[1]["RES"] != 0 )
+							{
+								if( $err_ex == false )
+								{
+									$err[$index] = "Не все периоды были удалены!";
+									$index++;
+									$err_ex = true;
+								}
+							}
+						}
+					}
+				}
+				break;
+			}
+
+if( sizeof($err) > 0 && strlen($err[0]) > 0 )
+{
+?>
+<TABLE BORDER=0 ALIGN=CENTER height=0% class=bodyText>
+<TR><TD style="color:red"><B>Ошибка!</B></TD></TR>
+<?
+	for( $i = 0; $i < sizeof($err); $i++ )
+	{
+		if( strlen($err[$i]) > 0 )
+		{
+			print '<TR><TD><B>'.$err[$i].'</B></TD></TR>';
+		}
+	}
+?>
+</TABLE>
+<?
+}
+?>
+
+	<SCRIPT LANGUAGE="JavaScript">
+		// выделить все элементы
+		function onClickSelAll()
+		{
+			set_value = document.forms(0).elements("SEL_ALL").checked;
+			elements_count = document.forms(0).length;
+			for( i=0; i < elements_count; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					document.forms(0).elements(i).checked = set_value;
+				}
+			}
+		}
+		
+		// сбросить первый флажок
+		function onClickRow()
+		{
+			if( document.forms(0).elements(event.srcElement.name).checked == false )
+				document.forms(0).elements("SEL_ALL").checked = false;
+			document.forms(0).elements(event.srcElement.name).checked = !document.forms(0).elements(event.srcElement.name).checked;
+		}
+
+		function onClickAdd()
+		{
+			var thisChar='';
+			var numStr='0123456789';
+			var count=0;
+			var i=0;
+			err1='Ошибка при вводе идентификатора системы!';
+			data=document.forms(0).elements("system_id").value;
+			len=data.length;
+			if (len==0)
+			{
+				alert (err1);
+				return;
+			}
+			for (i=0; i<len; i++)
+			{
+				thisChar=data.substring(i,i+1);
+				if (numStr.indexOf(thisChar)!=(-1))
+					count++;
+			}
+			if (count!=len)
+			{
+				alert (err1);
+				return (false);
+			}
+
+			document.forms(0).elements("action_name").value = "add";
+			document.forms(0).elements("pid").value = "5";
+			document.forms(0).submit();
+		}
+		
+		function onClickDel()
+		{
+			if( confirm("Вы действительно хотите удалить выбранные периоды?") == false )
+				return;
+			del_ids = "";
+			for( i=0; i<document.forms(0).length; i++ )
+			{
+				sname = document.forms(0).elements(i).name;
+				if( sname.indexOf("ROW") == 0 )
+				{
+					if( document.forms(0).elements(i).checked )
+					{
+						del_ids+=document.forms(0).elements(i).name.substring(4,document.forms(0).elements(i).name.length);
+						del_ids+=";";
+						document.forms(0).elements(i).checked = false;
+					}
+				}
+			}
+			if( del_ids.length > 0 )
+				del_ids = del_ids.substring(0, del_ids.length-1);
+			else
+			{
+				alert("Выберите элементы, которые хотите удалить!");
+				return;
+			}
+			document.forms(0).elements("del_ids").value = del_ids;
+			document.forms(0).elements("action_name").value = "del";
+			document.forms(0).elements("pid").value = "5";
+			document.forms(0).submit();
+		}
+		
+		function onClickClose()
+		{
+			p=document.location.href.indexOf('?');
+			document.location=document.location.href.substring(0,p)+'?pid=0';
+		}
+
+	</SCRIPT>
+	<FORM ACTION="" METHOD="GET" NAME="MAIN">
+	<INPUT TYPE=HIDDEN NAME="pid" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="cid" VALUE="<?print $cid;?>">
+	<INPUT TYPE=HIDDEN NAME="action_name" VALUE="">
+	<INPUT TYPE=HIDDEN NAME="del_ids" VALUE="">
+<TABLE CELLSPACING=0 CELLPADDING=0 WIDTH=100% HEIGHT=100% ALIGN=CENTER >
+<TR><TD VALIGN=<?print $global_list_valign;?>>
+
+	<TABLE CELLSPACING=0 CELLPADDING=5 BORDER="1" CLASS=bodyText WIDTH=90% HEIGHT=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+	<TR height=17>
+		<TD ALIGN=CENTER><B>Изменение периодов, в которые обзвон запрещен</B></TD>
+	</TR>
+	<TR>
+		<TD align=center>
+		<NOBR>
+<?
+//		Идентификатор системы:<INPUT TYPE=TEXT NAME="system_id" SIZE=11 VALUE="print $system_id;" maxlength=10>&nbsp;
+		print "<INPUT TYPE=HIDDEN NAME=\"system_id\" VALUE=1>\n";
+?>
+		Начало периода:<INPUT TYPE=TEXT NAME="begin_date" SIZE=11 VALUE="<?print $begin_date;?>">&nbsp;
+		Окончание периода:<INPUT TYPE=TEXT NAME="end_date" SIZE=11 VALUE="<?print $end_date;?>">&nbsp;
+		<INPUT TYPE=BUTTON value="Добавить" onClick="onClickAdd()">
+		</NOBR>
+		<DIV STYLE="height:100%; overflow:scroll;">
+		<TABLE CELLSPACING=0 CELLPADDING=1 BORDER="1" CLASS=dataAreaTable WIDTH=90% ALIGN=CENTER BORDERCOLOR=BLACK>
+			<TR>
+				<TD WIDTH=3% class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="sel_all" onClick="onClickSelAll()"></TD>
+<?
+//				<TD class=dataAreaTableData><B>Идентификатор системы</B></TD>
+?>
+				<TD class=dataAreaTableData><B>Начало периода</B></TD>
+				<TD class=dataAreaTableData><B>Окончание периода</B></TD>
+			</TR>
+
+<?
+##			$sql = "select silent_id SILID, system_id SYSTEM_ID, start_hour||':'||start_min START_PERIOD, end_hour||':'||end_min END_PERIOD from VMD_SILENT_HOURS where CLOSED<>1 ORDER BY SYSTEM_ID, START_PERIOD, END_PERIOD";
+			$sql = "select silent_id SILID, system_id SYSTEM_ID, TO_CHAR(start_period,'hh24:mi') START_PERIOD, TO_CHAR(end_period,'hh24:mi') END_PERIOD from VMD_SILENT_HOURS where CLOSED<>1 ORDER BY VMD_SILENT_HOURS.SYSTEM_ID, VMD_SILENT_HOURS.START_PERIOD, VMD_SILENT_HOURS.END_PERIOD";
+			$count = $db->SelectRecords($sql, &$rows);
+			for( $i = 1; $i <= $count; $i++ )
+			{
+				print '<TR BGCOLOR="#E5EBEB" onmouseover="this.style.backgroundColor=\'#E5ffEB\';" onmouseout="this.style.backgroundColor=\'#E5EBEB\';" ID="'.$rows[$i]["SILID"].'" onclick="rid=\'ROW_\'+this.id; document.forms(0).elements(rid).checked=!document.forms(0).elements(rid).checked;" >';
+				print '<TD WIDTH=3% class=dataAreaTableData><INPUT TYPE=CHECKBOX NAME="ROW_'.$rows[$i]["SILID"].'" onClick="onClickRow()"></TD>';
+//				print '<TD class=dataAreaTableData>'.$rows[$i]["SYSTEM_ID"].'</TD>';
+				print '<TD class=dataAreaTableData>'.$rows[$i]["START_PERIOD"].'</TD>';
+				print '<TD class=dataAreaTableData>'.$rows[$i]["END_PERIOD"].'</TD>';
+				print '</TR>';
+			}
+?>
+		</TABLE>
+		</DIV>
+		</TD>
+	</TR>
+	<TR height=17>
+		<TD>
+			<INPUT TYPE=BUTTON value="Удалить" onClick="onClickDel()">&nbsp;
+			<INPUT TYPE=BUTTON value="Закрыть" onClick="onClickClose()">&nbsp;
+		</TD>
+	</TR>
+	</TABLE>
+	</FORM>
+<?
+		}
+		break;
+
+	}
+
+?>
+
+</BODY>
+</HTML>
+
+<?
+	$db->LogOffServer();
+?>

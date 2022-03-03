@@ -1,0 +1,58 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30541
+                )
+
+        )
+
+    [ts] => 1627309755
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 5
+    [status_id] => CONVERTED
+    [status_dop] => S
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 1
+    [prichina_otkaza] => 
+    [record] => http://sc.wilstream.ru/sc/get_okt_record.php?idconnection=A3995575-E707-4CE4-B4BF-37A7EE3F1422&datecall=20210726-151319-493&partnum=6
+    [name] => Кирилл
+    [phone] => 88006008457
+    [phone_norm] => +78006008457
+    [comments] => 
+Форма отправлена оператором<br>
+Комментарий: &quot;Онлайн школа №1&quot;, входящие
+
+    [stats_id] => 
+    [stats_descruptor] => 
+    [status_name] => подтверждено
+    [status_otkaza] => 
+)
+
+SEND RESULT:
+OK 221 2.0.0 Service closing transmission channel

@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => scargos.com
+            [phone] => +79291637750
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 00:16, 2021-05-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: scargos.com<br>номер_телефона: +79291637750<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => scargos.com
+            [phone] => +79291637750
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 00:16, 2021-05-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: scargos.com<br>номер_телефона: +79291637750<br>     
+            [new] => 1
+        )
+
+)

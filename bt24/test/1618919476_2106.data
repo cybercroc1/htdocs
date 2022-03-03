@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Денис
+            [phone] => +79258414247
+            [email] => panovdenis2020@gmail.com
+            [url] => http://wilstream.ru/outcalls/telemarketing/privlechenie-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Интересует возможность привлечения клиентов путем обзвона по холодной базе с оплатой за лид.
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Денис
+            [phone] => +79258414247
+            [email] => panovdenis2020@gmail.com
+            [url] => http://wilstream.ru/outcalls/telemarketing/privlechenie-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Интересует возможность привлечения клиентов путем обзвона по холодной базе с оплатой за лид.
+            [new] => 1
+        )
+
+)

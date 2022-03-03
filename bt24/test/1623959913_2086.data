@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Екатерина
+            [phone] => 89130544529
+            [email] => qwert123@mail.ru
+            [url] => http://wilstream.ru/outcalls/aktualizaciya-baz-dannyh/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Екатерина
+            [phone] => 89130544529
+            [email] => qwert123@mail.ru
+            [url] => http://wilstream.ru/outcalls/aktualizaciya-baz-dannyh/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

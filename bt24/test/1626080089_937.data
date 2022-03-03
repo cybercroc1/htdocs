@@ -1,0 +1,30 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Алексей
+            [phone] => 89202503101
+            [email] => brusov@s-stroy.ru
+            [url] => http://wilstream.ru/stati/audit-koll-tsentra/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: вопрос по аудиту коллцентра. что входит в эту процедуру и какова стоимость?
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Алексей
+            [phone] => 89202503101
+            [email] => brusov@s-stroy.ru
+            [url] => http://wilstream.ru/stati/audit-koll-tsentra/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: вопрос по аудиту коллцентра. что входит в эту процедуру и какова стоимость?
+            [new] => 1
+        )
+
+)

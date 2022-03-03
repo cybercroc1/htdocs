@@ -1,0 +1,100 @@
+<?
+include('../OCIWRAP/recordset.php');
+
+function strqs( $str )
+{
+	return StripSlashes(str_replace("'", "''", $str ));
+}
+//->>>> BEGIN SESSION INIT
+session_start();
+
+// установим переменные на эту сессию
+// нам нужен пользователь, кот. пользуется службой и коннекция к БД.
+// $ora_conn - сторока подключения к БД. Формат: login/password@service_name
+// $user_id - id пользователя, кот. пользуется службой
+$user_id = $_GET["uui"];
+if( !isset($HTTP_COOKIE_VARS["uui"]) )
+	setcookie( "uui", $user_id, 0 );
+else
+	$user_id = $HTTP_COOKIE_VARS["uui"];
+if( $user_id == 0 )
+{
+	print '<B ALIGN=CENTER><FONT COLOR=RED>ОШИБКА ИНИЦИАЛИЗАЦИИ! НЕ УКАЗАН ПОЛЬЗОВАТЕЛЬ!</FONT></B><BR>';
+	print 'Проверьте строку инициализации службы! Формат строки: uui=&lt;user_id&gt;&sid=&lt;ora_conn&gt;<BR>';
+	return 0;
+}
+
+$ora_conn_vmd = $_GET["sid"];
+if( !isset($HTTP_COOKIE_VARS["ora_conn_vmd"]) )
+	setcookie( "ora_conn_vmd", $ora_conn_vmd, 0 );
+else
+	$ora_conn_vmd = $HTTP_COOKIE_VARS["ora_conn_vmd"];
+
+// 2)	Create DB object
+$login = ""; $pwd = ""; $ser_name = "";
+$ar = explode("/", $ora_conn_vmd );
+$login = $ar[0];
+$ar = explode("@", $ar[1] );
+$pwd = $ar[0];
+$ser_name = $ar[1];
+if( strlen($login) == 0 || strlen($pwd) == 0 || strlen($ser_name) == 0 )
+{
+	print '<B ALIGN=CENTER><FONT COLOR=RED>ОШИБКА ИНИЦИАЛИЗАЦИИ! НЕ ВЕРНЫЙ ФОРМАТ СТРОКИ ПОДКЛЮЧЕНИЯ К БД!</FONT></B><BR>';
+	print 'ORA_CONNECTION_STRING: '.$ora_conn_vmd.'<BR>';
+	print 'Формат: login/password@service_name<BR>';
+	return 0;
+}
+
+
+$db = new Recordset($login, $pwd, $ser_name);
+//->>>>	END SESSION INIT
+
+$ids_arr = explode( ";", $_GET["ids"]);
+
+$att = $_GET["att"];
+if ( !isset($att) )
+	$att = -1;
+
+$reasonFail = $_GET["reasonFail"];
+if ( !isset($reasonFail) )
+	$reasonFail = -1;
+
+$stoplist = $_GET["stoplist"];
+if ( !isset($stoplist) )
+	$stoplist = -1;
+
+$in = $ids_arr[0];
+
+$str_stoplist="";
+
+if ($att==0)
+{
+	if ($reasonFail>0)
+	{	
+		$state_str="$reasonFail";
+		if ( ($reasonFail==6)&&($stoplist>=0) )
+		{
+			$str_stoplist=" and rc.REASONCODE=$stoplist ";
+		}
+	}
+	else
+		$state_str="5,6";
+}
+else
+	$state_str="4";
+
+$sql = "select cn.CAMPAIGN_PHONE_NO as P  
+	from VMD_CAMPAIGN_GROUPS cg, VMD_CAMPAIGN_NUMBERS cn, VMD_PHONE_STATES ps, VMD_CAMPAIGN_RESULTCODES rc 
+	where cn.CALL_GROUP_REF=cg.CAMPAIGN_GROUP_ID and cg.CAMPAIGN_REF=$in and 
+		cn.STATEREF=ps.STATE_ID and cn.resultref=rc.CAMPAIGN_CODE_ID 
+		and cn.closed<>1 and ps.STATE_ID IN ($state_str) $str_stoplist 
+		ORDER BY cn.CAMPAIGN_PHONE_NO";
+
+$count = $db->SelectRecords($sql, &$rows);
+
+for( $i = 1; $i <= $count; $i++ )
+{
+	print $rows[$i]["P"]."<BR>";
+}
+
+?>

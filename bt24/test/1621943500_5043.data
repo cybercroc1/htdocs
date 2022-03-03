@@ -1,0 +1,31 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Клиент
+            [phone] => 89104525360
+            [email] =>  
+            [url] => http://wilstream.ru/outcalls/telemarketing/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Хочу узнать сколько стоят холодные звонки продажи услуг
+Работаем с физ лицами и юр лицами 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Клиент
+            [phone] => 89104525360
+            [email] =>  
+            [url] => http://wilstream.ru/outcalls/telemarketing/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Хочу узнать сколько стоят холодные звонки продажи услуг
+Работаем с физ лицами и юр лицами 
+            [new] => 1
+        )
+
+)

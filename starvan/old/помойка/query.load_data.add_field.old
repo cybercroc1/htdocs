@@ -1,0 +1,76 @@
+<?php 
+include("../../starcall_conf/session.cfg.php");
+include("../../starcall_conf/conn_string.cfg.php");
+$q=OCIParse($c,"select SEQ_STC_FIELDS_ID.nextval from dual");
+OCIExecute($q, OCI_DEFAULT); OCIFetch($q);
+$new_field_id=OCIResult($q,"NEXTVAL"); 
+
+if(!isset($new_field_id) or $new_field_id=='') exit();
+/*echo "<script>var new_field_id='".$new_field_id."';</script>";*/
+echo "<script>parent.admBottomFrame.add_field('".$new_field_id."');</script>";
+?>
+<script>
+/*
+with(parent.admBottomFrame.tbl) {
+	new_row=insertRow(parent.admBottomFrame.current_row_index+1);
+	new_row.setAttribute("onmouseover", "sel_row(this)");
+	new_row.setAttribute("onmouseout", "unsel_row(this)");
+	with(new_row) {
+		with(appendChild(document.createElement('th'))) {
+			setAttribute("onclick","del_field(this)");
+			setAttribute("title","Удалить");
+			style.cursor='pointer';
+			innerHTML="<font color=red>-</font>";
+		}	
+		with(appendChild(document.createElement('th'))) {
+			setAttribute("onclick","current_row_index=this.parentNode.rowIndex; parent.logFrame.location='query.load_data.add_field.php'");
+			setAttribute("title","Добавить ниже");
+			style.cursor='pointer';
+			innerHTML="<font color=blue>+</font>";			
+		}	
+		with(appendChild(document.createElement('th'))) {
+			setAttribute("onmousedown","fMD(this)");
+			setAttribute("onmouseup","fMU(this)");			
+			style.cursor='s-resize';
+			//if(event.ctrlKey) {
+			//	innerHTML=parentNode.parentNode.rows[new_row.rowIndex-1].cells[this.cellIndex].innerHIML;
+			//	parentNode.parentNode.rows[new_row.rowIndex-1].cells[this.cellIndex].innerHIML="<input type=hidden name=file_fields_num[] value=''><input type=hidden name=file_fields_name[] value=''>";
+			//}	
+			//else 
+			innerHTML="<input type=hidden name=file_fields_num[] value=''><input type=hidden name=file_fields_name[] value=''>";
+		}
+		with(appendChild(document.createElement('th'))) {
+			setAttribute("onmousedown","fMD(this)");
+			setAttribute("onmouseup","fMU(this)");	
+			style.cursor='s-resize';
+			innerHTML="<input type=hidden name=base_fields_id[] value='"+new_field_id+"'>"+new_field_id;				
+		}
+		with(appendChild(document.createElement('th'))) {
+			innerHTML="<input type=text style='width:100%' name=base_fields_text_name["+new_field_id+"] value='Новое поле-"+new_field_id+"'>";				
+		}		
+		with(appendChild(document.createElement('td'))) {
+			innerHTML="<input type=text style='width:100%' name=base_fields_code_name["+new_field_id+"] value='F"+new_field_id+"'>";				
+		}
+		with(appendChild(document.createElement('td'))) {
+			with(appendChild(document.createElement('select'))) {
+				name="base_fields_std_name["+new_field_id+"]";
+				appendChild(document.createElement('option'));
+				for(i=0; i<parent.admBottomFrame.std_field_name.length; i++){
+					opt=appendChild(document.createElement('option'));
+					opt.value=parent.admBottomFrame.std_field_name[i];
+					opt.innerText=parent.admBottomFrame.std_field_desc[i]+' ('+parent.admBottomFrame.std_field_name[i]+')';
+		}}}
+		with(appendChild(document.createElement('td'))) {
+			innerHTML="<input type=checkbox name=base_fields_uniq["+new_field_id+"]>";				
+		}
+		with(appendChild(document.createElement('td'))) {
+			innerHTML="<input type=checkbox name=base_fields_must["+new_field_id+"]>";				
+		}
+		with(appendChild(document.createElement('td'))) {
+			innerHTML="<input type=checkbox name=base_fields_quoted["+new_field_id+"]>";				
+		}		
+		//appendChild(document.createElement('td')); //это пустое поле нужно для исправления глюка с переносом ячеек в старых IE
+	}
+}
+*/
+</script>

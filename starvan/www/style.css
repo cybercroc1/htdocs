@@ -1,0 +1,221 @@
+html, body {
+	width: 100%; 
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+	background-color: #E5E5E5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 15px;
+	color: #004080;
+}
+.body_marign { 
+	margin-top:5px;
+	width:auto;
+	height:auto;
+}
+   .tbl table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+   }
+   .tbl td, th {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid #000; /* Параметры рамки */
+   }
+   .tbl th {
+    background: #afd792; /* Цвет фона */
+    color: #333;  /* Цвет текста */
+   }
+   .tbl tbody tr:hover {
+    background: #f3bd48; /* Цвет фона при наведении */
+    color: #fff; /* Цвет текста при наведении */
+   }
+
+#headerMain {
+  width:920px;
+  height: 195px;
+  margin:0px auto;
+  z-index:0;
+
+}
+ 
+#header {
+  /*width:920px;
+  height: 195px;
+  position: fixed;
+  z-index: 0;
+  padding:100px;*/
+  {
+height:35px;
+border-bottom:1px solid #ddd;
+position:fixed;
+top:0px;
+left:0px;
+right:0px;
+background:#fff url(../images/nav.png) repeat-x center left;
+z-index:999999;
+  
+}
+#footerMain {
+ width:920px;
+  height: 195px;
+  margin:0px auto;
+  z-index:0;
+ }
+ 
+#footer {
+  width:920px;
+  height: 195px;
+  position: fixed;
+  z-index: 9999;
+}   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+/**/
+.price {
+	margin:0px;padding:0px;
+	width:100%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #c0c0c0;
+	
+	-moz-border-radius-topright:14px !important;
+/*	-webkit-border-top-right-radius:14px !important;
+	border-top-right-radius:14px !important;*/
+	
+	-moz-border-radius-topleft:14px !important;
+/*	-webkit-border-top-left-radius:14px !important;
+	border-top-left-radius:14px !important;	*/
+	-moz-border-radius-bottomleft:14px;
+/*	-webkit-border-bottom-left-radius:14px;
+	border-bottom-left-radius:14px;*/
+
+	-moz-border-radius-bottomright:14px;
+/*	-webkit-border-bottom-right-radius:14px;
+	border-bottom-right-radius:14px;*/
+	
+
+}.price table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.price tr:last-child td:last-child {
+	-moz-border-radius-bottomright:14px;
+	-webkit-border-bottom-right-radius:14px;
+	border-bottom-right-radius:14px;
+}
+.price table tr:first-child td:first-child {
+	-moz-border-radius-topleft:14px;
+	-webkit-border-top-left-radius:14px;
+	border-top-left-radius:14px;
+}
+.price table tr:first-child td:last-child {
+	-moz-border-radius-topright:14px;
+	-webkit-border-top-right-radius:14px;
+	border-top-right-radius:14px;
+}.price tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:14px;
+	-webkit-border-bottom-left-radius:14px;
+	border-bottom-left-radius:14px;
+}.price tr:hover td{
+	background-color:#c0c0c0;
+		
+
+}
+.price td{
+	vertical-align:middle;
+	
+	background-color:#ffffff;
+
+	border:1px solid #ffffff;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:7px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}.price tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.price tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.price tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
+}
+/**/
+
+a {
+	color: #0033FF;
+	text-decoration: none;
+}
+
+form {
+	margin: 0px; 
+	padding: 0px;
+	background-color: #E5E5E5;
+}
+.content_table{border:0; width: 100%; height: 100%;}
+
+.header_td { 
+	padding:8px;
+	border:0; 
+	height:1px;	background-color: #E5E5E5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 15px;
+	color: #004080;
+}
+.content_td {border:0;
+	background-color: #E5E5E5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 15px;
+	color: #004080;
+	height:100%;
+}
+.content_div {
+	min-height:100%; 
+	max-height:100%; 
+	height:100%; 
+	border:0; 
+	overflow-y:scroll;
+}
+.footer_td {border:0; 
+	height:1px;
+	background-color: #E5E5E5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 15px;
+	color: #004080;	
+}

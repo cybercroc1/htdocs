@@ -1,0 +1,55 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30333
+                )
+
+        )
+
+    [ts] => 1626362304
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => 2
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 1
+    [prichina_otkaza] => обзвон базы физ лиц
+    [record] => http://sc.wilstream.ru/sc/get_okt_record.php?idconnection=200877AD-AAAB-470D-AFC2-8E901BD5BC1C&datecall=20210714-163144-877&partnum=2
+    [name] => Владимир
+    [phone] => 79250721644
+    [phone_norm] => +79250721644
+    [comments] => <br>Комментарий: Какой вид услуг вам понадобится? ПОИСК КЛИЕНТОВ И ПРОДАЖИ ПО ТЕЛЕФОНУКак срочно нужно запустить проект?: КАК МОЖНО БЫСТРЕЕКуда или откуда будут звонки? МОСКВА И ОБЛАСТЬ<br>URL: http://wilstream.ru/
+    [stats_id] => 
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => Нет таких услуг
+)
+
+SEND RESULT:
+OK 221 2.0.0 Service closing transmission channel

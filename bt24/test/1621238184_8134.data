@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Андрей
+            [phone] => 89137100480
+            [email] => sd@rkfabrika.ru
+            [url] => http://wilstream.ru/outcalls/telemarketing/holodnyy-zvonok/
+            [formname] => Задать вопрос
+            [question] => Вопрос: Здравствуйте.
+Хочу получить от вас предложение по аусорсингу продаж.
+Для контакта: почта или ватсап.
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Андрей
+            [phone] => 89137100480
+            [email] => sd@rkfabrika.ru
+            [url] => http://wilstream.ru/outcalls/telemarketing/holodnyy-zvonok/
+            [formname] => Задать вопрос
+            [question] => Вопрос: Здравствуйте.
+Хочу получить от вас предложение по аусорсингу продаж.
+Для контакта: почта или ватсап.
+            [new] => 1
+        )
+
+)

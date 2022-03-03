@@ -1,0 +1,30 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => VICTOR
+            [phone] => 89251166091
+            [email] => cybercroc@gmail.com
+            [url] => http://wilstream.ru/outcalls/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: тест
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => VICTOR
+            [phone] => 89251166091
+            [email] => cybercroc@gmail.com
+            [url] => http://wilstream.ru/outcalls/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: тест
+            [new] => 1
+        )
+
+)

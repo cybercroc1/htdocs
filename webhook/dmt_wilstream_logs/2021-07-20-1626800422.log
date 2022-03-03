@@ -1,0 +1,52 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30395
+                )
+
+        )
+
+    [ts] => 1626800421
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => CONVERTED
+    [status_dop] => S
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Море шоу
+    [phone] => 89269620058
+    [phone_norm] => +79269620058
+    [comments] => <br>Комментарий: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 08:32, 2021-07-18<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Море шоу<br>номер_телефона: 89269620058<br>     <br>URL: вилстрим.ру.фб
+    [stats_id] => wcc1454345
+    [stats_descruptor] => 
+    [status_name] => подтверждено
+    [status_otkaza] => 
+)

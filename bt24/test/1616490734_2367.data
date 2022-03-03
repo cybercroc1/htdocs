@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Forward
+            [phone] => +79852106143
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 12:07, 2021-03-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Forward<br>номер_телефона: +79852106143<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Forward
+            [phone] => +79852106143
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 12:07, 2021-03-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Forward<br>номер_телефона: +79852106143<br>     
+            [new] => 1
+        )
+
+)

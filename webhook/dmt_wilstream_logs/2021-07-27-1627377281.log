@@ -1,0 +1,55 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30559
+                )
+
+        )
+
+    [ts] => 1627377281
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => 4
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 1
+    [prichina_otkaza] => тест
+    [record] => 
+    [name] => тест
+    [phone] => 77777777777
+    [phone_norm] => +77777777777
+    [comments] => <br>Комментарий: тест<br>URL: www.contact-center.ru/otraslevye-resheniya/koll-tsentr-dlya-yuridicheskoy-kompanii/
+    [stats_id] => 
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => Иное
+)
+
+SEND RESULT:
+OK 221 2.0.0 Service closing transmission channel

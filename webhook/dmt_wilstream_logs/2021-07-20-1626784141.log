@@ -1,0 +1,52 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30431
+                )
+
+        )
+
+    [ts] => 1626784140
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => CONVERTED
+    [status_dop] => S
+    [other_city] => 1
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => другой город
+    [record] => 
+    [name] => Алексей
+    [phone] => 79062131353
+    [phone_norm] => +79062131353
+    [comments] => <br>Комментарий: Чем занимается Ваша компания?: ДРУГОЙ ВАРИАНТКакой вид услуг вам понадобится?: ОБЗВОН ДЕЙСТВУЮЩИХ КЛИЕНТОВКуда или откуда будут звонки?: ДРУГОЙ РЕГИОНКакими акциями воспользуетесь?: <br>URL: http://wilstream.ru/
+    [stats_id] => wcc1456582
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => другой город
+)

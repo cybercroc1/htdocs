@@ -1,0 +1,1 @@
+<?php if (@$c = OCILogon("starcall", "HoPol0po", "webmed", "CL8MSWIN1251")) {} else { $err = OCIError(); echo "Oracle Connect Error " . $err['message']; exit();}?>

@@ -1,0 +1,120 @@
+html, body {
+	width: 100%; 
+	height: 100%; 
+	margin: 0px; 
+	padding: 0px;
+}
+
+.body_marign { 
+	margin:5px;
+	margin-left:5px;
+	width:auto;
+	height:auto;
+}
+
+html, body, .header_tr td, .footer_tr td{ 
+	background-color: #E5E5E5;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	line-height: 15px;
+	color: #004080;
+}
+.selectable_row {
+	cursor: pointer;	
+}
+.selectable_row:hover {
+	background-color: #66FFFF;
+}
+.not_selectable_row:hover td{ 
+	background-color:#E5E5E5;
+	color:#666666;
+}
+.selected_row {
+	cursor: pointer;
+	background-color:#66CCFF;
+}
+.selected_row:hover { 
+	background-color:#88EEFF;
+}
+
+table{border-collapse:collapse; border:0px;}
+.white_table, .clear_table {
+	border-collapse:collapse; 
+	border:0px;
+}
+.white_table tbody {
+	background-color: white;
+}
+.white_table th, .white_table td, .clear_table th, .clear_table td {
+	border:1px solid #333333;
+}
+td, th {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 15px;
+	color: #333333;
+}
+
+a {
+	color: #0033FF;
+	text-decoration: none;
+}
+
+form {
+	margin: 0px; 
+	padding: 0px;
+}
+.content_table{width: 100%; height:100%; table-layout:auto;}
+.header_tr{ 
+	height:0px;
+}
+.content_tr {
+	height:100%;
+	max-height:100%; 
+	min-height:100%;
+}
+.content_div {
+	height:100%;
+	max-height:100%; 
+	min-height:100%;
+	overflow-y:scroll
+}
+@-moz-document url-prefix() {
+.content_div {
+	height:50px;
+	max-height:100%; 
+	min-height:100%;
+	overflow-y:scroll
+}	
+}
+.footer_tr {
+	height:0px;
+}
+.ifr_perez{
+	position:fixed; bottom:1px; left:1px; width:600px; height:110px; background-color:#E5E5E5;
+}
+.vertical_table {
+    text-align:center;
+    white-space:nowrap;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.vertical_table th p {
+    margin:0 -100%;
+    display:inline-block;
+}
+.vertical_table th p:before {
+    content:'';
+    width:0;
+    padding-top:110%;
+    display:inline-block;
+    vertical-align:middle;
+}
+.vertical_table {
+    text-align:center;
+    table-layout:fixed;
+    width:150px;
+}

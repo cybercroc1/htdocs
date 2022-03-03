@@ -1,0 +1,57 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30373
+                )
+
+        )
+
+    [ts] => 1626426636
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => NEW
+    [status_dop] => P
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Кирилл 
+    [phone] => 89268919482
+    [phone_norm] => +79268919482
+    [comments] => <br>URL: http://wilstream.ru/<br>Данные с формы: <br>
+    Имя: Кирилл<br>
+    Email: <br>
+    Номер: +79268919482<br>
+    Название компании: <br>
+    Комментарии: <br>Комментарий: Чем занимается Ваша компания?: ИНТЕРНЕТ-МАГАЗИНКакой вид услуг вам понадобится?: ПРИЁМ ВХОДЯЩИХ ЗВОНКОВКуда или откуда будут звонки?: МОСКВА И ОБЛАСТЬКакими акциями воспользуетесь?: «ИДЕАЛЬНЫЙ СЕКРЕТАРЬ» С ВЫГОДОЙ 50%<br>URL: http://wilstream.ru/
+    [stats_id] => 
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => 
+)

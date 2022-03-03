@@ -1,0 +1,58 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30497
+                )
+
+        )
+
+    [ts] => 1627043881
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => NEW
+    [status_dop] => P
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Владислав
+    [phone] => 79257334374
+    [phone_norm] => +79257334374
+    [comments] => <br>Комментарий: Требуется менеджер по B2B-продажам в американскую компанию Пиар агентство. 
+Основная задача – привлечение клиентов. Лиды предоставляются. 
+Основные требования: опыт в продажах от 2-х лет, опыт в B2B-продажах от 1 года. Развитые коммуникативные навыки, владение английским языком на уровне носителя – обязательно.
+Формат работы: удаленно, 3 часа в день, 5 дней в неделю. 
+Оплата на испытательный срок: $15/ час  + бонусы (5 % от заключенных контрактов. Средний KPI менеджера после двух месяц работ – $20 000 / мес. по выручке). Далее – по результатам работы.
+Просьба высылать резюме на электронную почту: info@e-pr.online 
+WhatsApp +1 (321) 300-0111<br>URL: www.contact-center.ru/o-kompanii/
+    [stats_id] => 
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => 
+)

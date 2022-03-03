@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Global Dance
+            [phone] => +79850016888<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:45, 2021-06-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Global Dance<br>номер_телефона: +79850016888<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Global Dance
+            [phone] => +79850016888<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:45, 2021-06-23<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Global Dance<br>номер_телефона: +79850016888<br>     
+            [new] => 1
+        )
+
+)

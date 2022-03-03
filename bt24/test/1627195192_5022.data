@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => NRG GROUP MOSCOW
+            [phone] => +79637676264<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 09:28, 2021-07-25<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: NRG GROUP MOSCOW<br>номер_телефона: +79637676264<br>     
+            [new] => 1
+            [stats_id] => wcc1461248
+        )
+
+    [req] => Array
+        (
+            [name] => NRG GROUP MOSCOW
+            [phone] => +79637676264<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 09:28, 2021-07-25<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: NRG GROUP MOSCOW<br>номер_телефона: +79637676264<br>     
+            [new] => 1
+            [stats_id] => wcc1461248
+        )
+
+)

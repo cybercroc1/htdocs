@@ -1,0 +1,52 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30571
+                )
+
+        )
+
+    [ts] => 1627395891
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => CONVERTED
+    [status_dop] => S
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Валерия
+    [phone] => 79150504700
+    [phone_norm] => +79150504700
+    [comments] => <br>Комментарий: Чем занимается Ваша компания?: ЮРИДИЧЕСКИЕ УСЛУГИКакой вид услуг вам понадобится?: ПОИСК КЛИЕНТОВ-ЮРЛИЦКуда или откуда будут звонки?: ВСЯ РОССИЯКакими акциями воспользуетесь?: <br>URL: http://wilstream.ru/
+    [stats_id] => wcc1463776
+    [stats_descruptor] => 
+    [status_name] => подтверждено
+    [status_otkaza] => 
+)

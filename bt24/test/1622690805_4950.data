@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => KV-Energy
+            [phone] => +74951034506
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 06:19, 2021-06-03<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: KV-Energy<br>номер_телефона: +74951034506<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => KV-Energy
+            [phone] => +74951034506
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 06:19, 2021-06-03<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: KV-Energy<br>номер_телефона: +74951034506<br>     
+            [new] => 1
+        )
+
+)

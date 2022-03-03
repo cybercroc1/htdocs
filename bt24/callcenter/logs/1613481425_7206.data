@@ -1,0 +1,12 @@
+Request_Array
+(
+    [aon] => 79111111211
+    [cdn] => 4959671946
+    [euConsent] => true
+    [BCPermissionLevel] => PERSONAL
+    [BC_GDPR] => 11111
+    [fhCookieConsent] => true
+    [gdpr-source] => GB
+    [gdpr_consent] => YES
+    [beget] => begetok
+)

@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Станислав
+            [phone] => +79251743526
+            [email] => ad.paroosh@yandex.ru
+            [url] => http://wilstream.ru/outcalls/telemarketing/holodnyy-zvonok/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день, нашей компании требуются услуги контакт центра, а именно - исходящий обзвон целевой аудитории (клиники, медцентры) с предложением услуг по рекламе в интернет. 
+Можно сразу отправить КП на ad.paroosh@yandex.ru
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Станислав
+            [phone] => +79251743526
+            [email] => ad.paroosh@yandex.ru
+            [url] => http://wilstream.ru/outcalls/telemarketing/holodnyy-zvonok/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день, нашей компании требуются услуги контакт центра, а именно - исходящий обзвон целевой аудитории (клиники, медцентры) с предложением услуг по рекламе в интернет. 
+Можно сразу отправить КП на ad.paroosh@yandex.ru
+            [new] => 1
+        )
+
+)

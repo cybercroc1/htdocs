@@ -1,0 +1,52 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30589
+                )
+
+        )
+
+    [ts] => 1627451778
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => NEW
+    [status_dop] => P
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => 
+    [record] => 
+    [name] => Елена
+    [phone] => 79050456222
+    [phone_norm] => +79050456222
+    [comments] => <br>Комментарий: Какой вид услуг вам понадобится? ПОИСК КЛИЕНТОВ И ПРОДАЖИ ПО ТЕЛЕФОНУКак срочно нужно запустить проект?: ЭТО НЕ ТАК ВАЖНО, ГЛАВНОЕ – КАЧЕСТВОКуда или откуда будут звонки? ВСЯ РОССИЯ<br>URL: http://wilstream.ru/
+    [stats_id] => wcc1464471
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => 
+)

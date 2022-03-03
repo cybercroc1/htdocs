@@ -1,0 +1,273 @@
+<?php 
+set_time_limit(600);
+include("../../starcall_conf/session.cfg.php"); 
+
+extract($_REQUEST);
+
+if(!isset($_SESSION['project']['id']) or $_SESSION['project']['id']=='') exit();
+$project_id=$_SESSION['project']['id'];
+
+include("../../starcall_conf/conn_string.cfg.php");
+
+//*СОХРАНЕНИЕ
+$time=time();
+
+if(isset($frm_submit) and $frm_submit=='save') {
+	if(isset($src_quote_id)) {
+		$upd=OCIParse($c,"update STC_SRC_QUOTES set src_quote=:quote where project_id=".$project_id." and id=:quote_id");
+		foreach($src_quote_id as $quote_id => $quote) {
+			OCIBindByName($upd,":quote_id",$quote_id);
+			OCIBindByName($upd,":quote",$quote);
+			OCIExecute($upd,OCI_DEFAULT);
+		}
+		echo "Сохранены значения квот по исходным полям<hr>";
+	}
+	if(isset($qst_quote_id)) {
+		$upd=OCIParse($c,"update STC_QST_QUOTES set qst_quote=:quote where project_id=".$project_id." and id=:quote_id");
+		foreach($qst_quote_id as $quote_id => $quote) {
+			OCIBindByName($upd,":quote_id",$quote_id);
+			OCIBindByName($upd,":quote",$quote);
+			OCIExecute($upd,OCI_DEFAULT);
+		}
+		echo "Сохранены значения квот по вопросам<hr>";
+	}	
+	//пересчет значений зависимых квот
+	OCIExecute(OCIParse($c,"begin STC_QUOTE_PARENT_CALC(".$project_id."); end;"));
+	echo "Пересчитаны значения зависимых квот STC_QUOTE_PARENT_CALC()<hr>";
+	OCICommit($c);
+	echo "<font color=green>СОХРАНЕНО</font><br>";
+	echo "<script>
+	parent.admBottomFrame.document.getElementById('save_status').innerHTML='<font color=green>СОХРАНЕНО</font>';
+	parent.admBottomFrame.frm.frm_submit.value='saved';
+	parent.admBottomFrame.frm.save.value='Сохранено';
+	//parent.admBottomFrame.frm.cancel.style.display='none';
+	parent.admBottomFrame.location.reload();
+	</script>";
+	exit();
+}
+//*
+?>
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1251">
+<link href="starcall.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<?php 
+//*перестроение квот
+if(isset($src_quote_rebuild)) {
+	$q=OCIParse($c,"select t.src_quote_broken from STC_PROJECTS t
+	where id=".$_SESSION['project']['id']);
+	OCIExecute($q); OCIFetch($q);
+	if(OCIResult($q,"SRC_QUOTE_BROKEN")=='yes') {
+		if(OCIExecute(OCIParse($c,"begin stc_src_quote_rebuild(".$_SESSION['project']['id']."); end;"))) {
+		$_SESSION['project']['src_quote_broken']='';
+		echo "<script>parent.admMainTopFrame.location=parent.admMainTopFrame.location.href;</script>";
+		}
+	} 
+}
+
+if(isset($qst_quote_rebuild)) {
+	$q=OCIParse($c,"select t.qst_quote_broken from STC_PROJECTS t
+	where id=".$_SESSION['project']['id']);
+	OCIExecute($q); OCIFetch($q);
+	if(OCIResult($q,"QST_QUOTE_BROKEN")=='yes') {
+		if(OCIExecute(OCIParse($c,"begin stc_qst_quote_rebuild(".$_SESSION['project']['id']."); end;"))) {
+		$_SESSION['project']['qst_quote_broken']='';
+		echo "<script>parent.admMainTopFrame.location=parent.admMainTopFrame.location.href;</script>";
+		}
+	}
+}
+
+if($_SESSION['project']['src_quote_broken']<>'') {
+	echo "<font color=red><a href='?src_quote_rebuild'>Изменены квоты по исходным полям! Нажмите сюда, что бы перестроить квоты (может занять длительное время) </a></font> ";
+	exit();
+}
+else if($_SESSION['project']['qst_quote_broken']<>'') {
+	echo "<font color=red><a href='?qst_quote_rebuild'>Изменены квоты по вопросам! Нажмите сюда, что бы престроить квоты (может занять длительное время) </font> ";
+	exit();
+}
+//*
+//НАЧАЛО ЧТРАНИЦЫ
+echo "<form name=frm_select method=get>";
+echo " | ";
+echo "<font size=4>Квоты</font> | ";
+$src_fields=array();
+//список исходных полей
+$q=OCIParse($c,"select id,text_name from STC_FIELDS t
+where project_id=".$project_id." and t.src_type_id=1 and t.quoted is not null and t.deleted is null
+order by t.ord");
+OCIExecute($q);
+while(OCIFetch($q)) {
+	$src_fields[OCIResult($q,"ID")]=OCIResult($q,"TEXT_NAME");
+}
+
+$quest_fields=array();
+//список квотируемых вопросов
+$q=OCIParse($c,"select o.quote_num,f.text_name from STC_OBJECTS o, Stc_Fields f
+where o.project_id=".$project_id." and o.quote_num is not null and o.deleted is null
+and f.deleted is null and f.id=o.field_id
+order by o.quote_num");
+OCIExecute($q); $i=0; while(OCIFetch($q)) {$i++;
+	$quest_fields[OCIResult($q,"QUOTE_NUM")]=OCIResult($q,"TEXT_NAME");
+	$old_qst_quote_id[$i]='';
+}
+
+if(count($src_fields)==0 and count($quest_fields)==0) {echo "<font size=3><b>Нет квотируемых полей и вопросов</b></font>"; exit();}
+if(!isset($level)) $level='null';
+echo "<select name=level onchange=frm_select.submit()><option value=null>Выберите уровень</option>";
+if(count($src_fields)>0) echo "<option value=0".($level=='0'?' selected':NULL).">Исходные поля</option>";
+if(count($quest_fields)>0) {
+	foreach($quest_fields as $lvl => $questname) {
+		echo "<option value=".$lvl.($level==$lvl?' selected':NULL).">Уровень ".$lvl."</option>";
+	}
+}
+echo "</select> | ";
+echo "<input type=submit value='Выгрузить в XLSX' onclick=parent.logFrame.location='adm.quotes.xlsx_exp.php'> | ";
+
+echo "<a href='help.adm.quotes.html' target=_blank>Справка</a><hr>";
+
+echo "</form>";
+
+if(!isset($level) or $level=='null') exit();
+
+echo "<form name=frm method=post target='logFrame'>";
+echo "<input type=hidden name=level value='".$level."'>";
+
+if($level<>'src' and $level<>'qst') {
+//ЗАВИСИМЫЕ КВОТЫ
+	$sql1="select * from" ; $sql2=""; $sql3=""; $sql4="order by ";
+	//собирает запрос
+	//если есть исходные поля
+	$lvl=0;
+	if(count($src_fields)>0) {
+		$i=0; foreach($src_fields as $field_id => $field_name) {$i++;
+			if($i==1) {
+				$sql2.="(select ssq.id qid0,ssq.src_quote quote0,ssq.src_new new0,ssq.src_norm norm0 from stc_src_quotes ssq where ssq.project_id=".$project_id.") ssq ";
+				if($sql3=='') $sql3='where '; else $sql3.='and '; 
+				$sql3.="s".$i.".src_qid=ssq.qid0 ";
+			}
+			$sql2.=", ";
+			$sql2.="(select sqi.quote_id src_qid, si.value val0_".$i." from  stc_src_indexes si, stc_src_quote_indexes sqi
+where si.project_id=".$project_id." and si.field_id=".$field_id." and sqi.index_id=si.id) s".$i." ";
+			if($i>1) {
+				if($sql3=='') $sql3='where '; else $sql3.='and '; 
+				$sql3.="s".$i.".src_qid=s".($i-1).".src_qid ";
+				$sql4.=", ";
+			}
+			$sql4.="s".$i.".val0_".$i." ";
+			
+		}
+		if($level>0) {
+			$sql2.=", ";
+			$sql4.=", ";
+		} 
+	}
+	//квоты по вопросам, если есть хотя бы один квотируемый вопрос
+	if(count($quest_fields)>0) {
+		for($lvl=1; $lvl<=$level; $lvl++) {
+			if($lvl>1) {
+				$sql2.=", ";
+				$sql4.=", ";				
+			}
+			if($lvl==1) {
+				$sql2.="(select qq.src_quote_id src_qid, qq.id qid".$lvl.",i.value val".$lvl.", qq.qst_quote quote".$lvl.", qq.qst_norm norm".$lvl." from STC_QST_INDEXES i, stc_qst_quotes qq
+where i.project_id=".$project_id." and qq.quote_level=".$lvl." and qq.index_id=i.id) q".$lvl." ";
+
+				if(count($src_fields)>0) {
+					if($sql3=='') $sql3='where '; else $sql3.='and ';
+					$sql3.="q".$lvl.".src_qid=ssq.qid0 ";
+				}
+			}
+			else {
+				$sql2.="(select qq.parent_id,qq.id qid".$lvl.",i.value val".$lvl.", qq.qst_quote quote".$lvl.", qq.qst_norm norm".$lvl." from STC_QST_INDEXES i, stc_qst_quotes qq
+where i.project_id=".$project_id." and qq.quote_level=".$lvl." and qq.index_id=i.id) q".$lvl." ";
+				if($sql3=='') $sql3='where '; else $sql3.='and ';
+				$sql3.="q".$lvl.".parent_id=q".($lvl-1).".qid".($lvl-1)." ";
+			}
+			$sql4.="q".$lvl.".val".$lvl." ";	
+		}
+	}
+	echo "<table>";
+	
+	$q=OCIParse($c,$sql1.$sql2.$sql3.$sql4);
+	OCIExecute($q);
+	$rownum=0;
+	$old_src_quote_id='';
+	$i=0; while(OCIFetch($q)) {$i++; 
+		if($i==1) {
+			echo "<tr><td></td>";
+			if(count($src_fields)>0) echo "<th colspan=".($level==0?count($src_fields)+2:count($src_fields)).">И С Х О Д Н Ы Е  П О Л Я</th>";
+			
+			for($j=1; $j<=$level; $j++) {
+				echo "<th colspan=".($j==$level?'2':'1').">У Р О В Е Н Ь ".$j."</th>";
+			}
+			
+			echo "</tr>";
+					
+			echo "<tr><td>№</td>";
+			if(count($src_fields)>0) {
+				$j=0; foreach($src_fields as $field_id => $field_name) {$j++;
+					echo "<th>".$field_name."</th>";
+				}
+				if($level==0) {
+					echo "<th>Квота</th>";
+					echo "<th>Новых</th>";
+				}
+			}
+			if(count($quest_fields)>0) {
+				$j=0; foreach($quest_fields as $num => $quest_name) {$j++;
+					if($j>$level) break;
+					echo "<th>".$quest_name."</th>";
+					if($j==$level) {
+						echo "<th>Квота</th>";
+					}
+				}
+			}
+			echo "</tr>";
+		}
+		$rownum++;
+		echo "<tr><td>".$rownum."</td>";
+		if(count($src_fields)>0) {
+			$j=0; foreach($src_fields as $field_id => $field_name) {$j++;
+				echo "<td>".OCIResult($q,"VAL0_".$j)."</th>";
+			}
+			if($level==0) { //не показываем квоту для не последнего уровня
+				echo "<td>";
+				if(OCIResult($q,"QID0")<>$old_src_quote_id){
+					$old_src_quote_id=OCIResult($q,"QID0");
+					echo "<input type=text size=1 name=src_quote_id[".OCIResult($q,"QID0")."] value='".OCIResult($q,"QUOTE0")."'>";
+				}
+				echo "</td>";
+				echo "<td>".OCIResult($q,"NEW0")."</td>";
+			}
+		}
+		if(count($quest_fields)>0) {
+			$j=0; foreach($quest_fields as $quest_lvl => $field_name) {$j++;
+				if($j>$level) break;
+				echo "<td>".OCIResult($q,"VAL".$quest_lvl)."</td>";
+				if($j==$level) { //не показываем квоту для не последнего уровня
+					echo "<td>";
+					if(OCIResult($q,"QID".$quest_lvl)<>$old_qst_quote_id[$quest_lvl]) {
+						$old_qst_quote_id[$quest_lvl]=OCIResult($q,"QID".$quest_lvl);
+						echo "<input type=text size=1 name=qst_quote_id[".OCIResult($q,"QID".$quest_lvl)."] value='".OCIResult($q,"QUOTE".$quest_lvl)."'>";
+					}
+					echo "</td>";
+				}
+			}
+		}
+		echo "</tr>";
+	}
+	echo "</table>";
+}
+echo "<hr>";
+echo "<div id=save_status></div>";
+echo "<input type=hidden name=frm_submit value=save>";
+echo "<input type=button name=save value=Сохранить onclick=this.disabled=true;frm.submit();> ";
+echo "</form>";
+//
+
+?>
+</body>
+</html>
+

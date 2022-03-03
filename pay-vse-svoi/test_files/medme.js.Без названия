@@ -1,0 +1,3 @@
+var medme_msk = true;
+var medme_spb = true;
+var medme_nn = true;

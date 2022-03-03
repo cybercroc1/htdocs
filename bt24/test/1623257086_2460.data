@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Ибрагим
+            [phone] => 11111111111111
+            [email] => ddd@ddd.dd
+            [url] => http://wilstream.ru/industrial-solutions/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: ggggg
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Ибрагим
+            [phone] => 11111111111111
+            [email] => ddd@ddd.dd
+            [url] => http://wilstream.ru/industrial-solutions/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: ggggg
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

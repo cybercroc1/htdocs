@@ -1,0 +1,30 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Эдик
+            [phone] => +79323297923
+            [email] => 
+            [url] => http://wilstream.ru/
+            [formname] => Заказ звонка
+            [new] => 1
+            [stats_id] => wcc1469419
+        )
+
+    [req] => Array
+        (
+            [name] => Эдик
+            [phone] => +79323297923
+            [email] => 
+            [url] => http://wilstream.ru/
+            [formname] => Заказ звонка
+            [new] => 1
+            [stats_id] => wcc1469419
+        )
+
+)

@@ -1,0 +1,30 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Софья
+            [phone] => 7 981 103 9686
+            [email] => 461346@mai.ru
+            [url] => http://wilstream.ru/incalls/telefonnoe-konsultirovanie/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Софья
+            [phone] => 7 981 103 9686
+            [email] => 461346@mai.ru
+            [url] => http://wilstream.ru/incalls/telefonnoe-konsultirovanie/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: 
+            [new] => 1
+        )
+
+)

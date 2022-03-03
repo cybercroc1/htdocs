@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => G-Next consulting
+            [phone] => +79856345904
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:26, 2021-04-03<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: G-Next consulting<br>номер_телефона: +79856345904<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => G-Next consulting
+            [phone] => +79856345904
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:26, 2021-04-03<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: G-Next consulting<br>номер_телефона: +79856345904<br>     
+            [new] => 1
+        )
+
+)

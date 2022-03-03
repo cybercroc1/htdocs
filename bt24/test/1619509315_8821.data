@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Маргарита
+            [phone] => 380688058034
+            [email] => margo.sakurova@gmail.com
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Маргарита
+            [phone] => 380688058034
+            [email] => margo.sakurova@gmail.com
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

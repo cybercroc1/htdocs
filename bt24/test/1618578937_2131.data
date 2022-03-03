@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Юлия Андреевна Асоян
+            [phone] => 89096390115
+            [email] => shamakhanskaya@mail.ru
+            [url] => http://wilstream.ru/stati/uslugi-koll-tsentra-s-oplatoy-za-rezultat/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: Здравствуйте. Ориентировочно прокомментируйте, пожалуйста, стоимость обзвона по нашей базе 145 тыс. контактов, оплата за результат (за абонента давшего ответ на 3 вопроса).
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Юлия Андреевна Асоян
+            [phone] => 89096390115
+            [email] => shamakhanskaya@mail.ru
+            [url] => http://wilstream.ru/stati/uslugi-koll-tsentra-s-oplatoy-za-rezultat/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: Здравствуйте. Ориентировочно прокомментируйте, пожалуйста, стоимость обзвона по нашей базе 145 тыс. контактов, оплата за результат (за абонента давшего ответ на 3 вопроса).
+            [company] =>  
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

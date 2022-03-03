@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => VICTOR
+            [phone] => 9251166091
+            [email] => cybercroc@gmail.com
+            [url] => http://wilstream.ru/outcalls/telemarketing/privlechenie-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: тест2
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => VICTOR
+            [phone] => 9251166091
+            [email] => cybercroc@gmail.com
+            [url] => http://wilstream.ru/outcalls/telemarketing/privlechenie-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: тест2
+            [new] => 1
+        )
+
+)

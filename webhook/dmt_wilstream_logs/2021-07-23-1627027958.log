@@ -1,0 +1,55 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30467
+                )
+
+        )
+
+    [ts] => 1627027958
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => JUNK
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 1
+    [prichina_otkaza] => услуги не интересуют
+    [record] => http://sc-vg.wilstream.ru/sc/get_okt_record.php?idconnection=EF75BA00-2F02-401F-853D-1F5F2363C7E0&datecall=20210722-083938-483&partnum=1
+    [name] => Георгий
+    [phone] => 89611330484
+    [phone_norm] => +79611330484
+    [comments] => <br>URL: http://wilstream.ru/incalls/telefonnoe-konsultirovanie/
+    [stats_id] => wcc1458236
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => ошибка
+)
+
+SEND RESULT:
+OK 221 2.0.0 Service closing transmission channel

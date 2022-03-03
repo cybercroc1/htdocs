@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => almightysoft.ru
+            [phone] => +79629000007<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:16, 2021-07-18<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: almightysoft.ru<br>номер_телефона: +79629000007<br>     
+            [new] => 1
+            [stats_id] => wcc1454654
+        )
+
+    [req] => Array
+        (
+            [name] => almightysoft.ru
+            [phone] => +79629000007<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 14:16, 2021-07-18<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: almightysoft.ru<br>номер_телефона: +79629000007<br>     
+            [new] => 1
+            [stats_id] => wcc1454654
+        )
+
+)

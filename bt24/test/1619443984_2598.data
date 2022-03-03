@@ -1,0 +1,31 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Юлия Втулкина
+            [phone] => +74959264970
+            [email] => vtulkina_y@mail.ru
+            [url] => http://wilstream.ru/outcalls/aktualizaciya-baz-dannyh/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Требуется обзвон для актуализации контактов юр.лиц/организаций (около 570 адресатов) - адрес, телефон. 
+Подскажите стоимость 
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Юлия Втулкина
+            [phone] => +74959264970
+            [email] => vtulkina_y@mail.ru
+            [url] => http://wilstream.ru/outcalls/aktualizaciya-baz-dannyh/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Требуется обзвон для актуализации контактов юр.лиц/организаций (около 570 адресатов) - адрес, телефон. 
+Подскажите стоимость 
+            [new] => 1
+        )
+
+)

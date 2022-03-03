@@ -1,0 +1,34 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Вадим
+            [phone] => +79213508093
+            [email] =>  
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:  телефонные продажи
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Вадим
+            [phone] => +79213508093
+            [email] =>  
+            [url] => http://wilstream.ru/ceny/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:  телефонные продажи
+            [new] => 1
+        )
+
+)

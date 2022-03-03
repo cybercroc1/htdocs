@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Юрий
+            [phone] => +7 968 780-88-88
+            [email] =>  
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день. Работаете ли по предоставляемой базе? Что представляет из себя тест?
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Юрий
+            [phone] => +7 968 780-88-88
+            [email] =>  
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день. Работаете ли по предоставляемой базе? Что представляет из себя тест?
+            [new] => 1
+        )
+
+)

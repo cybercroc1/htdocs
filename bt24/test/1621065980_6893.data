@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Climatehallcolling
+            [phone] => +79269645074
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 10:54, 2021-05-15<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Climatehallcolling<br>номер_телефона: +79269645074<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Climatehallcolling
+            [phone] => +79269645074
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 10:54, 2021-05-15<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Climatehallcolling<br>номер_телефона: +79269645074<br>     
+            [new] => 1
+        )
+
+)

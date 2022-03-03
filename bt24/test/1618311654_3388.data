@@ -1,0 +1,31 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Роман
+            [phone] => 9151821877
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Задать вопрос
+            [question] => Вопрос: Здравствуйте! Подскажите, занимаетесь ли вы смс-рассылкой?
+спасибо
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Роман
+            [phone] => 9151821877
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Задать вопрос
+            [question] => Вопрос: Здравствуйте! Подскажите, занимаетесь ли вы смс-рассылкой?
+спасибо
+            [new] => 1
+        )
+
+)

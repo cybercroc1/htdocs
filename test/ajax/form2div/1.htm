@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+</head>
+<script src='form2div.js'></script>
+<script>
+/*//переопределяем стандартные функции объекта form2div
+//внутри функций можно задавать разные действия, в зависимости от div_id, frm_id и нажатой кнопки
+form2div.allready=function(frm_id,div_id,clicked_button) { //эта функция срабатывает, когда повторно нажата кнопка отправки формы 
+	alert('Запрос уже выполняется!');	
+}
+form2div.loading=function(frm_id,div_id,clicked_button) { //эта функция срабатывает сразу после нажатия кнопки отправки формы
+	var div=document.getElementById(div_id);
+	div.innerHTML='<div style="text-align:center;margin:30px;"><img src="progress.gif"></img><br><a href=\'javascript:form2div_abort("'+div_id+'")\'>прервать загрузку</a></div>';
+	if(clicked_button.id=='b2') clicked_button.innerText="выполняется...";
+}
+form2div.aborted=function(frm_id,div_id,clicked_button) { //эта функция срабатывает, если отменили загрузку формы
+	var div=document.getElementById(div_id);
+	div.innerHTML='<div style="text-align:center;margin:30px;">загрузка прервана</div>';
+	if(clicked_button.id=='b2') clicked_button.innerText="отменено";
+}
+form2div.done=function(frm_id,div_id,clicked_button,response) { //эта функция срабатывает, когда все данные получены
+	var div=document.getElementById(div_id);
+	div.innerHTML=div.innerHTML=response;
+	if(clicked_button.id=='b2') clicked_button.innerText="готово";
+}*/
+</script>
+<body>
+<div style="border: 1px solid black; float: left; width: 48%; height: 350px; text-align: center;">
+<form id="frm1" method="get">
+ФОРМА 1 (GET)<br>
+<input type="text" name="input1" value="Текст из формы 1"></input><br><br>
+<select name="select1"><option>выбор 1 из формы 1</option><option>выбор 2 из формы 1</option></select><br><br>
+<input type=button name="button1" value="Нажата кнопка 1 из формы 1" onclick=form2div('frm1','div_1',this,'parse.php?pause=5')></input><br><br>
+</form>
+</div>
+
+<div style="border: 1px solid black; float: right; width: 48%; height: 250px; text-align: center;">
+<form id="frm2" method="post" enctype="multipart/form-data">
+ФОРМА 2 (POST) РАБОТАЕТ ТОЛЬКО В UTF-8<br>
+<input type="text" name="input1" value="Текст из формы 2"></input><br><br>
+<select name="select1"><option>одиночный выбор 1 из формы 1</option><option>одиночный выбор 2 из формы 1</option></select><br><br>
+<select name="select1[]" multiple><option>выбор 1 из формы 2</option><option>выбор 2 из формы 2</option></select><br><br>
+<input type=checkbox name="checkb[]" value='галка 1 из формы 2'>галка 1 из формы 2</input><input type=checkbox name="checkb[]" value='галка 2 из формы 2'>галка 2 из формы 2</input><br>
+элемент button внутри формы работает, как submit, поэтому после onclick нужно писать return false
+<input type=file name=fiiileee[] multiple></input>
+<button name="button1" value="Нажата кнопка 1 из формы 2" onclick="form2div('frm2','div_2',this,'parse.php?pause=5'); return false;">Нажата кнопка 1 из формы 2</button>
+</form>
+</div><br>
+<div style="clear: both"><br>
+это работает и если кнопки находятся вне формы
+<input type=button name="button2" value="Нажата кнопка 2 формы 1" onclick=form2div('frm1','div_1',this,'parse.php?pause=5')></input>
+<button id="b2" name="button2" value="Нажата кнопка 2 формы 2" onclick=form2div('frm2','div_2',this,'parse.php?pause=5')>Нажата кнопка 2 формы 2</button>
+<br><br></div>
+
+<div id="div_1" style="border: 1px solid black; float: left; width: 48%; height: 500px; overflow: auto;">Див, в который будет загружен результат отправки формы 1</div>
+<div id="div_2" style="border: 1px solid black; float: right; width: 48%; height: 500px; overflow: auto;">Див, в который будет загружен результат отправки формы 2</div>
+
+<hr>
+<form method="post" action="parse.php" enctype="multipart/form-data">
+<input type=text name=fffff></input>
+<input type=file name=fiiileee2[] multiple></input>
+<input type=submit>
+</form>
+</body>
+</html>

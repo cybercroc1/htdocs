@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Тестовый лид
+            [phone] => +7 (911) 111-11-11
+            [email] => 
+            [url] => http://wilstream.ru/
+            [formname] => Заказ звонка
+            [comment] => Вопрос: 
+            [new] => 1
+            [stats_id] => wcc1463826
+        )
+
+    [req] => Array
+        (
+            [name] => Тестовый лид
+            [phone] => +7 (911) 111-11-11
+            [email] => 
+            [url] => http://wilstream.ru/
+            [formname] => Заказ звонка
+            [comment] => Вопрос: 
+            [new] => 1
+            [stats_id] => wcc1463826
+        )
+
+)

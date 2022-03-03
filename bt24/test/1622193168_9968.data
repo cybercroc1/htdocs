@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Марина
+            [phone] => 422-22-23
+            [email] => baranova@fkrnnov.ru
+            [url] => http://wilstream.ru/incalls/organizatsiya-spravochnoy-sluzhby/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день. Интересует услуга "Организация справочной службы". Хотелось бы ознакомиться с коммерческим предложением по данной услуге. Направить информацию можно по адресу baranova@fkrnnov.ru. Спасибо
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Марина
+            [phone] => 422-22-23
+            [email] => baranova@fkrnnov.ru
+            [url] => http://wilstream.ru/incalls/organizatsiya-spravochnoy-sluzhby/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Добрый день. Интересует услуга "Организация справочной службы". Хотелось бы ознакомиться с коммерческим предложением по данной услуге. Направить информацию можно по адресу baranova@fkrnnov.ru. Спасибо
+            [new] => 1
+        )
+
+)

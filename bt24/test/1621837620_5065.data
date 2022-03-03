@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Artox Media Digital Group
+            [phone] => +79646287675
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 09:18, 2021-05-24<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Artox Media Digital Group<br>номер_телефона: +79646287675<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Artox Media Digital Group
+            [phone] => +79646287675
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 09:18, 2021-05-24<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Artox Media Digital Group<br>номер_телефона: +79646287675<br>     
+            [new] => 1
+        )
+
+)

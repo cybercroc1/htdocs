@@ -1,0 +1,83 @@
+2019.06.28 13:19:34
+REQUEST: Array
+(
+    [token] => 5ef331a4-a95d-425d-be60-ae3fe945700a
+    [request_type] => first_call
+    [deal_id] => {=Document:ID}
+    [phone] => {=Document:CONTACT.PHONE}
+    [id] => {=Document:CONTACT.ID}
+    [euConsent] => true
+    [BCPermissionLevel] => PERSONAL
+    [BC_GDPR] => 11111
+    [fhCookieConsent] => true
+    [gdpr-source] => GB
+    [gdpr_consent] => YES
+    [beget] => begetok
+)
+
+SERVER: Array
+(
+    [HTTPS] => on
+    [SSL_TLS_SNI] => sc.wilstream.ru
+    [SSL_SERVER_S_DN_CN] => *.wilstream.ru
+    [SSL_SERVER_I_DN_C] => US
+    [SSL_SERVER_I_DN_O] => DigiCert Inc
+    [SSL_SERVER_I_DN_OU] => www.digicert.com
+    [SSL_SERVER_I_DN_CN] => RapidSSL RSA CA 2018
+    [SSL_SERVER_SAN_DNS_0] => *.wilstream.ru
+    [SSL_SERVER_SAN_DNS_1] => wilstream.ru
+    [SSL_VERSION_INTERFACE] => mod_ssl/2.4.18
+    [SSL_VERSION_LIBRARY] => OpenSSL/1.0.2g
+    [SSL_PROTOCOL] => TLSv1.2
+    [SSL_SECURE_RENEG] => true
+    [SSL_COMPRESS_METHOD] => NULL
+    [SSL_CIPHER] => ECDHE-RSA-AES256-GCM-SHA384
+    [SSL_CIPHER_EXPORT] => false
+    [SSL_CIPHER_USEKEYSIZE] => 256
+    [SSL_CIPHER_ALGKEYSIZE] => 256
+    [SSL_CLIENT_VERIFY] => NONE
+    [SSL_SERVER_M_VERSION] => 3
+    [SSL_SERVER_M_SERIAL] => 0DE65B800EB99007115973EA440EEA9C
+    [SSL_SERVER_V_START] => Jun  6 00:00:00 2019 GMT
+    [SSL_SERVER_V_END] => Jun  5 12:00:00 2020 GMT
+    [SSL_SERVER_S_DN] => CN=*.wilstream.ru
+    [SSL_SERVER_I_DN] => CN=RapidSSL RSA CA 2018,OU=www.digicert.com,O=DigiCert Inc,C=US
+    [SSL_SERVER_A_KEY] => rsaEncryption
+    [SSL_SERVER_A_SIG] => sha256WithRSAEncryption
+    [SSL_SESSION_ID] => 6fff328b1aaf819535f40972c3795f1aea231aeea75a1513db77f36af12e80b7
+    [SSL_SESSION_RESUMED] => Initial
+    [HTTP_HOST] => sc.wilstream.ru
+    [HTTP_USER_AGENT] => TelegramBot (like TwitterBot)
+    [HTTP_ACCEPT_ENCODING] => deflate, gzip
+    [HTTP_COOKIE] => euConsent=true; BCPermissionLevel=PERSONAL; BC_GDPR=11111; fhCookieConsent=true; gdpr-source=GB; gdpr_consent=YES; beget=begetok
+    [HTTP_ACCEPT_LANGUAGE] => en-US,en;q=0.5
+    [HTTP_ACCEPT] => text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    [PATH] => C:\oracle\instantclient_12_1_win64;C:\oracle\product\11.2.0\dbhome_1\bin;C:\oracle\product\11.2.0\client_1\bin;C:\PHP7;C:\Program Files\HP\NCU;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\110\DTS\Binn\
+    [SystemRoot] => C:\Windows
+    [COMSPEC] => C:\Windows\system32\cmd.exe
+    [PATHEXT] => .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+    [WINDIR] => C:\Windows
+    [SERVER_SIGNATURE] => 
+    [SERVER_SOFTWARE] => Apache/2.4.18 (Win64) OpenSSL/1.0.2g PHP/7.0.5
+    [SERVER_NAME] => sc.wilstream.ru
+    [SERVER_ADDR] => 192.168.13.4
+    [SERVER_PORT] => 443
+    [REMOTE_ADDR] => 149.154.161.7
+    [DOCUMENT_ROOT] => C:/Apache24/htdocs
+    [REQUEST_SCHEME] => https
+    [CONTEXT_PREFIX] => 
+    [CONTEXT_DOCUMENT_ROOT] => C:/Apache24/htdocs
+    [SERVER_ADMIN] => sva@wilstream.ru
+    [SCRIPT_FILENAME] => C:/Apache24/htdocs/webhook/vks.php
+    [REMOTE_PORT] => 60022
+    [GATEWAY_INTERFACE] => CGI/1.1
+    [SERVER_PROTOCOL] => HTTP/1.1
+    [REQUEST_METHOD] => GET
+    [QUERY_STRING] => token=5ef331a4-a95d-425d-be60-ae3fe945700a&request_type=first_call&deal_id=%7B=Document:ID%7D&phone=%7B=Document:CONTACT.PHONE%7D&id=%7B=Document:CONTACT.ID%7D
+    [REQUEST_URI] => /webhook/vks.php?token=5ef331a4-a95d-425d-be60-ae3fe945700a&request_type=first_call&deal_id=%7B=Document:ID%7D&phone=%7B=Document:CONTACT.PHONE%7D&id=%7B=Document:CONTACT.ID%7D
+    [SCRIPT_NAME] => /webhook/vks.php
+    [PHP_SELF] => /webhook/vks.php
+    [REQUEST_TIME_FLOAT] => 1561717174,537
+    [REQUEST_TIME] => 1561717174
+)
+

@@ -1,0 +1,259 @@
+<?php 
+/** Error reporting */
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
+include("../../starcall_conf/session.cfg.php"); 
+extract($_REQUEST);
+
+if(!isset($_SESSION['project']['id']) or $_SESSION['project']['id']=='') exit();
+$project_id=$_SESSION['project']['id'];
+
+
+include("../../starcall_conf/conn_string.cfg.php");
+
+$src_fields=array();
+$quest_fields=array();
+
+$sql=build_query($project_id);
+$q=OCIParse($c,$sql);
+OCIExecute($q);
+
+/** Include PHPExcel */
+require_once dirname(__FILE__) . '/../../Classes/PHPExcel.php';
+// Create new PHPExcel object
+$objPHPExcel = new PHPExcel();
+
+//—войства документа
+$objPHPExcel->getProperties()
+			->setTitle(u8(" воты"))
+			->setSubject(u8(" воты"))
+			->setDescription(u8(" воты"))
+			->setKeywords(u8(" воты"))
+			->setCategory(u8(" воты"));
+
+//Ўјѕ ј “јЅЋ»÷џ
+$s=0; //счетчик листов
+$j=0; //счетчик полей
+$all_fields=array();
+if(count($src_fields)>0) {
+	$s++; //счетчик листов
+	if($s==1) {
+		$objPHPExcel->setActiveSheetIndex($s-1);
+		$sheet[$s]=$objPHPExcel->getActiveSheet();
+	}
+	else $sheet[$s]=$objPHPExcel->createSheet();
+	
+	foreach($src_fields as $field_name) {
+		$j++;
+		$all_fields[$j]=$field_name;
+	
+		if($j==1) {
+			$sheet[$s]->setCellValue('A1', u8("»сходные пол€"));
+			$sheet[$s]->getStyle('A1')->getFont()->setBold(true);
+			$sheet[$s]->setTitle(u8("»сходные пол€"));
+		}
+		$coord=$sheet[$s]->getCellByColumnAndRow($j-1,2)->getCoordinate();
+		$sheet[$s]->getStyle($coord)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+		$sheet[$s]->setCellValue($coord, u8($field_name));
+		$sheet[$s]->getStyle($coord)->getFont()->setBold(true);
+	}
+	$coord=$sheet[$s]->getCellByColumnAndRow($j,1)->getCoordinate();
+	$sheet[$s]->mergeCells('A1:'.$coord);
+	$coord=$sheet[$s]->getCellByColumnAndRow($j,2)->getCoordinate();
+	$sheet[$s]->setCellValue($coord, u8(' вота'));
+	$sheet[$s]->getStyle($coord)->getFont()->setBold(true);
+}
+
+if(count($quest_fields)>0) {
+		foreach($quest_fields as $level => $field_name) {
+		$j++;
+		$all_fields[$j]=$field_name;
+		$s++; //счетчик листов
+		if(!isset($sheet[$s])) {
+			if($s==1) {
+				$objPHPExcel->setActiveSheetIndex($s-1);
+				$sheet[$s]=$objPHPExcel->getActiveSheet();				
+			}
+			else $sheet[$s]=$objPHPExcel->createSheet();
+		}
+		$sheet[$s]->setCellValue('A1', u8('”ровень '.$level));
+		$sheet[$s]->getStyle('A1')->getFont()->setBold(true);
+		$sheet[$s]->setTitle(u8('”ровень '.$level));
+		foreach($all_fields as $x => $field_name) {
+			$coord=$sheet[$s]->getCellByColumnAndRow($x-1,2)->getCoordinate();
+			$sheet[$s]->getStyle($coord)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+			$sheet[$s]->setCellValue($coord, u8($field_name));
+			$sheet[$s]->getStyle($coord)->getFont()->setBold(true);
+		}	
+		
+		$coord=$sheet[$s]->getCellByColumnAndRow(count($all_fields),1)->getCoordinate();
+		$sheet[$s]->mergeCells('A1:'.$coord);
+		
+		$coord=$sheet[$s]->getCellByColumnAndRow(count($all_fields),2)->getCoordinate();
+		$sheet[$s]->setCellValue($coord, u8(' вота'));
+		$sheet[$s]->getStyle($coord)->getFont()->setBold(true);		
+	}
+}
+//ƒјЌЌџ≈
+$j=0; //счетчик полей
+//$s=0; //счетчик листов
+$x=0;
+$src_quote_id='';
+$old_src_quote_id='';
+$old_qst_quote_id='';
+$i=2; while(OCIFetch($q)) {$i++;
+	
+	for($level=0; $level<=count($quest_fields); $level++) {
+	
+	$x=0;
+	$j=0;
+	$s=$level;
+	if(count($src_fields)>0) {
+		$s++;
+		$j=0; foreach($src_fields as $field_id => $field_name) {$j++;
+			$x++; 
+			$coord=$sheet[$s]->getCellByColumnAndRow($x-1,$i)->getCoordinate();
+			$sheet[$s]->getStyle($coord)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+			$sheet[$s]->setCellValue($coord, u8(OCIResult($q,"SVAL".$j)));
+			//echo "<td>".OCIResult($q,"SVAL".$j)."</th>";
+		}
+		if($level==0) { //не показываем квоту дл€ не последнего уровн€
+			if(OCIResult($q,"Q_ID".$j)<>$old_src_quote_id){
+				$x++;
+				$old_src_quote_id=OCIResult($q,"Q_ID".$j);
+				$coord=$sheet[$s]->getCellByColumnAndRow($x-1,$i)->getCoordinate();
+				$sheet[$s]->setCellValue($coord, u8(OCIResult($q,"SRC_QUOTE")));
+				//echo "<input type=text size=1 name=src_quote_id[".OCIResult($q,"Q_ID".$j)."] value='".OCIResult($q,"SRC_QUOTE")."'>";
+			}
+		}
+	}	
+
+	if(count($quest_fields)>0) {
+		$j=0; foreach($quest_fields as $field_id => $field_name) {$j++;
+			if($j>$level) break;
+			$x++; 
+			$coord=$sheet[$s]->getCellByColumnAndRow($x-1,$i)->getCoordinate();
+			$sheet[$s]->getStyle($coord)->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
+			$sheet[$s]->setCellValue($coord, u8(OCIResult($q,"QVAL".$j)));			
+			//echo "<td>".OCIResult($q,"QVAL".$j)."</td>";
+			if($j==$level) { //не показываем квоту дл€ не последнего уровн€
+				if(!isset($old_qst_quote_id[$j]) or OCIResult($q,"QID".$j)<>$old_qst_quote_id[$j]) {
+					$x++;
+					$old_qst_quote_id[$j]=OCIResult($q,"QID".$j);
+					
+					$coord=$sheet[$s]->getCellByColumnAndRow($x-1,$i)->getCoordinate();
+					$sheet[$s]->setCellValue($coord, u8(OCIResult($q,"QST_QUOTE".$j)));
+					
+					//echo "<input type=text size=1 name=qst_quote_id[".OCIResult($q,"QID".$j)."] value='".OCIResult($q,"QST_QUOTE".$j)."'>";
+				}
+			}
+		}
+	}	
+	
+	}
+	
+	
+}
+
+$objPHPExcel->setActiveSheetIndex(0);
+
+
+// Redirect output to a clientТs web browser (Excel5)
+header('Content-Type: application/vnd.ms-excel');
+header('Content-Disposition: attachment;filename=report.xlsx');
+// If you're serving to IE over SSL, then the following may be needed
+header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+header ('Pragma: public'); // HTTP/1.0
+
+$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+//echo $objWriter;
+$objWriter->save('php://output');
+exit;
+
+//==================================================================================================================
+
+function u8($text) {return iconv('CP1251','UTF-8',$text);}
+
+function build_query($project_id) {
+	global $c;
+	global $src_fields;
+	global $quest_fields;
+	//список исходных полей
+	$q=OCIParse($c,"select id,text_name from STC_FIELDS t
+	where project_id=".$project_id." and t.src_type_id=1 and t.quoted is not null and t.deleted is null
+	order by t.ord");
+	OCIExecute($q);
+	while(OCIFetch($q)) {
+		$src_fields[OCIResult($q,"ID")]=OCIResult($q,"TEXT_NAME");
+	}
+	//список квотируемых вопросов
+	$q=OCIParse($c,"select o.quote_num,f.text_name from STC_OBJECTS o, Stc_Fields f
+	where o.project_id=".$project_id." and o.quote_num is not null and o.deleted is null
+	and f.deleted is null and f.id=o.field_id
+	order by o.quote_num");
+	OCIExecute($q); $i=0; while(OCIFetch($q)) {$i++;
+		$quest_fields[OCIResult($q,"QUOTE_NUM")]=OCIResult($q,"TEXT_NAME");
+		//$old_qst_quote_id[$i]='';
+	}
+
+	//выходим из функции, если нет квотируемых полей
+	if(count($src_fields)==0 and count($quest_fields)==0) return NULL;
+
+	$sql1="select * from ";	$sql2=""; $sql3="";	$sql4="order by ";
+	//собирает запрос
+	//если есть исходные пол€
+	if(count($src_fields)>0) {
+		$i=0; foreach($src_fields as $field_id => $field_name) {$i++;
+			if($i==1) {
+				$sql2.="(select ssq.id src_quote_id,ssq.src_quote,ssq.src_new,ssq.src_norm from stc_src_quotes ssq where ssq.project_id=".$project_id.") ssq ";
+				if($sql3=='') $sql3='where '; else $sql3.='and '; 
+				$sql3.="s".$i.".q_id".$i."=ssq.src_quote_id ";
+			}
+			$sql2.=", ";
+			$sql2.="(select sqi.quote_id q_id".$i.", si.value sval".$i." from  stc_src_indexes si, stc_src_quote_indexes sqi
+where si.project_id=".$project_id." and si.field_id=".$field_id." and sqi.index_id=si.id) s".$i." ";
+			if($i>1) {
+				if($sql3=='') $sql3='where '; else $sql3.='and '; 
+				$sql3.="s".$i.".q_id".$i."=s".($i-1).".q_id".($i-1)." ";
+				$sql4.=", ";
+			}
+			$sql4.="s".$i.".sval".$i." ";
+			
+		}
+		if(count($quest_fields)>0) {
+			$sql2.=", ";
+			$sql4.=", ";
+		} 
+	}
+	//квоты по вопросам, если есть хот€ бы один квотируемый вопрос
+	if(count($quest_fields)>0) {
+		for($i=1; $i<=count($quest_fields); $i++) {
+			if($i>1) {
+				$sql2.=", ";
+				$sql4.=", ";				
+			}
+			if($i==1) {
+				$sql2.="(select qq.src_quote_id,qq.id qid".$i.",i.value qval".$i.", qq.qst_quote qst_quote".$i.", qq.qst_norm qst_norm".$i." from STC_QST_INDEXES i, stc_qst_quotes qq
+where i.project_id=".$project_id." and qq.quote_level=".$i." and qq.index_id=i.id) q".$i." ";
+				if(count($src_fields)>0) {
+					if($sql3=='') $sql3='where '; else $sql3.='and ';
+					$sql3.="q".$i.".src_quote_id=ssq.src_quote_id ";
+				}
+			}
+			else {
+				$sql2.="(select qq.parent_id,qq.id qid".$i.",i.value qval".$i.", qq.qst_quote qst_quote".$i.", qq.qst_norm qst_norm".$i." from STC_QST_INDEXES i, stc_qst_quotes qq
+where i.project_id=".$project_id." and qq.quote_level=".$i." and qq.index_id=i.id) q".$i." ";
+				if($sql3=='') $sql3='where '; else $sql3.='and ';
+				$sql3.="q".$i.".parent_id=q".($i-1).".qid".($i-1)." ";
+			}
+			$sql4.="q".$i.".qval".$i." ";		
+		}
+	}
+	return $sql1.$sql2.$sql3.$sql4;
+}
+?>
+

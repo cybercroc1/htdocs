@@ -1,0 +1,31 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Лейла
+            [phone] => 79944443434
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Интересуют лиды
+
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Лейла
+            [phone] => 79944443434
+            [email] =>  
+            [url] => http://wilstream.ru/
+            [formname] => Подключить услугу
+            [comment] => Вопрос: Интересуют лиды
+
+            [new] => 1
+        )
+
+)

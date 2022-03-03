@@ -1,0 +1,52 @@
+89.208.230.2
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30389
+                )
+
+        )
+
+    [ts] => 1626953963
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => 2
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 0
+    [prichina_otkaza] => обзвон физических лиц
+    [record] => 
+    [name] => Михаил
+    [phone] => 89157875551
+    [phone_norm] => +79157875551
+    [comments] => <br>Комментарий: Какой вид услуг вам понадобится? МАРКЕТИНГОВЫЕ ИССЛЕДОВАНИЯКак срочно нужно запустить проект?: ЭТО НЕ ТАК ВАЖНО, ГЛАВНОЕ – КАЧЕСТВОКуда или откуда будут звонки? МОСКВА И ОБЛАСТЬ<br>URL: http://wilstream.ru/
+    [stats_id] => wcc1454012
+    [stats_descruptor] => 
+    [status_name] => отклонено
+    [status_otkaza] => Нет таких услуг
+)

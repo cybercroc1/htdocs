@@ -1,0 +1,154 @@
+2020-12-20 08:11:49 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 08:11:45','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 08:11:45','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 08:22:19 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 08:17:37','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 08:17:37','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 08:32:04 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 08:31:50','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 08:31:50','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 08:40:40 UPDATE CALL_BASE SET CALL_THEME_ID = 8, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 08:40:36','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 08:40:36','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 08:55:41 UPDATE CALL_BASE SET CALL_THEME_ID = 1, SOURCE_MAN_ID = 38, SERVICE_ID = 1, 
+    COMMENTS = 'Ир-Интернет, сайт-Сафари, оставляла заявку, пропустила звонок', CLIENT_NAME = 'Зоя', PHONE_MOB = '8(920)637-43-67', PHONE_MOB_NORM = '89206374367', CALL_BACK_NUM = 10, 
+    RESULT_ID = 1, LAST_CHANGE = to_date('20-12-2020 08:53:42','DD.MM.YYYY hh24:mi:ss'), SERVICE_DET_ID = 0, RESULT_DET = '1600', STATUS_ID = 2, FIO_ID = '105', TRANSFER_NUM = '2020-12-20-1002' WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 08:59:38 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 08:59:34','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 08:59:34','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 09:15:33 UPDATE CALL_BASE SET CALL_THEME_ID = 1, SOURCE_MAN_ID = 38, SERVICE_ID = 1, 
+    COMMENTS = 'Ир-Некорректный ответ, с телефона, интересует стоимость имплантов для нижней челюсти', CLIENT_NAME = 'Михаил', PHONE_MOB = '8(908)121-04-55', PHONE_MOB_NORM = '89081210455', CALL_BACK_NUM = 10, 
+    RESULT_ID = 1, LAST_CHANGE = to_date('20-12-2020 09:12:23','DD.MM.YYYY hh24:mi:ss'), SERVICE_DET_ID = 0, RESULT_DET = '', STATUS_ID = 2, FIO_ID = '313', TRANSFER_NUM = '2020-12-20-1004' WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 09:17:08 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1379690','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 09:19:39 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1379810','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 09:43:46 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 09:42:55','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 09:42:55','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 09:52:25 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 09:51:03','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 09:51:03','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 11:09:35 UPDATE CALL_BASE SET CALL_THEME_ID = 1, SOURCE_MAN_ID = 38, SERVICE_ID = 1, 
+    COMMENTS = 'Ир-Интернет, сайт-Яндекс
+Оставлял заявку, пропустил звонок, смс', CLIENT_NAME = 'Даниил', PHONE_MOB = '8(901)792-37-75', PHONE_MOB_NORM = '89017923775', CALL_BACK_NUM = 10, 
+    RESULT_ID = 3, LAST_CHANGE = to_date('20-12-2020 11:06:23','DD.MM.YYYY hh24:mi:ss'), SERVICE_DET_ID = 0, STATUS_ID = 1 WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 11:27:01 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380145','NULL','ХАЛЧИЧЕВА /САЛПИЯТ/МАГОМЕДОВНА','8(928)386-60-71', 
+        to_date('20.12.2020 15:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 11:29:51 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380145','NULL','ХАЛЧИЧЕВА /Салпият/МАГОМЕДОВНА','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 11:44:04 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380171','NULL','иванов /ДМИТРИЙ/АЛЕКСАНДРОВИЧ','8(906)041-80-99', 
+        to_date('20.12.2020 12:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 11:45:18 UPDATE CALL_BASE SET PHONE_NEW = '8(906)041-80-99', PHONE_NEW_NORM = '89060418099', STATUS_ID = , LAST_CHANGE = to_date('20-12-2020 11:45:18','DD.MM.YYYY hh24:mi:ss'), INTERSTATE = NULL, PHONE_MOB = '8(906)041-80-99', PHONE_MOB_NORM = '89060418099', CLIENT_NAME = '', FIO_ID = '249', STATUS_DET_ID = '', CALL_BACK_DATE = '', CALL_BACK_NUM = '' WHERE ID = 1380171
+2020-12-20 11:51:31 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380183','NULL','лычагина/полина/','8(903)289-44-44', 
+        to_date('20.12.2020 19:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 11:56:13 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1378586','NULL','пальцев/Александр/анатольевич','8(911)985-63-29', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 11:56:15 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380112','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 12:31:13 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380272','NULL','Богданова /Наталья /Тимофеевна','', 
+        to_date('20.12.2020 21:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 12:32:36 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 12:32:32','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 12:32:32','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 12:38:28 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 12:38:25','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 12:38:25','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 12:40:17 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380302','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 12:41:49 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380312','NULL','орехова/юлия/','8(903)572-91-31', 
+        to_date('20.12.2020 14:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 12:53:40 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380338','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 13:18:53 UPDATE CALL_BASE SET CALL_THEME_ID = 1, SOURCE_MAN_ID = 33, SERVICE_ID = 1, 
+    COMMENTS = 'Ир-По рекомендации друга, интересует стоимость лечения 1 зуба', CLIENT_NAME = 'Денис', PHONE_MOB = '8(977)189-63-37', PHONE_MOB_NORM = '89771896337', CALL_BACK_NUM = 10, 
+    RESULT_ID = 3, LAST_CHANGE = to_date('20-12-2020 13:16:40','DD.MM.YYYY hh24:mi:ss'), SERVICE_DET_ID = 0, STATUS_ID = 1 WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 13:19:35 UPDATE CALL_BASE SET PHONE_NEW = '', PHONE_NEW_NORM = '', STATUS_ID = , LAST_CHANGE = to_date('20-12-2020 13:19:35','DD.MM.YYYY hh24:mi:ss'), CALL_DOUBLE = 1, INTERSTATE = NULL, PHONE_MOB = '8(963)656-94-10', PHONE_MOB_NORM = '89636569410', CLIENT_NAME = 'БахораРажабова', FIO_ID = '311', STATUS_DET_ID = '', CALL_BACK_DATE = '', CALL_BACK_NUM = '' WHERE ID = 1380239
+2020-12-20 13:21:29 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380385','NULL','Довгалат /Любовь/','8(985)616-85-85', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 13:31:16 UPDATE CALL_BASE SET CALL_THEME_ID = 1, SOURCE_MAN_ID = 3, SERVICE_ID = 1, 
+    COMMENTS = 'Оставляла заявку, пропустила звонок, консультация', CLIENT_NAME = 'Александра', PHONE_MOB = '8(987)418-33-50', PHONE_MOB_NORM = '89874183350', CALL_BACK_NUM = 10, 
+    RESULT_ID = 1, LAST_CHANGE = to_date('20-12-2020 13:29:40','DD.MM.YYYY hh24:mi:ss'), SERVICE_DET_ID = 0, SOURCE_MAN_DET_ID = '1001', RESULT_DET = '1600', STATUS_ID = 2, FIO_ID = '105', TRANSFER_NUM = '2020-12-20-1056' WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 13:58:09 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380493','NULL','абакаров/зураб/','8(922)444-40-36', 
+        to_date('22.12.2020 17:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 13:59:48 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 13:57:58','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 13:57:58','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 14:24:37 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380561','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 15:28:56 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 15:28:53','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 15:28:53','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 15:54:31 UPDATE CALL_BASE SET PHONE_NEW = '8(985)048-15-58', PHONE_NEW_NORM = '89850481558', STATUS_ID = , LAST_CHANGE = to_date('20-12-2020 15:54:31','DD.MM.YYYY hh24:mi:ss'), INTERSTATE = NULL, PHONE_MOB = '', PHONE_MOB_NORM = '', CLIENT_NAME = '', FIO_ID = '105', STATUS_DET_ID = '', CALL_BACK_DATE = '', CALL_BACK_NUM = '' WHERE ID = 1379883
+2020-12-20 16:21:04 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1378531','NULL','гамирода/касун/','8(911)030-33-22', 
+        to_date('25.12.2020 11:00','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 16:54:00 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380848','NULL','щеглова/ирина/Анатольевна','8(963)642-99-57', 
+        to_date('20.12.2020 17:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 17:12:49 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 17:12:46','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 17:12:46','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 17:19:47 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1380893','NULL','романенко/денис/','8(915)187-19-07', 
+        to_date('20.12.2020 18:30','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 17:28:25 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 17:28:15','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 17:28:15','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 18:03:44 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 16:25:44','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 16:25:44','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 18:03:54 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 16:20:54','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 16:20:54','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 19:01:48 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1379684','NULL','Шелепинков /Юрий/','8(968)896-10-30', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 19:26:03 INSERT INTO CALL_BASE_CLINIC (ID, BASE_ID, HOSPITAL_ID, CLIENT_NAME, CLIENT_PHONE, CLIENT_DATE, WRITE_ADD) 
+        VALUES (SEQ_CALL_BASE_CLINIC_ID.nextval,'1381071','NULL','//','', 
+        to_date('','DD.MM.YYYY hh24:mi'), sysdate)
+2020-12-20 19:42:20 UPDATE CALL_BASE SET CALL_THEME_ID = 7, STATUS_ID = 99,
+			LAST_CHANGE = to_date('20-12-2020 19:42:16','DD.MM.YYYY hh24:mi:ss'), DATE_CLOSE = to_date('20-12-2020 19:42:16','DD.MM.YYYY hh24:mi:ss') WHERE ID = <br />
+<b>Notice</b>:  Undefined variable: max_call in <b>C:\Apache24\htdocs\med\med_call.php</b> on line <b>1130</b><br />
+
+2020-12-20 20:03:01 UPDATE CALL_BASE SET PHONE_NEW = '8(963)642-99-57', PHONE_NEW_NORM = '89636429957', STATUS_ID = , LAST_CHANGE = to_date('20-12-2020 20:03:01','DD.MM.YYYY hh24:mi:ss'), INTERSTATE = NULL, FIO_ID = '313', STATUS_DET_ID = '', CALL_BACK_DATE = '', CALL_BACK_NUM = '' WHERE ID = 1380848

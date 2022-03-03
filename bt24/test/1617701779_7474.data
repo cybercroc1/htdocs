@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => ParsekPro
+            [phone] => +79169459966
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 12:30, 2021-04-06<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: ParsekPro<br>номер_телефона: +79169459966<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => ParsekPro
+            [phone] => +79169459966
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 12:30, 2021-04-06<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: ParsekPro<br>номер_телефона: +79169459966<br>     
+            [new] => 1
+        )
+
+)

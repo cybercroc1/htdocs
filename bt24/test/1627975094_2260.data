@@ -1,0 +1,36 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Валерия
+            [phone] => 8 (919) 810-90-04
+            [email] => miatchina.lera@gmail.com
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:  телефонные продажи, информативный обзвон
+            [new] => 1
+            [stats_id] => wcc1470778
+        )
+
+    [req] => Array
+        (
+            [name] => Валерия
+            [phone] => 8 (919) 810-90-04
+            [email] => miatchina.lera@gmail.com
+            [url] => http://wilstream.ru/outcalls/obzvon-klientov/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: 
+            [company] =>  
+            [usluga] => Услуга:  телефонные продажи, информативный обзвон
+            [new] => 1
+            [stats_id] => wcc1470778
+        )
+
+)

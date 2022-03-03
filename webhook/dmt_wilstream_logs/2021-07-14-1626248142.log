@@ -1,0 +1,53 @@
+195.208.184.200
+POST:
+Array
+(
+    [event] => ONCRMLEADUPDATE
+    [data] => Array
+        (
+            [FIELDS] => Array
+                (
+                    [ID] => 30315
+                )
+
+        )
+
+    [ts] => 1626248142
+    [auth] => Array
+        (
+            [domain] => wilstream.bitrix24.ru
+            [client_endpoint] => https://wilstream.bitrix24.ru/rest/
+            [server_endpoint] => https://oauth.bitrix.info/rest/
+            [member_id] => cc7c44159e4fc354b6551fa5604aecb0
+            [application_token] => sncnba2n0hnw9q9tmrkrbcxfrh6b26fg
+        )
+
+)
+
+GET:
+Array
+(
+)
+
+LEAD INFO:
+Array
+(
+    [source_id] => 4
+    [status_id] => JUNK
+    [status_dop] => F
+    [other_city] => 0
+    [cennost] => 0
+    [type] => обычное
+    [status_commited] => 1
+    [prichina_otkaza] => не оставляла , ничего не надо
+    [record] => http://sc.wilstream.ru/sc/get_okt_record.php?idconnection=6BFD624D-43EB-487D-BAB6-F8928195FBF4&datecall=20210714-090508-310&partnum=2
+    [name] => Яна
+    [phone] => 79998411783
+    [phone_norm] => +79998411783
+    [comments] => <br>URL: http://wilstream.ru/incalls/telefonnoe-konsultirovanie/
+    [status_name] => отклонено
+    [status_otkaza] => ошибка
+)
+
+SEND RESULT:
+OK 221 2.0.0 Service closing transmission channel

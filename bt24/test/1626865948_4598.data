@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Lancman school
+            [phone] => +79775148409<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 13:59, 2021-07-21<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Lancman school<br>номер_телефона: +79775148409<br>     
+            [new] => 1
+            [stats_id] => wcc1457718
+        )
+
+    [req] => Array
+        (
+            [name] => Lancman school
+            [phone] => +79775148409<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 13:59, 2021-07-21<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: Lancman school<br>номер_телефона: +79775148409<br>     
+            [new] => 1
+            [stats_id] => wcc1457718
+        )
+
+)

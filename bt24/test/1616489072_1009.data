@@ -1,0 +1,33 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Анна
+            [phone] => 89196210466
+            [email] => anna.odintsova@factory5.ai
+            [url] => http://wilstream.ru/industrial-solutions/resheniya-dlya-it/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: Нужно сделать базу данных системных интеграторов с ФИО лпр. Цель - потом будем приглашать их на мероприятие
+            [company] => Factory5
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Анна
+            [phone] => 89196210466
+            [email] => anna.odintsova@factory5.ai
+            [url] => http://wilstream.ru/industrial-solutions/resheniya-dlya-it/
+            [formname] => Заказ прайс листа
+            [comment] => Комментарий: Нужно сделать базу данных системных интеграторов с ФИО лпр. Цель - потом будем приглашать их на мероприятие
+            [company] => Factory5
+            [usluga] => Услуга:   
+            [new] => 1
+        )
+
+)

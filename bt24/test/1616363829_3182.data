@@ -1,0 +1,29 @@
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => Салон красоты Pretty Woman
+            [phone] => +79257668611
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 00:50, 2021-03-22<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: Салон красоты Pretty Woman<br>номер_телефона: +79257668611<br>     
+            [new] => 1
+        )
+
+    [req] => Array
+        (
+            [name] => Салон красоты Pretty Woman
+            [phone] => +79257668611
+            [email] => 
+            [url] => 
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Поиск клиентов<br><br> Время и дата: 00:50, 2021-03-22<br> Группа объявлений: B2b<br> Объявление: - Генерация лидов<br> Форма: Свяжитесь с нами 2<br> company_name: Салон красоты Pretty Woman<br>номер_телефона: +79257668611<br>     
+            [new] => 1
+        )
+
+)

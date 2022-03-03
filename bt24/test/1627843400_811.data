@@ -1,0 +1,32 @@
+
+Request_Array
+(
+    [get] => Array
+        (
+        )
+
+    [post] => Array
+        (
+            [name] => SCHNEIDER GROUP
+            [phone] => +79857739916<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 21:32, 2021-08-01<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: SCHNEIDER GROUP<br>номер_телефона: +79857739916<br>     
+            [new] => 1
+            [stats_id] => wcc1469289
+        )
+
+    [req] => Array
+        (
+            [name] => SCHNEIDER GROUP
+            [phone] => +79857739916<br>     
+            [email] => 
+            [url] => вилстрим.ру.фб
+            [formname] => Заказ звонка
+            [comment] => Вопрос: из&nbsp;кампании в&nbsp;Facebook Look-a-like<br><br> Время и дата: 21:32, 2021-08-01<br> Группа объявлений: 1%<br> Объявление: Новое объявление<br> Форма: Свяжитесь с нами 2<br> company_name: SCHNEIDER GROUP<br>номер_телефона: +79857739916<br>     
+            [new] => 1
+            [stats_id] => wcc1469289
+        )
+
+)

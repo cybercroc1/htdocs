@@ -1,0 +1,55 @@
+Array
+(
+    [form-type] => callback
+    [name] => test1
+    [phone] => 2222222222222222
+    [agree] => on
+    [call_value] => 352723753
+    [url] => http://wilstream.ru/
+    [form_type] => callback
+)
+Array
+(
+    [name] => test2
+    [phone] => 123321123
+    [email] => 
+    [url] => www.contact-center.ru/
+    [formname] => Заказать обратный звонок
+    [comment] => Комментарий: 
+)
+Array
+(
+    [name] => test3
+    [phone] => 123321123
+    [email] => test@mail.ru
+    [url] => http://wilstream-msk.ru/
+    [formname] => Заказ прайс листа
+    [comment] => Комментарий:  
+    [company] =>  
+    [usluga] => Услуга:   
+)
+Array
+(
+    [form-type] => order-price-popup
+    [handling] => extension
+    [name] => Махрам
+    [company] => 
+    [phone] => +79254552486
+    [email] => 
+    [text] => 
+    [agree] => on
+    [call_value] => 352701196
+    [url] => http://wilstream.ru/incalls/goryachyaya-liniya/?utm_source=yandex&utm_medium=cpc&utm_campaign=msk_incalls_goryachaya_liniya_network&utm_term=%D1%83%D1%81%D0%BB%D1%83%D0%B3%D0%B0%20%D0%B3%D0%BE%D1%80%D1%8F%D1%87%D0%B0%D1%8F%20%D0%BB%D0%B8%D0%BD%D0%B8%D1%8F&utm_content=astat_12109036269|ret_|dsa_12109036269|cid_29635640|gid_3144244289|aid_5266424126|pt_none|pos_0|st_context|src_ltran.ru|dvc_mobile|reg_213|adp_no|apt_none|link:main&calltouch_tm=yd_c:29635640_gb:3144244289_ad:5266424126_ph:12109036269_st:context_pt:none_p:0_s:ltran.ru_dt:mobile_reg:213_ret:_apt:none&yclid=7031294935417763829
+    [form_type] => order-price-popup
+)
+Array
+(
+    [form-type] => callback
+    [name] => testaa
+    [phone] => 132323233
+    [agree] => on
+    [call_value] => 352723753
+    [url] => http://wilstream.ru/
+    [form_type] => callback
+)
+Array3http://wilstream.ru/Array3http://wilstream.ru/
